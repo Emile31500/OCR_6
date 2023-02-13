@@ -42,7 +42,7 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_de_naissance = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ["default" => false])]
     private ?bool $est_supprime = null;
 
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Messages::class, orphanRemoval: true)]

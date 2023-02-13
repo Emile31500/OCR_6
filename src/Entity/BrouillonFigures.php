@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BrouillonFiguresRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BrouillonFiguresRepository::class)]
@@ -31,6 +33,18 @@ class BrouillonFigures
 
     #[ORM\Column(options: ["default" => false])]
     private ?bool $est_supprime = false;
+
+    #[ORM\OneToMany(mappedBy: 'brouillon_figure', targetEntity: BrouillonPhotoFigure::class)]
+    private Collection $brouillonPhotoFigures;
+
+    #[ORM\OneToMany(mappedBy: 'brouillon_figure', targetEntity: BrouillonVideoFigure::class)]
+    private Collection $brouillonVideoFigures;
+
+    public function __construct()
+    {
+        $this->brouillonPhotoFigures = new ArrayCollection();
+        $this->brouillonVideoFigures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +119,66 @@ class BrouillonFigures
     public function setEstSupprime(bool $est_supprime): self
     {
         $this->est_supprime = $est_supprime;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BrouillonPhotoFigure>
+     */
+    public function getBrouillonPhotoFigures(): Collection
+    {
+        return $this->brouillonPhotoFigures;
+    }
+
+    public function addBrouillonPhotoFigure(BrouillonPhotoFigure $brouillonPhotoFigure): self
+    {
+        if (!$this->brouillonPhotoFigures->contains($brouillonPhotoFigure)) {
+            $this->brouillonPhotoFigures->add($brouillonPhotoFigure);
+            $brouillonPhotoFigure->setBrouillonFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBrouillonPhotoFigure(BrouillonPhotoFigure $brouillonPhotoFigure): self
+    {
+        if ($this->brouillonPhotoFigures->removeElement($brouillonPhotoFigure)) {
+            // set the owning side to null (unless already changed)
+            if ($brouillonPhotoFigure->getBrouillonFigure() === $this) {
+                $brouillonPhotoFigure->setBrouillonFigure(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BrouillonVideoFigure>
+     */
+    public function getBrouillonVideoFigures(): Collection
+    {
+        return $this->brouillonVideoFigures;
+    }
+
+    public function addBrouillonVideoFigure(BrouillonVideoFigure $brouillonVideoFigure): self
+    {
+        if (!$this->brouillonVideoFigures->contains($brouillonVideoFigure)) {
+            $this->brouillonVideoFigures->add($brouillonVideoFigure);
+            $brouillonVideoFigure->setBrouillonFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBrouillonVideoFigure(BrouillonVideoFigure $brouillonVideoFigure): self
+    {
+        if ($this->brouillonVideoFigures->removeElement($brouillonVideoFigure)) {
+            // set the owning side to null (unless already changed)
+            if ($brouillonVideoFigure->getBrouillonFigure() === $this) {
+                $brouillonVideoFigure->setBrouillonFigure(null);
+            }
+        }
 
         return $this;
     }

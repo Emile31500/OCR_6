@@ -24,7 +24,7 @@ class Figures
     #[ORM\Column(length: 4096)]
     private ?string $article = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ["default" => false])]
     private ?bool $est_supprime = null;
 
     #[ORM\OneToMany(mappedBy: 'figures', targetEntity: VideosFigures::class)]

@@ -27,8 +27,8 @@ class Messages
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column]
-    private ?bool $est_supprime = null;
+    #[ORM\Column(options: ["default" => false])]
+    private ?bool $est_supprime = false;
 
     public function getId(): ?int
     {

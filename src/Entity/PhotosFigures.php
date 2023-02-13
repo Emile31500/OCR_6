@@ -22,8 +22,8 @@ class PhotosFigures
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column]
-    private ?bool $est_supprime = null;
+    #[ORM\Column(options: ["default" => false])]
+    private ?bool $est_supprime = false;
 
     public function getId(): ?int
     {
