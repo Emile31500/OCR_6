@@ -8,34 +8,6 @@
 
     </head>
     <body>
-        {# <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <div class="float-end">
-                    <a class="navbar-brand" href="#">Snow Tricks</a>
-                </div>
-                <div class="float-start">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8100/Home">Home</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8100/Tricks/liste">Tricks</a>
-                            </li>
-                            <li class="nav-item unconnected_user_navzone">
-                            <a class="nav-link" href="http://127.0.0.1:8100/Tricks/liste">Sing in</a>
-                            </li>
-                            <li class="nav-item unconnected_user_navzone">
-                            <a class="nav-link" href="http://127.0.0.1:8100/Tricks/liste">Sing up</a>
-                            </li>
-                            <li class="nav-item connected_user_navzone">
-                            <a class="nav-link" href="http://127.0.0.1:8100/logout">Log out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav> #}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <div>
@@ -76,13 +48,39 @@
         {% block body %}
         {% endblock %}
     </div>
+    <footer style="background: rgb(220, 220, 220)" class="p-4 footer-body-element">
+        <div class="container">
+            Ⓒ Copyright @ 2023 <br>
+            Site créé par Emile Armengaud
+        </div>
+    </footer>
 </body>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}">
+        <style>
+            .footer-body-element {
+
+                margin-top: 70px;
+
+
+            }
+
+            .header-body-element {
+
+                margin-bottom: 70px;
+
+            }
+            .core-body-element {
+
+                margin: 70px;
+
+            }
+    </style>
     {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
             <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"/>
     {% endblock %}
+
 </html>

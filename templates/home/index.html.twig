@@ -3,7 +3,7 @@
 {% block title %} {{ controller_name }} {% endblock %}
 
 {% block bodyheader %}
-    <div class="w-100 align-middle" style="
+    <div class="header-body-element w-100 d-flex align-items-center justify-content-center" style="
     height: 30vh;
     background-color: rgb(0, 0, 0);
     background-image: url('{{ asset('media/img/snowboard_wallpaper.jpg')}}'); 
@@ -12,7 +12,11 @@
     background-repeat: no-repeat;
     background-position: center;">
     
-    <h2 class="align-middle text-light">On fait pas de la magie avec des saucisses </h2>
+    <h2 class="shadow fst-italic align-middle text-light text-center">On fait pas de la magie avec des saucisses </h2>
+    <svg style="width: 20px;" viewBox="0 0 100 100">
+        <polygon points="50,0 100,50 50,100 0,50" fill="#000000"/>
+    </svg>
+
 
     </div>
 {% endblock %}
