@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateursRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -43,10 +46,13 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeInterface $date_de_naissance = null;
 
     #[ORM\Column(options: ["default" => false])]
-    private ?bool $est_supprime = null;
+    private ?bool $est_supprime = false;
 
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Messages::class, orphanRemoval: true)]
     private Collection $messages;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     public function __construct()
     {
@@ -209,6 +215,18 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
