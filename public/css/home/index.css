@@ -1,0 +1,19 @@
+.tricks-card {
+
+    width: 18rem;
+    float: left;
+
+}
+
+.edit-card-div {
+
+    float: left;
+
+}
+
+.trash-card-div {
+
+    float: right;
+
+}
+

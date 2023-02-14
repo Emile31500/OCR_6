@@ -1,0 +1,31 @@
+.icone {
+    width: 20px;
+}
+
+.footer-body-element {
+
+    margin-top: 70px;
+    background: rgb(220, 220, 220)
+
+}
+
+.header-body-element {
+
+    margin-bottom: 70px;
+
+}
+.core-body-element {
+
+    margin: 70px;
+
+}
+
+.clear {
+
+    clear: both;
+}
+
+.align-itms-center {
+
+    align-items: center;
+}
