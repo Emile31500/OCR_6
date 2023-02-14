@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mot de passe oublié {% endblock %}
+
+{% block body %}
+
+    {# L'utilisateur remplie son adresse email #}
+    {# <form>
+        <p>
+            <label>Email : </label>
+            <br>
+            <input type="email" name="email"/>
+        </p>
+    </form> #}
+    {{ form_start(form_send_recup_code) }}
+        <p>
+            {{ form_row(form_send_recup_code.email) }}
+        </p>
+        <p>
+            <input type="submit" class="btn btn-primary"/>
+        </p>
+    {{ form_end(form_send_recup_code) }}
+    {#Un code lui est envoyé#}
+    {##}
+    {##}
+    {##}
+
+    {# L'utilisateur tape se code dans ce formulaire#}
+    <form>
+        <p>
+            <label>Code de récupération : </label>
+            <br>
+            <input type="number" name="code-recuperatuin"/>
+        </p>
+    </form>
+
+    {# si le code est bon #}
+
+        {# si ça fait moins de 5 minutes que le code a été généré #}
+
+            {# alors on afiche le formulaire de changement de mot de passe #}
+
+                <form>
+                    <p>
+                        <label>Mot de passe : </label>
+                        <br>
+                        <input type="password" name="password"/>
+                    </p>
+                    <p>
+                        <label>Confirmer le mot de passe : </label>
+                        <br>
+                        <input type="password" name="confirm-password"/>
+                    </p>
+                </form>
+
+        {# sinon on annonce que le code n'est plus valide #}
+
+    {# sinon on signale qu'il y a une erreur dans le code #}
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/Projet_OC6/src/Controller/ForgetPasswordController.php'|file_link(0) }}">src/Controller/ForgetPasswordController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/wamp64/www/Projet_OC6/templates/forget_password/index.html.twig'|file_link(0) }}">templates/forget_password/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

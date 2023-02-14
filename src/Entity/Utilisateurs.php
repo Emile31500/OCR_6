@@ -54,9 +54,13 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'id_utilisateur', targetEntity: RecuperationMdp::class)]
+    private Collection $recuperationMdps;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->recuperationMdps = new ArrayCollection();
     }
 
     public function getId(): ?int
