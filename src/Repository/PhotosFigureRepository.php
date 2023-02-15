@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\PhotosFigures;
+use App\Entity\PhotoFigure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<PhotosFigures>
+ * @extends ServiceEntityRepository<PhotoFigure>
  *
- * @method PhotosFigures|null find($id, $lockMode = null, $lockVersion = null)
- * @method PhotosFigures|null findOneBy(array $criteria, array $orderBy = null)
- * @method PhotosFigures[]    findAll()
- * @method PhotosFigures[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PhotoFigure|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PhotoFigure|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PhotoFigure[]    findAll()
+ * @method PhotoFigure[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PhotosFiguresRepository extends ServiceEntityRepository
+class PhotoFigureRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PhotosFigures::class);
+        parent::__construct($registry, PhotoFigure::class);
     }
 
-    public function save(PhotosFigures $entity, bool $flush = false): void
+    public function save(PhotoFigure $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PhotosFiguresRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(PhotosFigures $entity, bool $flush = false): void
+    public function remove(PhotoFigure $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class PhotosFiguresRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return PhotosFigures[] Returns an array of PhotosFigures objects
+//     * @return PhotoFigure[] Returns an array of PhotoFigure objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class PhotosFiguresRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?PhotosFigures
+//    public function findOneBySomeField($value): ?PhotoFigure
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

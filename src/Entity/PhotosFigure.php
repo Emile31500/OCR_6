@@ -2,39 +2,39 @@
 
 namespace App\Entity;
 
-use App\Repository\BrouillonPhotoFigureRepository;
+use App\Repository\PhotoFigureRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BrouillonPhotoFigureRepository::class)]
-class BrouillonPhotoFigure
+#[ORM\Entity(repositoryClass: PhotoFigureRepository::class)]
+class PhotoFigure
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'brouillonPhotoFigures')]
-    private ?BrouillonFigures $brouillon_figure = null;
+    #[ORM\ManyToOne(inversedBy: 'PhotoFigure')]
+    private ?Figure $Figure = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     private ?string $url = null;
-
+    
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getBrouillonFigure(): ?BrouillonFigures
+    public function getFigure(): ?Figure
     {
-        return $this->brouillon_figure;
+        return $this->Figure;
     }
 
-    public function setBrouillonFigure(?BrouillonFigures $brouillon_figure): self
+    public function setFigure(?Figure $Figure): self
     {
-        $this->brouillon_figure = $brouillon_figure;
+        $this->Figure = $Figure;
 
         return $this;
     }
@@ -62,4 +62,5 @@ class BrouillonPhotoFigure
 
         return $this;
     }
+    
 }

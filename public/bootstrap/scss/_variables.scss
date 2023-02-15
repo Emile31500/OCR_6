@@ -225,7 +225,7 @@ $enable-button-pointers:      true !default;
 $enable-rfs:                  true !default;
 $enable-validation-icons:     true !default;
 $enable-negative-margins:     false !default;
-$enable-deprecation-messages: true !default;
+$enable-deprecation-Message: true !default;
 $enable-important-utilities:  true !default;
 
 // Prefix for :root CSS variables
@@ -1344,7 +1344,7 @@ $thumbnail-box-shadow:              $box-shadow-sm !default;
 // scss-docs-end thumbnail-variables
 
 
-// Figures
+// Figure
 
 // scss-docs-start figure-variables
 $figure-caption-font-size:          $small-font-size !default;

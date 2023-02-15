@@ -2,19 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\VideosFiguresRepository;
+use App\Repository\VideoFigureRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: VideosFiguresRepository::class)]
-class VideosFigures
+#[ORM\Entity(repositoryClass: VideoFigureRepository::class)]
+class VideoFigure
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'videosFigures')]
-    private ?Figures $figures = null;
+    #[ORM\ManyToOne(inversedBy: 'VideoFigure')]
+    private ?Figure $Figure = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
@@ -22,22 +22,19 @@ class VideosFigures
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column(options: ["default" => false])]
-    private ?bool $est_supprime = false;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFigures(): ?Figures
+    public function getFigure(): ?Figure
     {
-        return $this->figures;
+        return $this->Figure;
     }
 
-    public function setFigures(?Figures $figures): self
+    public function setFigure(?Figure $Figure): self
     {
-        $this->figures = $figures;
+        $this->Figure = $Figure;
 
         return $this;
     }
@@ -65,16 +62,5 @@ class VideosFigures
 
         return $this;
     }
-
-    public function isEstSupprime(): ?bool
-    {
-        return $this->est_supprime;
-    }
-
-    public function setEstSupprime(bool $est_supprime): self
-    {
-        $this->est_supprime = $est_supprime;
-
-        return $this;
-    }
+    
 }

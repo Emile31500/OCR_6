@@ -2,57 +2,54 @@
 
 namespace App\Entity;
 
-use App\Repository\MessagesRepository;
+use App\Repository\MessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MessagesRepository::class)]
-class Messages
+#[ORM\Entity(repositoryClass: MessageRepository::class)]
+class Message
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\ManyToOne(inversedBy: 'Message')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Utilisateurs $utilisateur = null;
+    private ?Utilisateur $utilisateur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'messages')]
-    private ?Figures $figure = null;
+    #[ORM\ManyToOne(inversedBy: 'Message')]
+    private ?Figure $figure = null;
 
     #[ORM\Column(length: 1500)]
     private ?string $message = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
-
-    #[ORM\Column(options: ["default" => false])]
-    private ?bool $est_supprime = false;
-
+    
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUtilisateur(): ?Utilisateurs
+    public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
     }
 
-    public function setUtilisateur(?Utilisateurs $utilisateur): self
+    public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
-    public function getFigure(): ?Figures
+    public function getFigure(): ?Figure
     {
         return $this->figure;
     }
 
-    public function setFigure(?Figures $figure): self
+    public function setFigure(?Figure $figure): self
     {
         $this->figure = $figure;
 
@@ -82,16 +79,5 @@ class Messages
 
         return $this;
     }
-
-    public function isEstSupprime(): ?bool
-    {
-        return $this->est_supprime;
-    }
-
-    public function setEstSupprime(bool $est_supprime): self
-    {
-        $this->est_supprime = $est_supprime;
-
-        return $this;
-    }
+    
 }

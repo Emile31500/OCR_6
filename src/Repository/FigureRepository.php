@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Figures;
+use App\Entity\Figure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Figures>
+ * @extends ServiceEntityRepository<Figure>
  *
- * @method Figures|null find($id, $lockMode = null, $lockVersion = null)
- * @method Figures|null findOneBy(array $criteria, array $orderBy = null)
- * @method Figures[]    findAll()
- * @method Figures[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Figure|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Figure|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Figure[]    findAll()
+ * @method Figure[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FiguresRepository extends ServiceEntityRepository
+class FigureRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Figures::class);
+        parent::__construct($registry, Figure::class);
     }
 
-    public function save(Figures $entity, bool $flush = false): void
+    public function save(Figure $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class FiguresRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Figures $entity, bool $flush = false): void
+    public function remove(Figure $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class FiguresRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Figures[] Returns an array of Figures objects
+//     * @return Figure[] Returns an array of Figure objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class FiguresRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Figures
+//    public function findOneBySomeField($value): ?Figure
 //    {
 //        return $this->createQueryBuilder('f')
 //            ->andWhere('f.exampleField = :val')

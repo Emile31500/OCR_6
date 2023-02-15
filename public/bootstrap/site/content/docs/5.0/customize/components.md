@@ -42,7 +42,7 @@ We encourage you to adopt these guidelines when building with Bootstrap to creat
 
 <div class="bd-example">
   <div class="bd-callout my-0">
-    <strong>This is a callout.</strong> We built it custom for our docs so our messages to you stand out. It has three variants via modifier classes.
+    <strong>This is a callout.</strong> We built it custom for our docs so our Message to you stand out. It has three variants via modifier classes.
   </div>
 </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateursRepository;
+use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -11,10 +11,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UtilisateursRepository::class)]
+#[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -44,23 +44,25 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_de_naissance = null;
-
-    #[ORM\Column(options: ["default" => false])]
-    private ?bool $est_supprime = false;
-
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Messages::class, orphanRemoval: true)]
-    private Collection $messages;
+    
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Message::class, orphanRemoval: true)]
+    private Collection $Message;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'id_utilisateur', targetEntity: RecuperationMdp::class)]
-    private Collection $recuperationMdps;
+    #[ORM\Column(length: 10, options : ["default" => "published"])]
+    private ?string $status = "published";
+
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $codeRecup = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $recupDate = null;
 
     public function __construct()
     {
-        $this->messages = new ArrayCollection();
-        $this->recuperationMdps = new ArrayCollection();
+        $this->Message = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,40 +182,28 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function isEstSupprime(): ?bool
-    {
-        return $this->est_supprime;
-    }
-
-    public function setEstSupprime(bool $est_supprime): self
-    {
-        $this->est_supprime = $est_supprime;
-
-        return $this;
-    }
-
+    
     /**
-     * @return Collection<int, Messages>
+     * @return Collection<int, Message>
      */
-    public function getMessages(): Collection
+    public function getMessage(): Collection
     {
-        return $this->messages;
+        return $this->Message;
     }
 
-    public function addMessage(Messages $message): self
+    public function addMessage(Message $message): self
     {
-        if (!$this->messages->contains($message)) {
-            $this->messages->add($message);
+        if (!$this->Message->contains($message)) {
+            $this->Message->add($message);
             $message->setUtilisateur($this);
         }
 
         return $this;
     }
 
-    public function removeMessage(Messages $message): self
+    public function removeMessage(Message $message): self
     {
-        if ($this->messages->removeElement($message)) {
+        if ($this->Message->removeElement($message)) {
             // set the owning side to null (unless already changed)
             if ($message->getUtilisateur() === $this) {
                 $message->setUtilisateur(null);
@@ -231,6 +221,42 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCodeRecup(): ?string
+    {
+        return $this->codeRecup;
+    }
+
+    public function setCodeRecup(?string $codeRecup): self
+    {
+        $this->codeRecup = $codeRecup;
+
+        return $this;
+    }
+
+    public function getRecupDate(): ?\DateTimeInterface
+    {
+        return $this->recupDate;
+    }
+
+    public function setRecupDate(?\DateTimeInterface $recupDate): self
+    {
+        $this->recupDate = $recupDate;
 
         return $this;
     }
