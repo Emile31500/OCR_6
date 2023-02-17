@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-
-use App\Entity\RecuperationMdp;
-use Symfony\Component\Mime\Email;
+use App\Entity\Utilisateur;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+// use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use App\Repository\UtilisateurRepository;
-use App\Repository\RecuperationMdpRepository;
 use App\Form\SendPasswordRecuperationCodeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use DateTime;
 
-
 class ForgetPasswordController extends AbstractController
 {
     #[Route('/recuperation-mot-de-passe', name: 'app_forget_password')]
-    public function index(Request $request, UtilisateurRepository $UtilisateurRepository, RecuperationMdpRepository $recuperationMdpRepository, MailerInterface $mailer): Response
+    public function index(Request $request, UtilisateurRepository $UtilisateurRepository, MailerInterface $mailer): Response
     {
         $form_send_recup_code = $this->createForm(SendPasswordRecuperationCodeType::class);
         $form_send_recup_code->handleRequest($request);
@@ -27,37 +26,39 @@ class ForgetPasswordController extends AbstractController
         if ($form_send_recup_code->isSubmitted() && $form_send_recup_code->isValid()) {
             
             $response = $form_send_recup_code->getData();
-            $utilisateur = $UtilisateurRepository->findByEmail($response['email']);
+            $res = $UtilisateurRepository->findByEmail($response['email']);
+            $utilisateur = $res[0];
 
             if (isset($utilisateur) && !empty($utilisateur)){
 
                 date("Y-m-d h:i:s");
                 $now = new \DateTime();
-                $date_limit = $now->modify('+5 minutes');
+                $date_limit = $now->modify('+1 day');
                 
-                $randomString = '';
-                for ($i = 0; $i < 10; $i++) {
-                    $randomString .= mt_rand(0, 9);
+                function generateRandomString($length = 64) {
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $randomString = '';
+                    for ($i = 0; $i < $length; $i++) {
+                        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+                    }
+                    return $randomString;
                 }
 
-                $recuperationMdp = new RecuperationMdp();
-                $recuperationMdp->setEmail($response['email']);
-                $recuperationMdp->setCodeDeRecup($randomString);
-                $recuperationMdp->setDateLimite($date_limit);
+                $codeRecup = generateRandomString();
+                
+                $utilisateur->setCodeRecup($codeRecup);
+                $utilisateur->setRecupDate($date_limit);
+                $UtilisateurRepository->save($utilisateur, true);
 
-                $recuperationMdpRepository->save($recuperationMdp);
-
-                $email = (new Email())
-                ->from('hello@example.com')
-                ->to($response['email'])
-                //->cc('cc@example.com')
-                //->bcc('bcc@example.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Email de récupération de mot de passe')
-                ->text('Sending emails is fun again!')
-                ->html('<h1> Email de récupération de mot de passe : </h1> <p> Code de récupération : '.$randomString.'</p>');
-    
+                $email = (new TemplatedEmail())
+                    ->from(new Address('emile00013@gmail.com'))
+                    ->to(new Address($response['email']))    
+                    ->subject('Email de récupération de mot de passe')
+                    ->htmlTemplate('mail/password_recup.html.twig')
+                    ->context([
+                            'name' => $utilisateur->getNomUtilisateur(),
+                            'code_recuperation' => $codeRecup
+                    ]);
                 $mailer->send($email);
 
             }
@@ -67,6 +68,16 @@ class ForgetPasswordController extends AbstractController
         return $this->render('forget_password/index.html.twig', [
             "form_send_recup_code" => $form_send_recup_code->createView(),
             'controller_name' => 'ForgetPasswordController',
+        ]);
+    }
+
+    #[Route('/modifier-le-mot-de-passe', name: 'app_edit_password')]
+    public function editPassword(UtilisateurRepository $UtilisateurRepository) : response
+    {
+
+
+        return $this->render('forget_password/index.html.twig', [
+            'controller_name' => 'Modification du mot de passe',
         ]);
     }
 }

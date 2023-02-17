@@ -23,6 +23,9 @@ class Figure
 
     #[ORM\Column(length: 4096)]
     private ?string $article = null;
+    
+    #[ORM\Column(length: 10, options : ["default" => "published"])]
+    private ?string $status = "published";
 
     #[ORM\OneToMany(mappedBy: 'Figure', targetEntity: VideoFigure::class)]
     private Collection $VideoFigure;
@@ -77,6 +80,18 @@ class Figure
     public function setArticle(string $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

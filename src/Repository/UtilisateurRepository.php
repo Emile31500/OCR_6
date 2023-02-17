@@ -62,7 +62,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
 //     */
     public function findByEmail($value): array
     {
-        return $this->createQueryBuilder('u')
+        $result = $this->createQueryBuilder('u')
             ->andWhere('u.email = :val')
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
@@ -70,6 +70,8 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
             ->getQuery()
             ->getResult()
         ;
+        
+        return $result;
     }
 
 //    public function findOneBySomeField($value): ?Utilisateur

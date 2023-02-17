@@ -4,36 +4,6 @@
 
 {% block body %}
 
-    {# L'utilisateur remplie son adresse email #}
-    {# <form>
-        <p>
-            <label>Email : </label>
-            <br>
-            <input type="email" name="email"/>
-        </p>
-    </form> #}
-    {{ form_start(form_send_recup_code) }}
-        <p>
-            {{ form_row(form_send_recup_code.email) }}
-        </p>
-        <p>
-            <input type="submit" class="btn btn-primary"/>
-        </p>
-    {{ form_end(form_send_recup_code) }}
-    {#Un code lui est envoyé#}
-    {##}
-    {##}
-    {##}
-
-    {# L'utilisateur tape se code dans ce formulaire#}
-    <form>
-        <p>
-            <label>Code de récupération : </label>
-            <br>
-            <input type="number" name="code-recuperatuin"/>
-        </p>
-    </form>
-
     {# si le code est bon #}
         {# si ça fait moins de 5 minutes que le code a été généré #}
             {# alors on afiche le formulaire de changement de mot de passe #}
