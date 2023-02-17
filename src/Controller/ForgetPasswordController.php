@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\EditPsswFormType;
 use App\Entity\Utilisateur;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -71,13 +72,16 @@ class ForgetPasswordController extends AbstractController
         ]);
     }
 
-    #[Route('/modifier-le-mot-de-passe', name: 'app_edit_password')]
-    public function editPassword(UtilisateurRepository $UtilisateurRepository) : response
+    #[Route('/modifier-le-mot-de-passe/{code_recup}', name: 'app_edit_password')]
+    public function editPassword(Request $request, UtilisateurRepository $UtilisateurRepository,  ) : response
     {
 
+        $form = $this->createForm(EditPsswFormType::class);
+        $form->handleRequest($request);
 
-        return $this->render('forget_password/index.html.twig', [
+        return $this->render('forget_password/editpw.html.twig', [
             'controller_name' => 'Modification du mot de passe',
+            'edit_pssw_form' => $form->createView()
         ]);
     }
 }
