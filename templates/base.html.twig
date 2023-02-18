@@ -8,7 +8,7 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="mb-5 navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <div>
                     <a class="navbar-brand" href="#">Snow Tricks</a>
@@ -61,29 +61,11 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}">
-        <style>
-            .footer-body-element {
-
-                margin-top: 70px;
-
-
-            }
-
-            .header-body-element {
-
-                margin-bottom: 70px;
-
-            }
-            .core-body-element {
-
-                margin: 70px;
-
-            }
-    </style>
+        <link rel="stylesheet" href="{{ asset('css/.main.css') }}">
     {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
-            <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"/>
+        <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"/>
     {% endblock %}
 
 </html>

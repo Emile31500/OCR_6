@@ -86,12 +86,15 @@ class ForgetPasswordController extends AbstractController
         
         if ($date_recup > $now)   {   
 
-            $form = $this->createForm(EditPsswFormType::class);
+            $data;
+
+            $form = $this->createForm(EditPsswFormType::class, null, [
+                'attr' => ['id' => 'password-edit-form', 'class'=>'mb-5 mt-5']]);
+            // $form->setAttribute('id', 'password-edit-form');
             $form->handleRequest($request);
 
             if ($form->isSubmitted()){
 
-                // Marche pas :(
                 $utilisateur->setPassword(
                     $userPasswordHasher->hashPassword(
                         $utilisateur,
@@ -99,15 +102,16 @@ class ForgetPasswordController extends AbstractController
                     )
                 );
 
-                // Marche dans register controller
-                // $user->setPassword(
-                //     $userPasswordHasher->hashPassword(
-                //         $user,
-                //         $form->get('plainPassword')->getData()
-                //     )
-                // );
-
                 $utilisateurRepository->save($utilisateur, true);
+
+                $utilisateur->setCodeRecup(null);
+                $utilisateur->setRecupDate(null);
+                $entityManager->persist($utilisateur);
+                $entityManager->flush();
+
+                header('Content-Type: application/json');
+                echo json_encode(["status" => true]);
+                die;
 
             }
         } else {

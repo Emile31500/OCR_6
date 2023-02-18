@@ -5,18 +5,25 @@
 {% block body %}
     <h2 class="header-body-element"> {{ controller_name }}</h2>
 
-            {{ form_start(edit_pssw_form) }}
-            
-                <p>
-                    {{ form_row(edit_pssw_form.password) }}
-                </p>
-                <p>
-                    {{ form_row(edit_pssw_form.passwordConf) }}
-                </p>
-                <p>
-                    {{ form_row(edit_pssw_form.submit) }}
-                </p>
+    {{ form_start(edit_pssw_form) }}
+    
+        <p>
+            {{ form_row(edit_pssw_form.password) }}
+        </p>
+        <p>
+            {{ form_row(edit_pssw_form.passwordConf) }}
+        </p>
+        <p>
+            {{ form_row(edit_pssw_form.submit) }}
+        </p>
 
-            {{ form_end(edit_pssw_form) }}
+    {{ form_end(edit_pssw_form) }}
+    <div class="status_message_container">
+        <div id="status_message" class="alert alert-danger d-none" role="alert">
+        </div>
+    </div>
 
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/editpassword.js') }}"></script>
 {% endblock %}
