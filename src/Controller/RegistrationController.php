@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Repository\UtilisateurRepository;
 use App\Form\RegistrationFormType;
 use App\Security\Authenticator;
 use Doctrine\ORM\EntityManagerInterface;

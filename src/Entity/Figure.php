@@ -25,7 +25,7 @@ class Figure
     private ?string $article = null;
     
     #[ORM\Column(length: 10, options : ["default" => "published"])]
-    private ?string $status = "published";
+    private ?string $statu = "published";
 
     #[ORM\OneToMany(mappedBy: 'Figure', targetEntity: VideoFigure::class)]
     private Collection $VideoFigure;
@@ -84,14 +84,14 @@ class Figure
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatu(): ?string
     {
-        return $this->status;
+        return $this->statu;
     }
 
-    public function setStatus(string $status): self
+    public function setStatu(string $statu): self
     {
-        $this->status = $status;
+        $this->statu = $statu;
 
         return $this;
     }

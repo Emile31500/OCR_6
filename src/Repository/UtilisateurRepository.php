@@ -74,6 +74,20 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         return $result;
     }
 
+    public function findByRecupcode(string $value): array
+    {
+        $result = $this->createQueryBuilder('u')
+            ->andWhere('u.codeRecup=:val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+        
+        return $result;
+    }
+
 //    public function findOneBySomeField($value): ?Utilisateur
 //    {
 //        return $this->createQueryBuilder('u')

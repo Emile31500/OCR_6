@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Form\EditPsswFormType;
-use App\Entity\Utilisateur;
+use App\Form\SendPasswordRecuperationCodeType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
-// use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
+use App\Entity\Utilisateur;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
-use App\Form\SendPasswordRecuperationCodeType;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -73,11 +76,54 @@ class ForgetPasswordController extends AbstractController
     }
 
     #[Route('/modifier-le-mot-de-passe/{code_recup}', name: 'app_edit_password')]
-    public function editPassword(Request $request, UtilisateurRepository $UtilisateurRepository,  ) : response
+    public function editPassword(string $code_recup, UtilisateurRepository $utilisateurRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) : response
     {
+        $array_utilisateur = new Utilisateur;
+        $array_utilisateur = $utilisateurRepository->findByRecupcode($code_recup);
+        $utilisateur = $array_utilisateur[0];
+        $date_recup = $utilisateur->getRecupDate();
+        $now = new \DateTime();
+        
+        if ($date_recup > $now)   {   
 
-        $form = $this->createForm(EditPsswFormType::class);
-        $form->handleRequest($request);
+            $form = $this->createForm(EditPsswFormType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()){
+
+                // Marche pas :(
+                $utilisateur->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $utilisateur,
+                        $form->get('password')->getData()
+                    )
+                );
+
+                // Marche dans register controller
+                // $user->setPassword(
+                //     $userPasswordHasher->hashPassword(
+                //         $user,
+                //         $form->get('plainPassword')->getData()
+                //     )
+                // );
+
+                $utilisateurRepository->save($utilisateur, true);
+
+            }
+        } else {
+            
+            $utilisateur->setCodeRecup(null);
+            $utilisateur->setRecupDate(null);
+            $entityManager->persist($utilisateur);
+            $entityManager->flush();
+
+            return $this->render('forget_password/editpw.html.twig', [
+                'error' => 'La date limite pour modifier le mot de passe a expirée. Renseignez une segonde fois votre addresse mail pour changer de mot de passe.',
+                'controller_name' => 'Modification du mot de passe',
+                'edit_pssw_form' => $form->createView()
+            ]);
+            
+        }
 
         return $this->render('forget_password/editpw.html.twig', [
             'controller_name' => 'Modification du mot de passe',
