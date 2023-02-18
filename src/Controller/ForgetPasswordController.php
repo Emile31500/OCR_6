@@ -80,58 +80,73 @@ class ForgetPasswordController extends AbstractController
     {
         $array_utilisateur = new Utilisateur;
         $array_utilisateur = $utilisateurRepository->findByRecupcode($code_recup);
-        $utilisateur = $array_utilisateur[0];
-        $date_recup = $utilisateur->getRecupDate();
-        $now = new \DateTime();
-        
-        if ($date_recup > $now)   {   
 
-            $data;
+        if (isset($array_utilisateur) && !empty($array_utilisateur)) {
 
-            $form = $this->createForm(EditPsswFormType::class, null, [
-                'attr' => ['id' => 'password-edit-form', 'class'=>'mb-5 mt-5']]);
-            // $form->setAttribute('id', 'password-edit-form');
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted()){
-
-                $utilisateur->setPassword(
-                    $userPasswordHasher->hashPassword(
-                        $utilisateur,
-                        $form->get('password')->getData()
-                    )
-                );
-
-                $utilisateurRepository->save($utilisateur, true);
-
+            $utilisateur = $array_utilisateur[0];
+            $date_recup = $utilisateur->getRecupDate();
+            $now = new \DateTime();
+            
+            if ($date_recup > $now)   {   
+    
+                $data;
+    
+                $form = $this->createForm(EditPsswFormType::class, null, [
+                    'attr' => ['id' => 'password-edit-form', 'class'=>'mb-5 mt-5']]);
+                // $form->setAttribute('id', 'password-edit-form');
+                $form->handleRequest($request);
+    
+                if ($form->isSubmitted()){
+    
+                    $utilisateur->setPassword(
+                        $userPasswordHasher->hashPassword(
+                            $utilisateur,
+                            $form->get('password')->getData()
+                        )
+                    );
+    
+                    $utilisateurRepository->save($utilisateur, true);
+    
+                    $utilisateur->setCodeRecup(null);
+                    $utilisateur->setRecupDate(null);
+                    $entityManager->persist($utilisateur);
+                    $entityManager->flush();
+    
+                    header('Content-Type: application/json');
+                    echo json_encode(["status" => true]);
+                    die;
+    
+                }
+            } else {
+                
                 $utilisateur->setCodeRecup(null);
                 $utilisateur->setRecupDate(null);
                 $entityManager->persist($utilisateur);
                 $entityManager->flush();
+    
+                return $this->render('forget_password/editpw.html.twig', [
 
-                header('Content-Type: application/json');
-                echo json_encode(["status" => true]);
-                die;
-
+                    'erreur' => 'La date limite pour modifier le mot de passe a expirée. Renseignez une segonde fois votre addresse mail pour changer de mot de passe.',
+                    'controller_name' => 'Modification du mot de passe',
+                
+                ]);
+                
             }
-        } else {
-            
-            $utilisateur->setCodeRecup(null);
-            $utilisateur->setRecupDate(null);
-            $entityManager->persist($utilisateur);
-            $entityManager->flush();
 
             return $this->render('forget_password/editpw.html.twig', [
-                'error' => 'La date limite pour modifier le mot de passe a expirée. Renseignez une segonde fois votre addresse mail pour changer de mot de passe.',
                 'controller_name' => 'Modification du mot de passe',
                 'edit_pssw_form' => $form->createView()
             ]);
-            
+
         }
 
         return $this->render('forget_password/editpw.html.twig', [
             'controller_name' => 'Modification du mot de passe',
-            'edit_pssw_form' => $form->createView()
+            'erreur' => 'Votre mot de passe a déjà été mis à jour ou votre lien de modification de mot de passe est invalide.'
+
         ]);
+       
+
+       
     }
 }
