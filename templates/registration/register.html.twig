@@ -24,14 +24,13 @@
         <p>
             {{ form_row(registrationForm.plainPassword) }}
         </p>
-        
         <p>
             <label for="confirm-password"> Confirmer le mot de passe : </label>
             <br>
             <input type="password" class="form-control" name="confirm-password" id="confirm-password"/>
         </p>
         <p>
-            <a href="http://127.0.0.1:8100/connexion"> Déjà un compte ? Connectez-vous !</a>
+            <a href="{{ path('app_login') }}"> Déjà un compte ? Connectez-vous !</a>
         </p>
         {{ form_row(registrationForm.agreeTerms) }}
 

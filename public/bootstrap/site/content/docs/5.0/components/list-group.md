@@ -324,7 +324,7 @@ Use the tab JavaScript plugin—include it individually or through the compiled 
       <div class="list-group" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="tab" href="#list-home" role="tab" aria-controls="list-home">Home</a>
         <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="tab" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="tab" href="#list-messages" role="tab" aria-controls="list-messages">Messages</a>
+        <a class="list-group-item list-group-item-action" id="list-Message-list" data-bs-toggle="tab" href="#list-Message" role="tab" aria-controls="list-Message">Message</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="tab" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
       </div>
     </div>
@@ -336,8 +336,8 @@ Use the tab JavaScript plugin—include it individually or through the compiled 
         <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
           <p>Some placeholder content in a paragraph relating to "Profile". And some more content, used here just to pad out and fill this tab panel. In production, you would obviously have more real content here. And not just text. It could be anything, really. Text, images, forms.</p>
         </div>
-        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-          <p>Some placeholder content in a paragraph relating to "Messages". And some more content, used here just to pad out and fill this tab panel. In production, you would obviously have more real content here. And not just text. It could be anything, really. Text, images, forms.</p>
+        <div class="tab-pane fade" id="list-Message" role="tabpanel" aria-labelledby="list-Message-list">
+          <p>Some placeholder content in a paragraph relating to "Message". And some more content, used here just to pad out and fill this tab panel. In production, you would obviously have more real content here. And not just text. It could be anything, really. Text, images, forms.</p>
         </div>
         <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
           <p>Some placeholder content in a paragraph relating to "Settings". And some more content, used here just to pad out and fill this tab panel. In production, you would obviously have more real content here. And not just text. It could be anything, really. Text, images, forms.</p>
@@ -353,7 +353,7 @@ Use the tab JavaScript plugin—include it individually or through the compiled 
     <div class="list-group" id="list-tab" role="tablist">
       <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Home</a>
       <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
-      <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Messages</a>
+      <a class="list-group-item list-group-item-action" id="list-Message-list" data-bs-toggle="list" href="#list-Message" role="tab" aria-controls="list-Message">Message</a>
       <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
     </div>
   </div>
@@ -361,7 +361,7 @@ Use the tab JavaScript plugin—include it individually or through the compiled 
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
       <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
-      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+      <div class="tab-pane fade" id="list-Message" role="tabpanel" aria-labelledby="list-Message-list">...</div>
       <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
     </div>
   </div>
@@ -378,7 +378,7 @@ You can activate a list group navigation without writing any JavaScript by simpl
   <div class="list-group" id="myList" role="tablist">
     <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#home" role="tab">Home</a>
     <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab">Profile</a>
-    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#messages" role="tab">Messages</a>
+    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#Message" role="tab">Message</a>
     <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#settings" role="tab">Settings</a>
   </div>
 
@@ -386,7 +386,7 @@ You can activate a list group navigation without writing any JavaScript by simpl
   <div class="tab-content">
     <div class="tab-pane active" id="home" role="tabpanel">...</div>
     <div class="tab-pane" id="profile" role="tabpanel">...</div>
-    <div class="tab-pane" id="messages" role="tabpanel">...</div>
+    <div class="tab-pane" id="Message" role="tabpanel">...</div>
     <div class="tab-pane" id="settings" role="tabpanel">...</div>
   </div>
 </div>
@@ -426,7 +426,7 @@ To make tabs panel fade in, add `.fade` to each `.tab-pane`. The first tab pane 
 <div class="tab-content">
   <div class="tab-pane fade show active" id="home" role="tabpanel">...</div>
   <div class="tab-pane fade" id="profile" role="tabpanel">...</div>
-  <div class="tab-pane fade" id="messages" role="tabpanel">...</div>
+  <div class="tab-pane fade" id="Message" role="tabpanel">...</div>
   <div class="tab-pane fade" id="settings" role="tabpanel">...</div>
 </div>
 ```
@@ -441,14 +441,14 @@ Activates a list item element and content container. Tab should have either a `d
 <div class="list-group" id="myList" role="tablist">
   <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#home" role="tab">Home</a>
   <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab">Profile</a>
-  <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#messages" role="tab">Messages</a>
+  <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#Message" role="tab">Message</a>
   <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#settings" role="tab">Settings</a>
 </div>
 
 <div class="tab-content">
   <div class="tab-pane active" id="home" role="tabpanel">...</div>
   <div class="tab-pane" id="profile" role="tabpanel">...</div>
-  <div class="tab-pane" id="messages" role="tabpanel">...</div>
+  <div class="tab-pane" id="Message" role="tabpanel">...</div>
   <div class="tab-pane" id="settings" role="tabpanel">...</div>
 </div>
 

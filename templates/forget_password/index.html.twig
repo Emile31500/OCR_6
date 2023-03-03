@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{controller_name}} {% endblock %}
+
+{% block body %}
+    <h2 class="header-body-element"> {{controller_name}} </h2>
+    <p>Un lien vous sera envoyé par email pour pouvoir modifier votre mot de passe.</p>
+    {{ form_start(form_send_recup_code) }}
+        <p>
+            {{ form_row(form_send_recup_code.email) }}
+        </p>
+        <p>
+            <input type="submit" class="btn btn-primary"/>
+        </p>
+    {{ form_end(form_send_recup_code) }}
+    <div class="status_message_container">
+        <div id="status_message" class="alert alert-danger d-none" role="alert">
+            An error has occurred. Please try again later.
+        </div>
+    </div>
+{% endblock %}

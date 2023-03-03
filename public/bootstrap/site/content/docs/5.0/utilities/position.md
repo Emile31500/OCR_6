@@ -90,7 +90,7 @@ Here are some real life examples of these classes:
 
 {{< example class="bd-example-position-examples d-flex justify-content-around" >}}
 <button type="button" class="btn btn-primary position-relative">
-  Mails <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
+  Mails <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread Message</span></span>
 </button>
 
 <button type="button" class="btn btn-dark position-relative">
@@ -98,7 +98,7 @@ Here are some real life examples of these classes:
 </button>
 
 <button type="button" class="btn btn-primary position-relative">
-  Alerts <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
+  Alerts <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread Message</span></span>
 </button>
 {{< /example >}}
 

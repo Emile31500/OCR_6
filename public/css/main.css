@@ -1,0 +1,26 @@
+.footer-body-element {
+
+    margin-top: 70px;
+
+
+}
+
+.header-body-element {
+
+    margin-bottom: 70px;
+
+}
+.core-body-element {
+
+    margin: 70px;
+
+}
+
+.status_message_container {
+
+    min-height: 100px;
+}
+
+footer {
+    background: rgb(220, 220, 220)
+}
