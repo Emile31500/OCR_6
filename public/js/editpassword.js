@@ -64,7 +64,7 @@ password_edit_form.addEventListener("submit", function(event){
             method: 'POST',
             body: data
         })
-            .then(response => response.json())
+            .then(response => console.log(response.json()))
             .then(data => console.log(data))
             .catch(error => console.error(error));
 

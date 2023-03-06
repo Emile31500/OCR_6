@@ -7,16 +7,15 @@ use App\Form\SendPasswordRecuperationCodeType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use DateTime;
 
 class ForgetPasswordController extends AbstractController
@@ -24,34 +23,24 @@ class ForgetPasswordController extends AbstractController
     #[Route('/recuperation-mot-de-passe', name: 'app_forget_password')]
     public function index(Request $request, UtilisateurRepository $UtilisateurRepository, MailerInterface $mailer): Response
     {
-        $form_send_recup_code = $this->createForm(SendPasswordRecuperationCodeType::class);
-        $form_send_recup_code->handleRequest($request);
+        $form = $this->createForm(SendPasswordRecuperationCodeType::class);
+        $form->handleRequest($request);
 
-        if ($form_send_recup_code->isSubmitted() && $form_send_recup_code->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             
-            $response = $form_send_recup_code->getData();
-            $res = $UtilisateurRepository->findByEmail($response['email']);
-            $utilisateur = $res[0];
+            $response = $form->getData();
+            $utilisateur = $UtilisateurRepository->findOneBySomeField('email', $response['email']);
 
-            if (isset($utilisateur) && !empty($utilisateur)){
+            if ($utilisateur != null){
 
-                date("Y-m-d h:i:s");
+                // date("Y-m-d h:i:s");
                 $now = new \DateTime();
-                $date_limit = $now->modify('+1 day');
+                $dateLimit = $now->modify('+1 day');
                 
-                function generateRandomString($length = 64) {
-                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $randomString = '';
-                    for ($i = 0; $i < $length; $i++) {
-                        $randomString .= $characters[rand(0, strlen($characters) - 1)];
-                    }
-                    return $randomString;
-                }
+                $codeRecup = random_bytes(64);
 
-                $codeRecup = generateRandomString();
-                
                 $utilisateur->setCodeRecup($codeRecup);
-                $utilisateur->setRecupDate($date_limit);
+                $utilisateur->setRecupDate($dateLimit);
                 $UtilisateurRepository->save($utilisateur, true);
 
                 $email = (new TemplatedEmail())
@@ -70,33 +59,28 @@ class ForgetPasswordController extends AbstractController
         }   
 
         return $this->render('forget_password/index.html.twig', [
-            "form_send_recup_code" => $form_send_recup_code->createView(),
-            'controller_name' => 'ForgetPasswordController',
+            "form_send_recup_code" => $form->createView(),
+            'controller_name' => 'Mot de passe oublié'
         ]);
     }
 
     #[Route('/modifier-le-mot-de-passe/{code_recup}', name: 'app_edit_password')]
     public function editPassword(string $code_recup, UtilisateurRepository $utilisateurRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) : response
     {
-        $array_utilisateur = new Utilisateur;
-        $array_utilisateur = $utilisateurRepository->findByRecupcode($code_recup);
 
-        if (isset($array_utilisateur) && !empty($array_utilisateur)) {
-
-            $utilisateur = $array_utilisateur[0];
+        $utilisateur = $utilisateurRepository->findOneBySomeField('codeRecup', $code_recup);
+        if ($utilisateur != null) {
+            
             $date_recup = $utilisateur->getRecupDate();
             $now = new \DateTime();
             
             if ($date_recup > $now)   {   
-    
-                $data;
-    
+
                 $form = $this->createForm(EditPsswFormType::class, null, [
                     'attr' => ['id' => 'password-edit-form', 'class'=>'mb-5 mt-5']]);
-                // $form->setAttribute('id', 'password-edit-form');
                 $form->handleRequest($request);
     
-                if ($form->isSubmitted()){
+                if ($form->isSubmitted() && $form->isValid()){
     
                     $utilisateur->setPassword(
                         $userPasswordHasher->hashPassword(
@@ -104,19 +88,15 @@ class ForgetPasswordController extends AbstractController
                             $form->get('password')->getData()
                         )
                     );
-    
-                    $utilisateurRepository->save($utilisateur, true);
-    
+                    
                     $utilisateur->setCodeRecup(null);
                     $utilisateur->setRecupDate(null);
-                    $entityManager->persist($utilisateur);
-                    $entityManager->flush();
-    
-                    header('Content-Type: application/json');
-                    echo json_encode(["status" => true]);
-                    die;
+                    $utilisateurRepository->save($utilisateur, true);
+                    
+                    return new JsonResponse(["status" => true]);
     
                 }
+                
             } else {
                 
                 $utilisateur->setCodeRecup(null);
