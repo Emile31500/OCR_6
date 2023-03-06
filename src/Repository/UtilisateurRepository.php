@@ -88,13 +88,13 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         return $result;
     }
 
-//    public function findOneBySomeField($value): ?Utilisateur
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+   public function findOneBySomeField($selector, $value): ?Utilisateur
+   {
+       return $this->createQueryBuilder('u')
+           ->andWhere('u.'.$selector.'=:val')
+           ->setParameter('val', $value)
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+   }
 }
