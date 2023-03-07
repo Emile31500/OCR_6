@@ -42,17 +42,16 @@ class PhotoFigureRepository extends ServiceEntityRepository
 //    /**
 //     * @return PhotoFigure[] Returns an array of PhotoFigure objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByFigureId($value): ?PhotoFigure
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.Figure = :val')
+            ->setParameter('val', $value)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?PhotoFigure
 //    {

@@ -156,7 +156,10 @@ class __TwigTemplate_03bb75ba3fc87527b2f7f0745ff4984f extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
         // line 31
-        echo "    ";
+        echo "    <script src=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/editpassword.js"), "html", null, true);
+        echo "\"></script>
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -212,7 +215,7 @@ class __TwigTemplate_03bb75ba3fc87527b2f7f0745ff4984f extends Template
 
 {% endblock %}
 {% block javascripts %}
-    {# <script src=\"{{ asset('js/editpassword.js') }}\"></script> #}
+    <script src=\"{{ asset('js/editpassword.js') }}\"></script>
 {% endblock %}
 ", "forget_password/editpw.html.twig", "C:\\wamp64\\www\\Projet_OC6\\templates\\forget_password\\editpw.html.twig");
     }
