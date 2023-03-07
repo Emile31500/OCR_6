@@ -64,8 +64,8 @@ password_edit_form.addEventListener("submit", function(event){
             method: 'POST',
             body: data
         })
-            .then(response => console.log(response.json()))
-            .then(data => console.log(data))
+            .then(response => response.json())
+            .then(data => data)
             .catch(error => console.error(error));
 
         status_message.classList.remove("d-none");
@@ -73,7 +73,6 @@ password_edit_form.addEventListener("submit", function(event){
         status_message.classList.remove("alert-danger");
         status_message.classList.add("alert-success");
         status_message.innerHTML = "Votre mot de passe a été enregistré";
-        console.log(data);
         return true;
 
 

@@ -136,7 +136,10 @@ class __TwigTemplate_a48b359646ab2af2c0e20d43dab3b1d2 extends Template
             <input type=\"password\" class=\"form-control\" name=\"confirm-password\" id=\"confirm-password\"/>
         </p>
         <p>
-            <a href=\"http://127.0.0.1:8100/connexion\"> Déjà un compte ? Connectez-vous !</a>
+            <a href=\"";
+        // line 33
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+        echo "\"> Déjà un compte ? Connectez-vous !</a>
         </p>
         ";
         // line 35
@@ -169,7 +172,7 @@ class __TwigTemplate_a48b359646ab2af2c0e20d43dab3b1d2 extends Template
 
     public function getDebugInfo()
     {
-        return array (  149 => 38,  143 => 35,  130 => 25,  124 => 22,  118 => 19,  112 => 16,  106 => 13,  100 => 10,  95 => 8,  89 => 6,  79 => 5,  59 => 3,  36 => 1,);
+        return array (  152 => 38,  146 => 35,  141 => 33,  130 => 25,  124 => 22,  118 => 19,  112 => 16,  106 => 13,  100 => 10,  95 => 8,  89 => 6,  79 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -206,7 +209,7 @@ class __TwigTemplate_a48b359646ab2af2c0e20d43dab3b1d2 extends Template
             <input type=\"password\" class=\"form-control\" name=\"confirm-password\" id=\"confirm-password\"/>
         </p>
         <p>
-            <a href=\"http://127.0.0.1:8100/connexion\"> Déjà un compte ? Connectez-vous !</a>
+            <a href=\"{{ path('app_login') }}\"> Déjà un compte ? Connectez-vous !</a>
         </p>
         {{ form_row(registrationForm.agreeTerms) }}
 

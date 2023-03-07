@@ -465,7 +465,7 @@ class __TwigTemplate_3a85326e5653fee4df71d1565b681804 extends Template
             $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "macro", "dump_request_data"));
 
             // line 162
-            $macros["__internal_parse_1"] = $this;
+            $macros["__internal_parse_0"] = $this;
             // line 163
             echo "{
     id: \"";
@@ -482,7 +482,7 @@ class __TwigTemplate_3a85326e5653fee4df71d1565b681804 extends Template
             echo "\",
     events: [ ";
             // line 167
-            echo twig_call_macro($macros["__internal_parse_1"], "macro_dump_events", [(isset($context["events"]) || array_key_exists("events", $context) ? $context["events"] : (function () { throw new RuntimeError('Variable "events" does not exist.', 167, $this->source); })())], 167, $context, $this->getSourceContext());
+            echo twig_call_macro($macros["__internal_parse_0"], "macro_dump_events", [(isset($context["events"]) || array_key_exists("events", $context) ? $context["events"] : (function () { throw new RuntimeError('Variable "events" does not exist.', 167, $this->source); })())], 167, $context, $this->getSourceContext());
             echo " ],
 }
 ";
