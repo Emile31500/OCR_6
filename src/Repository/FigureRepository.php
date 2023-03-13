@@ -53,6 +53,16 @@ class FigureRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findOneBySlug($value): ?Figure
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.slug = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    public function findOneBySomeField($value): ?Figure
 //    {
 //        return $this->createQueryBuilder('f')

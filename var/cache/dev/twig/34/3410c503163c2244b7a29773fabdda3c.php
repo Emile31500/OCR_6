@@ -146,10 +146,16 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 33), "nom", [], "any", false, false, false, 33), "html", null, true);
             echo "\"/>
             <div class=\"card-body\">
-                <h3 class=\"col-8 h4\"> ";
+                <a href=\"";
             // line 35
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 35), "nom", [], "any", false, false, false, 35), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 35), "slug", [], "any", false, false, false, 35)]), "html", null, true);
+            echo "\" >
+                    <h3 class=\"col-8 h4\"> ";
+            // line 36
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 36), "nom", [], "any", false, false, false, 36), "html", null, true);
             echo " </h3>
+                </a>
+                
                 <div class=\"col-2 edit-card-div\">
                     <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">
                         <path d=\"M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z\"/>
@@ -167,7 +173,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['figure'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 49
+        // line 52
         echo "
     <div class=\"clear\">
         <div  class=\"col d-flex m-5 align-itms-center  justify-content-center \">
@@ -185,7 +191,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 58
+    // line 61
     public function block_perso_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -195,7 +201,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
 
-        // line 59
+        // line 62
         echo "    <link rel=\"stylesheet\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/home/index.css"), "html", null, true);
         echo "\">
@@ -220,7 +226,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     public function getDebugInfo()
     {
-        return array (  199 => 59,  189 => 58,  171 => 49,  151 => 35,  143 => 33,  140 => 32,  135 => 31,  125 => 30,  112 => 25,  92 => 6,  82 => 5,  61 => 3,  38 => 1,);
+        return array (  205 => 62,  195 => 61,  177 => 52,  155 => 36,  151 => 35,  143 => 33,  140 => 32,  135 => 31,  125 => 30,  112 => 25,  92 => 6,  82 => 5,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -259,7 +265,10 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
             <div class=\"tricks-card card mx-3 my-3\">
             <img class=\"top-img-card\" src=\"{{ asset('media/img/figures/')}}{{figure.photo.url}}\" alt=\"{{figure.figure.nom}}\"/>
             <div class=\"card-body\">
-                <h3 class=\"col-8 h4\"> {{figure.figure.nom}} </h3>
+                <a href=\"{{ path('app_figure', {slug: figure.figure.slug } ) }}\" >
+                    <h3 class=\"col-8 h4\"> {{figure.figure.nom}} </h3>
+                </a>
+                
                 <div class=\"col-2 edit-card-div\">
                     <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">
                         <path d=\"M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z\"/>
