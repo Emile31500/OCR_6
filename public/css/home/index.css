@@ -5,6 +5,13 @@
 
 }
 
+.top-img-card {
+
+    height: 225px;
+    object-fit: cover;
+
+}
+
 .edit-card-div {
 
     float: left;
