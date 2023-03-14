@@ -21,6 +21,6 @@ return [
     'app_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::index'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure']], [], [], []],
     'app_forget_password' => [[], ['_controller' => 'App\\Controller\\ForgetPasswordController::index'], [], [['text', '/recuperation-mot-de-passe']], [], [], []],
     'app_edit_password' => [['code_recup'], ['_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], [], [['variable', '/', '[^/]++', 'code_recup', true], ['text', '/modifier-le-mot-de-passe']], [], [], []],
-    'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
+    'app_home' => [['max_res'], ['max_res' => null, '_controller' => 'App\\Controller\\HomeController::index'], [], [['variable', '/', '[^/]++', 'max_res', true]], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/inscription']], [], [], []],
 ];

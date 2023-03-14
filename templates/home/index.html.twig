@@ -19,17 +19,12 @@
                 <td class="fst-italic">"La passion du Snowboard"</td>
             </tr>
         </table>
-        {# <svg style="width: 20px;" viewBox="0 0 100 100">
-            <polygon points="50,0 100,50 50,100 0,50" fill="#000000"/>
-        </svg> #}
-
-
     </div>
 {% endblock %}
-
 {% block body %}
-        {% for figure in data %}
-            <div class="tricks-card card mx-3 my-3">
+    <div id='tricks-card-list'>
+    {% for figure in data %}
+        <div class="tricks-card card mx-3 my-3">
             <img class="top-img-card" src="{{ asset('media/img/figures/')}}{{figure.photo.url}}" alt="{{figure.figure.nom}}"/>
             <div class="card-body">
                 <a href="{{ path('app_figure', {slug: figure.figure.slug } ) }}" >
@@ -48,8 +43,8 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
-
+    {% endfor %}
+    </div>
     <div class="clear">
         <div  class="col d-flex m-5 align-itms-center  justify-content-center ">
             <button id="load_more_tricks_button" class=" btn btn-primary p-3 pr-5 pl-5">
@@ -57,6 +52,9 @@
             </button>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/load_more_figure.js') }}"></script>
 {% endblock %}
 {% block perso_stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/home/index.css') }}">
