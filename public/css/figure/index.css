@@ -1,0 +1,8 @@
+.img-figure {
+
+    max-width: 350px;
+    max-height: 350px;
+    min-width: 250px;
+    min-height: 250px;
+    object-fit: cover;
+}

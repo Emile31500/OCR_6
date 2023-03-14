@@ -14,9 +14,12 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/administration' => [[['_route' => 'app_administration', '_controller' => 'App\\Controller\\AdministrationController::index'], null, null, null, false, false, null]],
         '/connexion' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\AuthenticatorController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\AuthenticatorController::logout'], null, null, null, false, false, null]],
         '/recuperation-mot-de-passe' => [[['_route' => 'app_forget_password', '_controller' => 'App\\Controller\\ForgetPasswordController::index'], null, null, null, false, false, null]],
+        '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
+        '/inscription' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -37,8 +40,6 @@ return [
                 .')'
                 .'|/figure/([^/]++)(*:185)'
                 .'|/modifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:231)'
-                .'|/([^/]++)?(*:249)'
-                .'|/inscription(*:269)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -50,10 +51,8 @@ return [
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         185 => [[['_route' => 'app_figure', '_controller' => 'App\\Controller\\FigureController::index'], ['slug'], null, null, false, true, null]],
-        231 => [[['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], null, null, false, true, null]],
-        249 => [[['_route' => 'app_home', 'max_res' => null, '_controller' => 'App\\Controller\\HomeController::index'], ['max_res'], null, null, false, true, null]],
-        269 => [
-            [['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], [], null, null, false, false, null],
+        231 => [
+            [['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

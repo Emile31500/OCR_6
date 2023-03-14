@@ -16,11 +16,12 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
+    'app_administration' => [[], ['_controller' => 'App\\Controller\\AdministrationController::index'], [], [['text', '/administration']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::login'], [], [['text', '/connexion']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::logout'], [], [['text', '/logout']], [], [], []],
     'app_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::index'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure']], [], [], []],
     'app_forget_password' => [[], ['_controller' => 'App\\Controller\\ForgetPasswordController::index'], [], [['text', '/recuperation-mot-de-passe']], [], [], []],
     'app_edit_password' => [['code_recup'], ['_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], [], [['variable', '/', '[^/]++', 'code_recup', true], ['text', '/modifier-le-mot-de-passe']], [], [], []],
-    'app_home' => [['max_res'], ['max_res' => null, '_controller' => 'App\\Controller\\HomeController::index'], [], [['variable', '/', '[^/]++', 'max_res', true]], [], [], []],
+    'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/inscription']], [], [], []],
 ];

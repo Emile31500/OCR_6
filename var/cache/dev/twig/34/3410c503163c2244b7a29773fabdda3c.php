@@ -105,7 +105,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                 <td><h2 class=\"shadow fst-italic align-middle text-light text-center\"> Snowboard  </h2></td>
             </tr>
             <tr>
-                <td class=\"fst-italic\">\"La passion du Snowboard\"</td>
+                <td class=\"fst-italic text-light\">\"La passion du Snowboard\"</td>
             </tr>
         </table>
     </div>
@@ -136,7 +136,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $context['_seq'] = twig_ensure_traversable((isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 26, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["figure"]) {
             // line 27
-            echo "        <div class=\"tricks-card card mx-3 my-3\">
+            echo "        <div class=\"tricks-card card mx-5 my-5\">
             <img class=\"top-img-card\" src=\"";
             // line 28
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/img/figures/"), "html", null, true);
@@ -149,7 +149,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
             // line 30
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 30), "slug", [], "any", false, false, false, 30)]), "html", null, true);
             echo "\" >
-                    <h3 class=\"col-8 h4\"> ";
+                    <h3 class=\"col-8 h4 text-dark\"> ";
             // line 31
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 31), "nom", [], "any", false, false, false, 31), "html", null, true);
             echo " </h3>
@@ -271,7 +271,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                 <td><h2 class=\"shadow fst-italic align-middle text-light text-center\"> Snowboard  </h2></td>
             </tr>
             <tr>
-                <td class=\"fst-italic\">\"La passion du Snowboard\"</td>
+                <td class=\"fst-italic text-light\">\"La passion du Snowboard\"</td>
             </tr>
         </table>
     </div>
@@ -279,11 +279,11 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 {% block body %}
     <div id='tricks-card-list'>
     {% for figure in data %}
-        <div class=\"tricks-card card mx-3 my-3\">
+        <div class=\"tricks-card card mx-5 my-5\">
             <img class=\"top-img-card\" src=\"{{ asset('media/img/figures/')}}{{figure.photo.url}}\" alt=\"{{figure.figure.nom}}\"/>
             <div class=\"card-body\">
                 <a href=\"{{ path('app_figure', {slug: figure.figure.slug } ) }}\" >
-                    <h3 class=\"col-8 h4\"> {{figure.figure.nom}} </h3>
+                    <h3 class=\"col-8 h4 text-dark\"> {{figure.figure.nom}} </h3>
                 </a>
                 
                 <div class=\"col-2 edit-card-div\">
