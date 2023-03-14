@@ -28,4 +28,13 @@ class FigureController extends AbstractController
             'data' => $data
         ]);
     }
+
+    #[Route('/creation-figure', name: 'app_creation_figure')]
+    public function creationFigure(){
+
+        return $this->render('figure/index.html.twig', [
+            'controller_name' => "Création d'une figure"
+        ]);
+
+    }
 }
