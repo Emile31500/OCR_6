@@ -10,10 +10,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-    public function index(FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository): Response
+    #[Route('/{max_res?}', name: 'app_home')]
+    public function index(FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository, mixed $max_res): Response
     {
-        $figures = $figureRepository->findPublished();
+
+        if (!isset($max_res)){
+
+            $max_res = 6;
+        }
+
+        $figures = $figureRepository->findPublished($max_res);
 
         $data = [];    
 

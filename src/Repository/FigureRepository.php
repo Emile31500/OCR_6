@@ -42,15 +42,23 @@ class FigureRepository extends ServiceEntityRepository
 //    /**
 //     * @return Figure[] Returns an array of Figure objects
 //     */
-    public function findPublished(): array
+    public function findPublished(mixed $max_result): array
     {
-        return $this->createQueryBuilder('f')
+        
+        $queryBuilder = $this->createQueryBuilder('f')
             ->andWhere('f.statu = :val')
             ->setParameter('val', 'published')
-            ->orderBy('f.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
+            ->orderBy('f.id', 'ASC');
+
+        if ($max_result > 1) {
+            
+            $queryBuilder->setMaxResults($max_result);
+        
+        }
+
+        return $queryBuilder->getQuery()
+                    ->getResult();
+
     }
 
     public function findOneBySlug($value): ?Figure
