@@ -16,6 +16,7 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
+    'app_administration' => [[], ['_controller' => 'App\\Controller\\AdministrationController::index'], [], [['text', '/administration']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::login'], [], [['text', '/connexion']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::logout'], [], [['text', '/logout']], [], [], []],
     'app_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::index'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure']], [], [], []],
