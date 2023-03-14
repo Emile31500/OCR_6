@@ -5,10 +5,10 @@ let tricks_list = document.getElementById('tricks-card-list');
 button.addEventListener('click', function(){
 
     nb_clique++;
-    let max_res = 6 + nb_clique * 3;
+    let max_res = 3 + nb_clique * 3;
     let web_server = location.hostname + ':' + location.port;
 
-    let response = fetch('http://' + web_server + '/' + max_res)
+    let response = fetch('http://' + web_server + '/?max_result=' + max_res)
         .then(function(response) {
             return response.text();
         })
