@@ -15,7 +15,12 @@ use App\Entity\PhotoFigure;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 
 class FigureController extends AbstractController
@@ -39,21 +44,28 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure')]
-    public function suppressionFigure(FigureRepository $figureRepo, PhotoFigureRepository $photoFigureRepo, string $slug){
+    public function suppressionFigure(FigureRepository $figureRepo, PhotoFigureRepository $photoFigureRepo, TokenStorageInterface $tokenStorage, Security $security, string $slug){
 
-        $figure = $figureRepo->findOneBySlug($slug);
-        $photoFigure = $photoFigureRepo->findByFigureId($figure->getId());
+        $user = $tokenStorage->getToken()->getUser();
+        $isAdmin = $user->getRoles()[0] == "administrator";
 
-        $photoFigureRepo->remove($photoFigure, true);
-        $figureRepo->remove($figure, true);
+        if($isAdmin){
+
+            $figure = $figureRepo->findOneBySlug($slug);
+            $photoFigure = $photoFigureRepo->findByFigureId($figure->getId());
+
+            $photoFigureRepo->remove($photoFigure, true);
+            $figureRepo->remove($figure, true);
+            
+            return $this->render('figure/supression.html.twig', [
+                'controller_name' => "Création d'une figure",
+                "form" => $form->createView()
+            ]);
+
+        }
 
         header('location: /');
         die;
-
-        return $this->render('figure/supression.html.twig', [
-            'controller_name' => "Création d'une figure",
-            "form" => $form->createView()
-        ]);
 
     }
 
