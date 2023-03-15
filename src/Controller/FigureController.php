@@ -38,6 +38,25 @@ class FigureController extends AbstractController
         ]);
     }
 
+    #[Route('/figure-suppression/{slug}', name: 'app_supression_figure')]
+    public function suppressionFigure(FigureRepository $figureRepo, PhotoFigureRepository $photoFigureRepo, string $slug){
+
+        $figure = $figureRepo->findOneBySlug($slug);
+        $photoFigure = $photoFigureRepo->findByFigureId($figure->getId());
+
+        $photoFigureRepo->remove($photoFigure, true);
+        $figureRepo->remove($figure, true);
+
+        header('location: /');
+        die;
+
+        return $this->render('figure/supression.html.twig', [
+            'controller_name' => "Création d'une figure",
+            "form" => $form->createView()
+        ]);
+
+    }
+
     #[Route('/creation-figure', name: 'app_creation_figure')]
     public function creationFigure(Request $request, EntityManagerInterface $manager){
 

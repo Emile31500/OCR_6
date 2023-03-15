@@ -39,8 +39,11 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/figure/([^/]++)(*:185)'
-                .'|/modifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:231)'
+                .'|/figure(?'
+                    .'|/([^/]++)(*:188)'
+                    .'|\\-suppression/([^/]++)(*:218)'
+                .')'
+                .'|/modifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:265)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -51,8 +54,9 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        185 => [[['_route' => 'app_figure', '_controller' => 'App\\Controller\\FigureController::index'], ['slug'], null, null, false, true, null]],
-        231 => [
+        188 => [[['_route' => 'app_figure', '_controller' => 'App\\Controller\\FigureController::index'], ['slug'], null, null, false, true, null]],
+        218 => [[['_route' => 'app_supression_figure', '_controller' => 'App\\Controller\\FigureController::suppressionFigure'], ['slug'], null, null, false, true, null]],
+        265 => [
             [['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
