@@ -3,5 +3,19 @@
 {% block title %}Hello AdministrationController!{% endblock %}
 
 {% block body %}
-<h2> {{ controller_name }}! ✅</h1>
+<h2> {{ controller_name }}</h2>
+ {{ form_start(form) }}
+    <p>
+        {{ form_row(form.nom) }}
+    </p>
+    <p>
+        {{ form_row(form.photo) }}
+    </p>
+    <p>
+        {{ form_row(form.article) }}
+    </p>
+    <p>
+        {{ form_row(form.submit) }}
+    </p>
+ {{ form_end(form) }}
 {% endblock %}
