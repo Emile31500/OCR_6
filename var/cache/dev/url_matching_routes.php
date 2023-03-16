@@ -43,7 +43,8 @@ return [
                     .'|/([^/]++)(*:188)'
                     .'|\\-suppression/([^/]++)(*:218)'
                 .')'
-                .'|/modifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:265)'
+                .'|/edition\\-figure/([^/]++)(*:252)'
+                .'|/modifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:298)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -56,7 +57,8 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         188 => [[['_route' => 'app_figure', '_controller' => 'App\\Controller\\FigureController::index'], ['slug'], null, null, false, true, null]],
         218 => [[['_route' => 'app_supression_figure', '_controller' => 'App\\Controller\\FigureController::suppressionFigure'], ['slug'], null, null, false, true, null]],
-        265 => [
+        252 => [[['_route' => 'app_edition_figure', '_controller' => 'App\\Controller\\FigureController::editionFigure'], ['slug'], null, null, false, true, null]],
+        298 => [
             [['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
