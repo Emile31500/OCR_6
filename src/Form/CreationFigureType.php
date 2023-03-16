@@ -5,7 +5,8 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\File as ConstrainFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,6 +17,8 @@ class CreationFigureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        
+        $img = new File('media/img/figures/japan_air_1.jpg');
         $builder
             ->add('nom', TextType::class, [
                 "label" => "Nom : ",
@@ -31,11 +34,12 @@ class CreationFigureType extends AbstractType
             ])
             ->add('photo', FileType::class, [
                 "label" => "Image : ",
+                "data" => $img,
                 "attr" => [
                     'class' => 'form-control'
                 ],
                 'constraints' => [
-                    new File([
+                    new ConstrainFile([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/jpeg'

@@ -80,11 +80,10 @@ class FigureController extends AbstractController
 
             $imgPath = 'media/img/figures/'.$photoFigure->getUrl();
             $imgDefault = new File($imgPath);
-            var_dump($imgDefault);
-            die;
+
             $form = $this->createForm(CreationFigureType::class, [
                                                                 'nom' => $figure->getNom(),
-                                                                'photo' => $imgDefault, 
+                                                                // 'img_default' => $imgDefault, 
                                                                 'article' => $figure->getArticle()
                                                             ]);
             $form->handleRequest($request);
@@ -121,8 +120,8 @@ class FigureController extends AbstractController
                     $figure->setArticle($article);
                     $figure->addPhotoFigure($photoFigure);
                     
-                    $figureRepo->save($figure);
-                    $photoFigureRepo->save($photoFigure);
+                    $figureRepo->save($figure, true);
+                    $photoFigureRepo->save($photoFigure, true);
 
                     // $manager->persist($figure);
                     // $manager->persist($photoFigure);
