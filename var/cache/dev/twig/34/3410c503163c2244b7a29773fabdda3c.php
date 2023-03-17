@@ -179,14 +179,19 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                 if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 41, $this->source); })()), "user", [], "any", false, false, false, 41), "roles", [], "any", false, false, false, 41), 0, [], "array", false, false, false, 41) == "administrator")) {
                     // line 42
                     echo "                        <div class=\"col-2 edit-card-div\">
-                            <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">
-                                <path d=\"M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z\"/>
-                            </svg>
+                            <a href=\"";
+                    // line 43
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_edition_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 43), "slug", [], "any", false, false, false, 43)]), "html", null, true);
+                    echo "\">
+                                <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">
+                                    <path d=\"M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z\"/>
+                                </svg>
+                            </a>
                         </div>
                         <div class=\"col-2 trash-card-div\">
                             <a href=\"";
-                    // line 48
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_supression_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 48), "slug", [], "any", false, false, false, 48)]), "html", null, true);
+                    // line 50
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_supression_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 50), "slug", [], "any", false, false, false, 50)]), "html", null, true);
                     echo "\">
                                 <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\">
                                     <path d=\"M296 432h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8zm-160 0h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8zM440 64H336l-33.6-44.8A48 48 0 0 0 264 0h-80a48 48 0 0 0-38.4 19.2L112 64H8a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h24v368a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96h24a8 8 0 0 0 8-8V72a8 8 0 0 0-8-8zM171.2 38.4A16.1 16.1 0 0 1 184 32h80a16.1 16.1 0 0 1 12.8 6.4L296 64H152zM384 464a16 16 0 0 1-16 16H80a16 16 0 0 1-16-16V96h320zm-168-32h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8z\"/>
@@ -195,10 +200,10 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                         </div>
                     ";
                 }
-                // line 55
+                // line 57
                 echo "                ";
             }
-            // line 56
+            // line 58
             echo "            </div>
         </div>
     ";
@@ -206,7 +211,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['figure'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 59
+        // line 61
         echo "    </div>
     <div class=\"clear\">
         <div  class=\"col d-flex m-5 align-itms-center  justify-content-center \">
@@ -224,7 +229,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 68
+    // line 70
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -234,7 +239,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 69
+        // line 71
         echo "    <script src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/load_more_figure.js"), "html", null, true);
         echo "\"></script>
@@ -247,7 +252,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 71
+    // line 73
     public function block_perso_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -257,7 +262,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
 
-        // line 72
+        // line 74
         echo "    <link rel=\"stylesheet\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/home/index.css"), "html", null, true);
         echo "\">
@@ -282,7 +287,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     public function getDebugInfo()
     {
-        return array (  261 => 72,  251 => 71,  238 => 69,  228 => 68,  210 => 59,  202 => 56,  199 => 55,  189 => 48,  181 => 42,  178 => 41,  176 => 40,  171 => 38,  167 => 37,  159 => 35,  156 => 34,  152 => 33,  149 => 32,  146 => 31,  138 => 27,  135 => 26,  132 => 25,  122 => 24,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
+        return array (  266 => 74,  256 => 73,  243 => 71,  233 => 70,  215 => 61,  207 => 58,  204 => 57,  194 => 50,  184 => 43,  181 => 42,  178 => 41,  176 => 40,  171 => 38,  167 => 37,  159 => 35,  156 => 34,  152 => 33,  149 => 32,  146 => 31,  138 => 27,  135 => 26,  132 => 25,  122 => 24,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
     }
 
     public function getSourceContext()
@@ -329,9 +334,11 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                  {% if app.user is not null %}
                     {% if app.user.roles[0] == 'administrator' %}
                         <div class=\"col-2 edit-card-div\">
-                            <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">
-                                <path d=\"M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z\"/>
-                            </svg>
+                            <a href=\"{{ path('app_edition_figure', {slug: figure.figure.slug } ) }}\">
+                                <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">
+                                    <path d=\"M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z\"/>
+                                </svg>
+                            </a>
                         </div>
                         <div class=\"col-2 trash-card-div\">
                             <a href=\"{{ path('app_supression_figure', {slug: figure.figure.slug } ) }}\">

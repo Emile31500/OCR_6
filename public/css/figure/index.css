@@ -6,3 +6,12 @@
     min-height: 250px;
     object-fit: cover;
 }
+#message-zone{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#slug {
+
+    display: none
+}

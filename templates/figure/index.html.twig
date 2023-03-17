@@ -14,57 +14,52 @@
     <p class="mt-5 mb-5">
         {{ data.figure.article }}
     </p>
-    <div>
-        <div>
-            <div class="d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient">
-                <div class="mx-3" style=" height: 100%;">
-                    <div class="lead utilisateur-message" style="font-weight: 500; min-width: 100px;"> Mario El Piza </div>
-                    <div class="small date-message"> 17/07/2002 19:00:00</div>
-                </div>
-                <div class="lead corps-message ">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </div>
-            </div>
-             <div class="d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient">
-                <div class="mx-3" style=" height: 100%;">
-                    <div class="lead utilisateur-message" style="font-weight: 500; min-width: 100px;"> Mario El Piza </div>
-                    <div class="small date-message"> 17/07/2002 19:00:00</div>
-                </div>
-                <div class="lead corps-message ">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </div>
-            </div>
-             <div class="d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient">
-                <div class="mx-3" style=" height: 100%;">
-                    <div class="lead utilisateur-message" style="font-weight: 500; min-width: 100px;"> Mario El Piza </div>
-                    <div class="small date-message"> 17/07/2002 19:00:00</div>
-                </div>
-                <div class="lead corps-message ">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </div>
-            </div>
+    <div id="message-zone">
+        {% for message in messages %}
             <div class="d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient"> 
                 <div class="mx-3" style=" height: 100%;">
-                    <div class="lead utilisateur-message" style="font-weight: 500; min-width: 100px;"> Mario El Piza </div>
-                    <div class="clear small date-message"> 17/07/2002 19:00:00</div>
+                    <div class="lead utilisateur-message" style="font-weight: 500; min-width: 100px;"> {{message.utilisateur.nomUtilisateur }} </div>
+                    <div class="clear small date-message"> {{message.date|date("y-m-d H:i:s")}}</div>
                 </div>
                 <div class="lead corps-message ">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    {{message.message}}
                 </div>        
             </div>
-        </div>
-        <div>
+        {% endfor %}
+    </div>
+    <script>
+        var element = document.getElementById("message-zone");
+        element.scrollTop = element.scrollHeight;
+    </script>
+    <div>
+        {% if app.user %}
+        {{ form_start(form, {'attr': {'id': 'message-form', 'class': 'row'}}) }}
+            <div class="d-flex col-3 md-col-4">
+                {{ form_row(form.submit) }}
+            </div>
+            <div class="col-9 md-col-8">
+                {# {{ form_row(form.message) }} #}
+                {{ form_widget(form.message) }}
+
+            </div>         
+        {{ form_end(form) }}
+        {% else %}
             <form class="row my-3">
                 <div class="d-flex col-3 md-col-4">
-                    <button class="btn btn-primary position-relative  start-50"> Envoyer </button>
+                    <button class="btn btn-light position-relative  start-50" disabled> Envoyer </button>
                 </div>
                 <div class="col-9 md-col-8">
-                    <textarea class="form-control lead right-message bg-light bg-gradient" name="right-message" id="right-message"> </textarea>
+                    <textarea class="form-control lead right-message bg-light bg-gradient" name="right-message" id="right-message" disabled> </textarea>
                 </div>
             </form>
-        </div>
+        {% endif %}
+        <span id="slug">{{data.figure.slug}}</span>
     </div>
 {% endblock %}
 {% block perso_stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/figure/index.css') }}">
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/message_autoload.js') }}"></script>
+    <script src="{{ asset('js/send_message_async.js') }}"></script>
 {% endblock %}
