@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\FigureRepository;
 use App\Repository\VideoFigureRepository;
 use App\Repository\PhotoFigureRepository;
+use App\Repository\MessageRepository;
 use App\Form\CreationFigureType;
 use App\Form\EditionFigureType;
 use App\Form\MessageType;
@@ -27,7 +28,7 @@ use DateTimeInterface;
 class FigureController extends AbstractController
 {
     #[Route('/figure/{slug}', name: 'app_figure')]
-    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
+    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, MessageRepository $messageRepository,PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
 
         $message = new Message();
@@ -64,10 +65,15 @@ class FigureController extends AbstractController
 
         }
 
+        $message = $messageRepository->findByFigure($figure->getId());
+
+        // var_dump($message[0]->getUtilisateur()->getNomUtilisateur());
+        // die;
 
         return $this->render('figure/index.html.twig', [
             'controller_name' => $figure->getNom(),
             'form' => $form->createView(),
+            'messages' => $message,
             'data' => $data
         ]);
     }

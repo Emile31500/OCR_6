@@ -288,7 +288,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         <script src=\"";
         // line 71
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bootstrap/dist/js/bootstrap.min.js"), "html", null, true);
-        echo "\"/> 
+        echo "\"/>
     ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -385,7 +385,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
     {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
-        <script src=\"{{ asset('bootstrap/dist/js/bootstrap.min.js') }}\"/> 
+        <script src=\"{{ asset('bootstrap/dist/js/bootstrap.min.js') }}\"/>
     {% endblock %}
 
 </html>
