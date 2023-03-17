@@ -17,9 +17,7 @@ class MessageType extends AbstractType
             ->add('message', TextareaType::class, [
                 'label' => false,
                 "attr" => [
-                    'class' => 'form-control lead right-message bg-light bg-gradien',
-                    'name' => "right-message",
-                    'id' => "right-message"
+                    'class' => 'form-control lead right-message bg-light bg-gradien'
                 ]
             ])
             ->add('submit', SubmitType::class, [
@@ -27,7 +25,11 @@ class MessageType extends AbstractType
                     'class' => 'btn btn-primary position-relative start-50'
                 ]
             ])
-            ->setAttribute('class', 'row')
+            ->setAttributes(array(
+                'id' => 'my-form-id',
+                'class' => 'my-form-class'
+            ));
+            
         ;
     }
 

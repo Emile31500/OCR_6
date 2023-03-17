@@ -33,15 +33,15 @@
     </script>
     <div>
         {% if app.user %}
-            {{ form_start(form) }}
-            <div class="row">
-                <div class="d-flex col-3 md-col-4">
-                    {{ form_row(form.submit) }}
-                </div>
-                <div class="col-9 md-col-8">
-                    {{ form_row(form.message) }}
-                </div>
-            </div>                
+        {{ form_start(form, {'attr': {'id': 'message-form', 'class': 'row'}}) }}
+            <div class="d-flex col-3 md-col-4">
+                {{ form_row(form.submit) }}
+            </div>
+            <div class="col-9 md-col-8">
+                {# {{ form_row(form.message) }} #}
+                {{ form_widget(form.message) }}
+
+            </div>         
         {{ form_end(form) }}
         {% else %}
             <form class="row my-3">
@@ -61,4 +61,5 @@
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/message_autoload.js') }}"></script>
+    <script src="{{ asset('js/send_message_async.js') }}"></script>
 {% endblock %}
