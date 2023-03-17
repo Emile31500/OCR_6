@@ -11,22 +11,26 @@ use App\Repository\VideoFigureRepository;
 use App\Repository\PhotoFigureRepository;
 use App\Form\CreationFigureType;
 use App\Form\EditionFigureType;
+use App\Form\MessageType;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Entity\Figure;
+use App\Entity\Message;
 use App\Entity\PhotoFigure;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use DateTimeInterface;
 
 
 class FigureController extends AbstractController
 {
     #[Route('/figure/{slug}', name: 'app_figure')]
-    public function index(FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, string $slug): Response
+    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
 
+        $message = new Message();
         $figure = $figureRepository->findOneBySlug($slug);
 
         $data = [];    
@@ -35,8 +39,35 @@ class FigureController extends AbstractController
         $data["photo"] =  $photoFigureRepository->findByFigureId($figure->getId());
         $data["video"] =  $videoFigureRepository->findByFigureId($figure->getId());
 
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+        
+        if ($tokenStorage->getToken()){
+
+            $user = $tokenStorage->getToken()->getUser();
+
+        }
+        
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            $dateString = date('Y-m-d');
+            $dateTime = \DateTimeImmutable::createFromFormat('Y-m-d', $dateString);
+
+            $message->setUtilisateur($user);
+            $message->setMessage($form->get('message')->getData());    
+            $message->setDate($dateTime);
+            $message->setFigure($figure);
+
+            $manager->persist($message);
+            $manager->flush();
+
+        }
+
+
         return $this->render('figure/index.html.twig', [
             'controller_name' => $figure->getNom(),
+            'form' => $form->createView(),
             'data' => $data
         ]);
     }
@@ -82,10 +113,11 @@ class FigureController extends AbstractController
             $imgDefault = new File($imgPath);
 
             $form = $this->createForm(CreationFigureType::class, [
-                                                                'nom' => $figure->getNom(),
-                                                                // 'img_default' => $imgDefault, 
-                                                                'article' => $figure->getArticle()
-                                                            ]);
+                                                                    'nom' => $figure->getNom(),
+                                                                    'photo' => $imgDefault,
+                                                                    'article' => $figure->getArticle()
+                                                                ]);
+
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -122,10 +154,6 @@ class FigureController extends AbstractController
                     
                     $figureRepo->save($figure, true);
                     $photoFigureRepo->save($photoFigure, true);
-
-                    // $manager->persist($figure);
-                    // $manager->persist($photoFigure);
-                    // $manager->flush();
 
                 }
             }

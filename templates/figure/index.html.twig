@@ -54,14 +54,28 @@
             </div>
         </div>
         <div>
-            <form class="row my-3">
-                <div class="d-flex col-3 md-col-4">
-                    <button class="btn btn-primary position-relative  start-50"> Envoyer </button>
-                </div>
-                <div class="col-9 md-col-8">
-                    <textarea class="form-control lead right-message bg-light bg-gradient" name="right-message" id="right-message"> </textarea>
-                </div>
-            </form>
+            {% if app.user %}
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="d-flex col-3 md-col-4">
+                        {{ form_row(form.submit) }}
+                    </div>
+                    <div class="col-9 md-col-8">
+                        {{ form_row(form.message) }}
+                    </div>
+                </div>                
+            {{ form_end(form) }}
+            {% else %}
+                <form class="row my-3">
+                    <div class="d-flex col-3 md-col-4">
+                        <button class="btn btn-light position-relative  start-50" disabled> Envoyer </button>
+                    </div>
+                    <div class="col-9 md-col-8">
+                        <textarea class="form-control lead right-message bg-light bg-gradient" name="right-message" id="right-message" disabled> </textarea>
+                    </div>
+                </form>
+            {% endif %}
+            
         </div>
     </div>
 {% endblock %}
