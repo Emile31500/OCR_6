@@ -1,4 +1,3 @@
-
 function loadMessage(){
 
     let message_zone = document.getElementById('message-zone');
@@ -16,7 +15,7 @@ function loadMessage(){
             html_message += "<div class='d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient'>"
             html_message += "<div class='mx-3 h-100'>";
             html_message += "<div class='lead utilisateur-message'> " + message['nom_utilisateur'] + "</div>";   
-            html_message += "<div class='clear small date-message'>" + date + "</div>";
+            html_message += "<div class='clear small date-message optional-content'>" + date + "</div>";
             html_message += "</div> <div class='lead corps-message '>" + message['message'] + "</div>  </div>";
         
         });
