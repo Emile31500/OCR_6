@@ -14,8 +14,8 @@ function loadMessage(){
 
             let date = message['date']['date'].slice(0, 19)
             html_message += "<div class='d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient'>"
-            html_message += "<div class='mx-3' style=' height: 100%;'>";
-            html_message += "<div class='lead utilisateur-message' style='font-weight: 500; min-width: 100px;'> " + message['nom_utilisateur'] + "</div>";   
+            html_message += "<div class='mx-3 h-100'>";
+            html_message += "<div class='lead utilisateur-message'> " + message['nom_utilisateur'] + "</div>";   
             html_message += "<div class='clear small date-message'>" + date + "</div>";
             html_message += "</div> <div class='lead corps-message '>" + message['message'] + "</div>  </div>";
         
