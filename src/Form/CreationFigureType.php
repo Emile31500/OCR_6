@@ -17,20 +17,23 @@ class CreationFigureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+       
+        
         
         $img = new File('media/img/figures/japan_air_1.jpg');
         $builder
             ->add('nom', TextType::class, [
-                "label" => "Nom : ",
-                "attr" => [
+                'label' => 'Nom : ',
+                'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('article', TextareaType::class, [
-                "label" => "Article : ",
-                "attr" => [
+                'label' => 'Article : ',
+                'attr' => [
                     'class' => 'form-control'
                 ]
+<<<<<<< HEAD
             ])
             ->add('photo', FileType::class, [
                 "label" => "Image : ",
@@ -50,6 +53,47 @@ class CreationFigureType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 "attr" => [
+=======
+                ]);
+            if ($options['data']['isFormEdit'] === true){
+
+                $builder->add('photo', FileType::class, [
+                    'label' => 'Image : ',
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'constraints' => [
+                        new ConstrainFile([
+                            'maxSize' => '1024k',
+                            'mimeTypes' => [
+                                'image/jpeg'
+                            ],
+                            'mimeTypesMessage' => 'Please upload a valid image file',
+                        ])
+                    ]
+                ]);
+            } else {
+                $builder->add('photo', FileType::class, [
+                    'label' => 'Image : ',
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                    'constraints' => [
+                        new ConstrainFile([
+                            'maxSize' => '1024k',
+                            'mimeTypes' => [
+                                'image/jpeg'
+                            ],
+                            'mimeTypesMessage' => 'Please upload a valid image file',
+                        ])
+                    ]
+                ]);
+            }
+           
+            $builder->add('submit', SubmitType::class, [
+                'attr' => [
+>>>>>>> 2f546f5 (Fixe: image can be nuul + Fixe : wrong slug)
                     'class' => 'btn btn-primary'
                 ]
             ]);
