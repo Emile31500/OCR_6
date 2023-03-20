@@ -3,11 +3,11 @@
 {% block title %}Hello FigureController!{% endblock %}
 
 {% block body %}
-    <div class="row mt-5 mb-5">
-        <div class="col-5">
+    <div class="row mt-5 mb-5 d-flex justify-content-center optional-content">
+        <div class="col text-center">
             <img class="img-figure" src="{{ asset('media/img/figures/') }}{{data.photo.url}}"/>
         </div>
-        <div class="col-4">
+        <div class="col">
             <h2> {{ controller_name }}</h2>
         </div>
     </div>
