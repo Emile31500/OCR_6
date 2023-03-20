@@ -1,5 +1,3 @@
-let message_zone = document.getElementById('message-zone');
-message_zone.scrollTop = message_zone.scrollHeight;
 
 function loadMessage(){
 
@@ -34,4 +32,8 @@ function loadMessage(){
 }
 
 loadMessage();
+
+let message_zone = document.getElementById('message-zone');
+message_zone.scrollTop = message_zone.scrollHeight;
+
 setInterval(loadMessage, 2000);

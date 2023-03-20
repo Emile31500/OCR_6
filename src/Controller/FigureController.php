@@ -30,7 +30,7 @@ class FigureController extends AbstractController
     #[Route('/figure/{slug}', name: 'app_figure')]
     public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
-
+        $message = new Message();
         $figure = $figureRepository->findOneBySlug($slug);
 
         $data = [];    
