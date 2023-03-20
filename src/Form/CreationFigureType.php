@@ -20,7 +20,6 @@ class CreationFigureType extends AbstractType
        
         
         
-        $img = new File('media/img/figures/japan_air_1.jpg');
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom : ',

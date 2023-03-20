@@ -1029,7 +1029,10 @@ c8700b,192.168.1.78,POST,http://192.168.1.78:8100/edition-figure/japan-air,16789
 03ab22,192.168.1.78,GET,http://192.168.1.78:8100/edition-figure/japan-air,1678955461,,200
 5d11eb,192.168.1.78,GET,http://192.168.1.78:8100/edition-figure/japan-air,1678955462,,200
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
 f5be30,192.168.1.78,GET,http://192.168.1.78:8100/edition-figure/japan-air,1678972120,9d87c8,500
 9d87c8,192.168.1.78,GET,http://192.168.1.78:8100/edition-figure/japan-air,1678972121,,500
 31d746,192.168.1.78,GET,http://192.168.1.78:8100/edition-figure/japan-air,1678972303,,200
@@ -7444,6 +7447,7 @@ baadca,192.168.1.41,GET,http://192.168.1.41:8100/,1679301135,,200
 97d6c7,192.168.1.41,GET,http://192.168.1.41:8100/,1679301587,,200
 490568,192.168.1.41,GET,http://192.168.1.41:8100/,1679301625,,200
 a528dc,192.168.1.41,GET,http://192.168.1.41:8100/,1679301631,,200
+<<<<<<< HEAD
 e2b81b,192.168.1.41,GET,http://192.168.1.41:8100/edition-figure/japan-air,1679302242,df379a,500
 df379a,192.168.1.41,GET,http://192.168.1.41:8100/edition-figure/japan-air,1679302242,,500
 38ccd5,192.168.1.41,GET,http://192.168.1.41:8100/edition-figure/japan-air,1679302266,33ccbe,500
@@ -7565,3 +7569,5 @@ c0f0c0,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,16793
 baea7d,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308570,,200
 35e1e9,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308583,,200
 a8a7a2,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308593,,200
+=======
+>>>>>>> main

@@ -393,6 +393,9 @@
     <service id="App\Form\EditPsswFormType" class="App\Form\EditPsswFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\MessageType" class="App\Form\MessageType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -1257,6 +1260,7 @@
       <argument type="collection">
         <argument>App\Form\CreationFigureType</argument>
         <argument>App\Form\EditPsswFormType</argument>
+        <argument>App\Form\MessageType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>App\Form\SendPasswordRecuperationCodeType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -3337,7 +3341,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.hoI9IN7"/>
+      <argument type="service" id=".service_locator.j0dZlcL"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -6246,6 +6250,8 @@
     <service id=".abstract.instanceof.App\Form\CreationFigureType" class="App\Form\CreationFigureType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EditPsswFormType" class="App\Form\EditPsswFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\EditPsswFormType" class="App\Form\EditPsswFormType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MessageType" class="App\Form\MessageType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\MessageType" class="App\Form\MessageType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SendPasswordRecuperationCodeType" class="App\Form\SendPasswordRecuperationCodeType" autowire="true" abstract="true"/>
@@ -6609,12 +6615,21 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.AlyfPUJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ttf4lZQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="figureRepository" type="service_closure" id="App\Repository\FigureRepository"/>
+        <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="photoFigureRepository" type="service_closure" id="App\Repository\PhotoFigureRepository"/>
+        <argument key="tokenStorage" type="service_closure" id="security.token_storage"/>
         <argument key="videoFigureRepository" type="service_closure" id="App\Repository\VideoFigureRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.cA2yfBT" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="figureRepository" type="service_closure" id="App\Repository\FigureRepository"/>
+        <argument key="messageRepo" type="service_closure" id="App\Repository\MessageRepository"/>
       </argument>
     </service>
     <service id=".service_locator.JVI6tHc" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6675,14 +6690,15 @@
         <argument key="userPasswordHasher" type="service_closure" id="security.user_password_hasher"/>
       </argument>
     </service>
-    <service id=".service_locator.vLUfidb" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.nPFE.Pi" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdministrationController::index" type="service_closure" id=".service_locator.YgYapZ6"/>
         <argument key="App\Controller\AuthenticatorController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
         <argument key="App\Controller\FigureController::creationFigure" type="service_closure" id=".service_locator.8JYXY.m"/>
         <argument key="App\Controller\FigureController::editionFigure" type="service_closure" id=".service_locator.OejEZuy"/>
-        <argument key="App\Controller\FigureController::index" type="service_closure" id=".service_locator.AlyfPUJ"/>
+        <argument key="App\Controller\FigureController::index" type="service_closure" id=".service_locator.ttf4lZQ"/>
+        <argument key="App\Controller\FigureController::message" type="service_closure" id=".service_locator.cA2yfBT"/>
         <argument key="App\Controller\FigureController::suppressionFigure" type="service_closure" id=".service_locator.JVI6tHc"/>
         <argument key="App\Controller\ForgetPasswordController::editPassword" type="service_closure" id=".service_locator.vjetzzK"/>
         <argument key="App\Controller\ForgetPasswordController::index" type="service_closure" id=".service_locator.8YhWmfT"/>
@@ -6696,7 +6712,8 @@
         <argument key="App\Controller\AuthenticatorController:login" type="service_closure" id=".service_locator.rSTd.nA"/>
         <argument key="App\Controller\FigureController:creationFigure" type="service_closure" id=".service_locator.8JYXY.m"/>
         <argument key="App\Controller\FigureController:editionFigure" type="service_closure" id=".service_locator.OejEZuy"/>
-        <argument key="App\Controller\FigureController:index" type="service_closure" id=".service_locator.AlyfPUJ"/>
+        <argument key="App\Controller\FigureController:index" type="service_closure" id=".service_locator.ttf4lZQ"/>
+        <argument key="App\Controller\FigureController:message" type="service_closure" id=".service_locator.cA2yfBT"/>
         <argument key="App\Controller\FigureController:suppressionFigure" type="service_closure" id=".service_locator.JVI6tHc"/>
         <argument key="App\Controller\ForgetPasswordController:editPassword" type="service_closure" id=".service_locator.vjetzzK"/>
         <argument key="App\Controller\ForgetPasswordController:index" type="service_closure" id=".service_locator.8YhWmfT"/>
@@ -6876,11 +6893,12 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.hoI9IN7" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.j0dZlcL" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CreationFigureType" type="service_closure" id="App\Form\CreationFigureType"/>
         <argument key="App\Form\EditPsswFormType" type="service_closure" id="App\Form\EditPsswFormType"/>
+        <argument key="App\Form\MessageType" type="service_closure" id="App\Form\MessageType"/>
         <argument key="App\Form\RegistrationFormType" type="service_closure" id="App\Form\RegistrationFormType"/>
         <argument key="App\Form\SendPasswordRecuperationCodeType" type="service_closure" id="App\Form\SendPasswordRecuperationCodeType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
@@ -7561,12 +7579,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.vLUfidb"/>
+      <argument type="service" id=".service_locator.nPFE.Pi"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.vLUfidb"/>
+      <argument type="service" id=".service_locator.nPFE.Pi"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8533,7 +8551,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.vLUfidb"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.nPFE.Pi"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8554,14 +8572,16 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
+    <service id=".service_locator.XxI4vJu" alias=".service_locator.ttf4lZQ"/>
+    <service id=".service_locator.3VNHCl_" alias=".service_locator.cA2yfBT"/>
     <service id=".service_locator.v0lSVNw" alias=".service_locator.JVI6tHc"/>
     <service id=".service_locator.1oc_hT0" alias=".service_locator.OejEZuy"/>
     <service id=".service_locator.Fgfqy3N" alias=".service_locator.8JYXY.m"/>
     <service id=".service_locator.XudNM_b" alias=".service_locator.vjetzzK"/>
     <service id=".service_locator.LLC6prh" alias=".service_locator.thm4f08"/>
-    <service id=".service_locator.8zLpnAM" alias=".service_locator.vLUfidb"/>
+    <service id=".service_locator.PlEbAWr" alias=".service_locator.nPFE.Pi"/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
-    <service id=".service_locator.TQPptOU" alias=".service_locator.hoI9IN7"/>
+    <service id=".service_locator.eMCYbjD" alias=".service_locator.j0dZlcL"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.VZoQk0z" alias=".service_locator.CshazM0"/>
@@ -8612,7 +8632,8 @@
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
     <service id=".service_locator.R82pv.c" alias=".service_locator.YgYapZ6"/>
     <service id=".service_locator.7NIAq8D" alias=".service_locator.rSTd.nA"/>
-    <service id=".service_locator.GvV7djF" alias=".service_locator.AlyfPUJ"/>
+    <service id=".service_locator.vPCOsdb" alias=".service_locator.ttf4lZQ"/>
+    <service id=".service_locator.SqQ5qdu" alias=".service_locator.cA2yfBT"/>
     <service id=".service_locator.QfhQ5UI" alias=".service_locator.JVI6tHc"/>
     <service id=".service_locator.IqklkRv" alias=".service_locator.OejEZuy"/>
     <service id=".service_locator.OBJDmIo" alias=".service_locator.8JYXY.m"/>

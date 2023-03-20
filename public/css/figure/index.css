@@ -6,3 +6,18 @@
     min-height: 250px;
     object-fit: cover;
 }
+
+.utilisateur-message {
+    font-weight: 500;
+    min-width: 100px;
+}
+
+#message-zone{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#slug {
+
+    display: none
+}
