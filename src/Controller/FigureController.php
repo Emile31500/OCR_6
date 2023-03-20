@@ -28,10 +28,9 @@ use DateTimeInterface;
 class FigureController extends AbstractController
 {
     #[Route('/figure/{slug}', name: 'app_figure')]
-    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, MessageRepository $messageRepository,PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
+    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
 
-        $message = new Message();
         $figure = $figureRepository->findOneBySlug($slug);
 
         $data = [];    
@@ -65,17 +64,35 @@ class FigureController extends AbstractController
 
         }
 
-        $message = $messageRepository->findByFigure($figure->getId());
-
-        // var_dump($message[0]->getUtilisateur()->getNomUtilisateur());
-        // die;
-
         return $this->render('figure/index.html.twig', [
             'controller_name' => $figure->getNom(),
             'form' => $form->createView(),
-            'messages' => $message,
             'data' => $data
         ]);
+    }
+
+    #[Route('/message/{slug}', name: 'app_message')]
+    public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, string $slug){
+
+        $figure = $figureRepository->findOneBySlug($slug);
+        $messages_obj = $messageRepo->findByFigure($figure->getId());
+        $max = count($messages_obj);
+        $message = [];
+
+        for ($i=0; $i < $max; $i++) { 
+
+            $temp["nom_utilisateur"] = $messages_obj[$i]->getUtilisateur()->getNomUtilisateur();
+            $temp["message"] = $messages_obj[$i]->getMessage();
+            $temp["date"] = $messages_obj[$i]->getDate();
+
+            array_push($message, $temp);
+            unset($temp);
+
+        } 
+
+        header("Content-Type: application/json");
+        echo(json_encode($message));
+        die;
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure')]
@@ -107,11 +124,12 @@ class FigureController extends AbstractController
     public function editionFigure(string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo, PhotoFigureRepository $photoFigureRepo, TokenStorageInterface $tokenStorage, Security $security){
 
         $user = $tokenStorage->getToken()->getUser();
-        $isAdmin = $user->getRoles()[0] == "administrator";
+        $isAdmin = $user->getRoles()[0] === "administrator";
 
         if($isAdmin){
 
-            $photoFigure = new PhotoFigure();
+            $oldFigure = $figureRepo->findOneBySlug($slug);
+            $oldPhoto = $oldFigure->getPhotoFigure()[0];
             $figure = $figureRepo->findOneBySlug($slug);
             $photoFigure = $photoFigureRepo->findByFigureId($figure->getId());
 
@@ -120,7 +138,6 @@ class FigureController extends AbstractController
 
             $form = $this->createForm(CreationFigureType::class, [
                                                                     'nom' => $figure->getNom(),
-                                                                    'photo' => $imgDefault,
                                                                     'article' => $figure->getArticle()
                                                                 ]);
 
@@ -151,7 +168,7 @@ class FigureController extends AbstractController
                     $article = $form->get('article')->getData();
         
                     $photoFigure->setNom($nom);
-                    $photoFigure->setUrl($newFilename );
+                    $photoFigure->setUrl($newFilename);
                     
                     $figure->setNom($nom);
                     $figure->setSlug($slug);
@@ -165,8 +182,9 @@ class FigureController extends AbstractController
             }
 
             return $this->render('figure/edition.html.twig', [
-                'controller_name' => "Edition d'une figure",
-                "form" => $form->createView()
+                'controller_name' => 'Edition d\'une figure',
+                'form' => $form->createView(),
+                'photo' => $oldPhoto 
             ]);
 
         } else {

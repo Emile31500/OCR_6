@@ -12,20 +12,9 @@
         </div>
     </div>
     <p class="mt-5 mb-5">
-        {{ data.figure.article }}
+        {{ data.figure.article|nl2br}}
     </p>
     <div id="message-zone">
-        {% for message in messages %}
-            <div class="d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient"> 
-                <div class="mx-3" style=" height: 100%;">
-                    <div class="lead utilisateur-message" style="font-weight: 500; min-width: 100px;"> {{message.utilisateur.nomUtilisateur }} </div>
-                    <div class="clear small date-message"> {{message.date|date("y-m-d H:i:s")}}</div>
-                </div>
-                <div class="lead corps-message ">
-                    {{message.message}}
-                </div>        
-            </div>
-        {% endfor %}
     </div>
     <script>
         var element = document.getElementById("message-zone");
@@ -33,16 +22,15 @@
     </script>
     <div>
         {% if app.user %}
-        {{ form_start(form, {'attr': {'id': 'message-form', 'class': 'row'}}) }}
-            <div class="d-flex col-3 md-col-4">
-                {{ form_row(form.submit) }}
-            </div>
-            <div class="col-9 md-col-8">
-                {# {{ form_row(form.message) }} #}
-                {{ form_widget(form.message) }}
+            {{ form_start(form, {'attr': {'id': 'message-form', 'class': 'row'}}) }}
+                <div class="d-flex col-3 md-col-4">
+                    {{ form_row(form.submit) }}
+                </div>
+                <div class="col-9 md-col-8">
+                    {{ form_widget(form.message) }}
 
-            </div>         
-        {{ form_end(form) }}
+                </div>         
+            {{ form_end(form) }}
         {% else %}
             <form class="row my-3">
                 <div class="d-flex col-3 md-col-4">
