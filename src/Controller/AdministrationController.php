@@ -17,7 +17,6 @@ class AdministrationController extends AbstractController
         if ($user = $security->getUser()) {
 
             $role = $user->getRoles();
-            var_dump($role);
 
             if ($role[0] != "administrator"){
                 
