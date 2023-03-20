@@ -19,11 +19,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-<<<<<<< HEAD
-=======
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use DateTimeInterface;
->>>>>>> 2f546f5 (Fixe: image can be nuul + Fixe : wrong slug)
 
 
 class FigureController extends AbstractController
@@ -81,20 +78,6 @@ class FigureController extends AbstractController
 
         if($isAdmin){
 
-<<<<<<< HEAD
-            $photoFigure = new PhotoFigure();
-            $figure = $figureRepo->findOneBySlug($slug);
-            $photoFigure = $photoFigureRepo->findByFigureId($figure->getId());
-
-            $imgPath = 'media/img/figures/'.$photoFigure->getUrl();
-            $imgDefault = new File($imgPath);
-
-            $form = $this->createForm(CreationFigureType::class, [
-                                                                'nom' => $figure->getNom(),
-                                                                // 'img_default' => $imgDefault, 
-                                                                'article' => $figure->getArticle()
-                                                            ]);
-=======
             $session->start();
             if ($session->get('slug') !== null){
                 
@@ -113,8 +96,6 @@ class FigureController extends AbstractController
                     'article' => $figure->getArticle()
                     ]
             ]);
-
->>>>>>> 2f546f5 (Fixe: image can be nuul + Fixe : wrong slug)
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
@@ -143,27 +124,9 @@ class FigureController extends AbstractController
 
                     // persist the new filename to the database or do whatever you want with it
                     $photoFigure->setNom($nom);
-<<<<<<< HEAD
-                    $photoFigure->setUrl($newFilename );
-                    
-                    $figure->setNom($nom);
-                    $figure->setSlug($slug);
-                    $figure->setArticle($article);
-                    $figure->addPhotoFigure($photoFigure);
-                    
-                    $figureRepo->save($figure, true);
-                    $photoFigureRepo->save($photoFigure, true);
-
-                    // $manager->persist($figure);
-                    // $manager->persist($photoFigure);
-                    // $manager->flush();
-
-=======
                     $photoFigure->setUrl($newFilename);
                     $photoFigureRepo->save($photoFigure, true);
                     $figure->addPhotoFigure($photoFigure);
-                
->>>>>>> 2f546f5 (Fixe: image can be nuul + Fixe : wrong slug)
                 }
 
                 $session->set('slug', $slug);
@@ -177,15 +140,10 @@ class FigureController extends AbstractController
            
             
             return $this->render('figure/edition.html.twig', [
-<<<<<<< HEAD
-                'controller_name' => "Edition d'une figure",
-                "form" => $form->createView()
-=======
                 'controller_name' => 'Edition d\'une figure',
                 'form' => $form->createView(),
                 'figure' => $oldFigure,
-                'photo' => $oldPhoto 
->>>>>>> 2f546f5 (Fixe: image can be nuul + Fixe : wrong slug)
+                'photo' => $oldPhoto
             ]);
 
         } else {

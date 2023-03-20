@@ -7559,3 +7559,9 @@ d3547f,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air-2,167
 7f7263,192.168.1.41,GET,http://192.168.1.41:8100/,1679307865,,200
 697b46,192.168.1.41,GET,http://192.168.1.41:8100/edition-figure/japan-air,1679307916,,200
 >>>>>>> 2f546f5 (Fixe: image can be nuul + Fixe : wrong slug)
+c5724b,192.168.1.41,GET,http://192.168.1.41:8100/edition-figure/japan-air,1679308542,,200
+c0f0c0,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308553,,200
+3cfed7,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308565,,200
+baea7d,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308570,,200
+35e1e9,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308583,,200
+a8a7a2,192.168.1.41,POST,http://192.168.1.41:8100/edition-figure/japan-air,1679308593,,200

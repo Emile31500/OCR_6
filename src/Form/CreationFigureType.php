@@ -33,27 +33,6 @@ class CreationFigureType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ]
-<<<<<<< HEAD
-            ])
-            ->add('photo', FileType::class, [
-                "label" => "Image : ",
-                "data" => $img,
-                "attr" => [
-                    'class' => 'form-control'
-                ],
-                'constraints' => [
-                    new ConstrainFile([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpeg'
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image file',
-                    ])
-                ]
-            ])
-            ->add('submit', SubmitType::class, [
-                "attr" => [
-=======
                 ]);
             if ($options['data']['isFormEdit'] === true){
 
@@ -93,7 +72,6 @@ class CreationFigureType extends AbstractType
            
             $builder->add('submit', SubmitType::class, [
                 'attr' => [
->>>>>>> 2f546f5 (Fixe: image can be nuul + Fixe : wrong slug)
                     'class' => 'btn btn-primary'
                 ]
             ]);
