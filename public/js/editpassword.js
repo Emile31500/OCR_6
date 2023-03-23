@@ -10,22 +10,18 @@ function isPasswordValid(strg){
 
     if (strg.lenght > 64 || strg.lenght < 8){
 
-        console.log("longueur invalide " + strg.lenght);
         return false;
         
     } else if (/[a-z]/.test(strg) == false){
 
-        console.log("no lower ");
         return false;
         
     }  else if (/[A-Z]/.test(strg) == false){
 
-        console.log("no upper ");
         return false;
         
     }  else if (/[0-9]/.test(strg) == false){
 
-        console.log("no number ");
         return false;
         
     }
@@ -42,7 +38,6 @@ password_edit_form.addEventListener("submit", function(event){
         status_message.classList.remove("d-none");
         status_message.classList.remove("d-inline");
         status_message.innerHTML = "Les deux mots de passe ne sont pas identique. Veuillez sélectionner un mot de passe valide";
-        console.log("différent");
         return false;
 
     } else if (isPasswordValid(password.value) == false) {
@@ -50,8 +45,6 @@ password_edit_form.addEventListener("submit", function(event){
         status_message.classList.remove("d-none");
         status_message.classList.add("d-inline");
         status_message.innerHTML = "Votre mot de passe n'est pas valide, il doit contenir des majuscules, des minuscules, des chiffres et faire entre 8 et 64 carctères inclue.";
-
-        console.log("invalid");
         return false;
         
 

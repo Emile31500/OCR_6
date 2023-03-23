@@ -7,7 +7,6 @@ let url = 'http://' + web_server + '/figure/' + slug;
 message_form.addEventListener('submit', function(event){
 
     event.preventDefault();
-    console.log('a');
     let data = new FormData(this);
 
     let response = fetch(url, {
