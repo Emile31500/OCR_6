@@ -110,9 +110,9 @@ class FigureController extends AbstractController
             $photoFigureRepo->remove($photoFigure, true);
             $figureRepo->remove($figure, true);
 
-            return $this->render('figure/supression.html.twig', [
-                'controller_name' => "Suppression",
-            ]);
+            header("Content-Type: applciation/json");
+            echo json_encode(["status" => true]);
+            die;
 
         }
 

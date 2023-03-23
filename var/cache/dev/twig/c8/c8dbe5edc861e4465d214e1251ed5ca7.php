@@ -33,6 +33,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
             'stylesheets' => [$this, 'block_stylesheets'],
             'perso_stylesheets' => [$this, 'block_perso_stylesheets'],
             'javascripts' => [$this, 'block_javascripts'],
+            'perso_javascripts' => [$this, 'block_perso_javascripts'],
         ];
     }
 
@@ -142,7 +143,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         // line 69
         echo "    ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 73
+        // line 75
         echo "
 </html>
 ";
@@ -288,8 +289,32 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         <script src=\"";
         // line 71
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bootstrap/dist/js/bootstrap.min.js"), "html", null, true);
-        echo "\"/>
-    ";
+        echo "\"></script>
+        ";
+        // line 72
+        $this->displayBlock('perso_javascripts', $context, $blocks);
+        // line 74
+        echo "    ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 72
+    public function block_perso_javascripts($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
+
+        // line 73
+        echo "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -310,7 +335,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
 
     public function getDebugInfo()
     {
-        return array (  290 => 71,  285 => 70,  275 => 69,  265 => 67,  255 => 66,  245 => 68,  243 => 66,  239 => 65,  235 => 64,  231 => 63,  226 => 62,  216 => 61,  206 => 52,  196 => 51,  186 => 48,  176 => 47,  158 => 5,  146 => 73,  143 => 69,  141 => 61,  131 => 53,  129 => 51,  125 => 49,  123 => 47,  114 => 40,  108 => 37,  105 => 36,  99 => 33,  93 => 30,  90 => 29,  88 => 28,  83 => 26,  77 => 23,  60 => 8,  55 => 5,  49 => 1,);
+        return array (  317 => 73,  307 => 72,  297 => 74,  295 => 72,  291 => 71,  286 => 70,  276 => 69,  266 => 67,  256 => 66,  246 => 68,  244 => 66,  240 => 65,  236 => 64,  232 => 63,  227 => 62,  217 => 61,  207 => 52,  197 => 51,  187 => 48,  177 => 47,  159 => 5,  147 => 75,  144 => 69,  142 => 61,  132 => 53,  130 => 51,  126 => 49,  124 => 47,  115 => 40,  109 => 37,  106 => 36,  100 => 33,  94 => 30,  91 => 29,  89 => 28,  84 => 26,  78 => 23,  61 => 8,  56 => 5,  50 => 1,);
     }
 
     public function getSourceContext()
@@ -385,7 +410,9 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
     {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
-        <script src=\"{{ asset('bootstrap/dist/js/bootstrap.min.js') }}\"/>
+        <script src=\"{{ asset('bootstrap/dist/js/bootstrap.min.js') }}\"></script>
+        {% block perso_javascripts %}
+        {% endblock %}
     {% endblock %}
 
 </html>
