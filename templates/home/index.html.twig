@@ -27,11 +27,29 @@
             <a href="{{ path('app_creation_figure') }}">
                 <button class="btn btn-success"> Ajouter </button>
             </a>
+            <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="confirmDeleteLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="colse-del-modal" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" id="confirm-del-figure">Confirmer la suppression</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
          {% endif %}
     {% endif %}
     <div id='tricks-card-list' class="my-5 row row-cols-1 row-cols-md-2 g-4">
     {% for figure in data %}
-        <div class="col d-flex justify-content-center">
+        <div class="col tricks-col {{figure.figure.slug}} d-flex justify-content-center">
             <div class="tricks-card card">
                 <img class="top-img-card" src="{{ asset('media/img/figures/')}}{{figure.photo.url}}" alt="{{figure.figure.nom}}"/>
                 <div class="card-body">
@@ -48,7 +66,7 @@
                                 </a>
                             </div>
                             <div class="col-2 trash-card-div">
-                                <a href="{{ path('app_supression_figure', {slug: figure.figure.slug } ) }}">
+                                <a href="#" class="del-figure-btn" link="{{ path('app_supression_figure', { slug : figure.figure.slug  } ) }}" slug="{{figure.figure.slug}}" data-bs-toggle="modal" data-bs-target="#confirmDelete">
                                     <svg class="icone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                         <path d="M296 432h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8zm-160 0h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8zM440 64H336l-33.6-44.8A48 48 0 0 0 264 0h-80a48 48 0 0 0-38.4 19.2L112 64H8a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h24v368a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96h24a8 8 0 0 0 8-8V72a8 8 0 0 0-8-8zM171.2 38.4A16.1 16.1 0 0 1 184 32h80a16.1 16.1 0 0 1 12.8 6.4L296 64H152zM384 464a16 16 0 0 1-16 16H80a16 16 0 0 1-16-16V96h320zm-168-32h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8z"/>
                                     </svg>
@@ -60,7 +78,7 @@
             </div>
         </div>
     {% endfor %}
-    </div>
+    </div>    
     <div class="clear">
         <div  class="col d-flex m-5 align-itms-center  justify-content-center ">
             <button id="load_more_tricks_button" class=" btn btn-primary p-3 pr-5 pl-5">
@@ -69,9 +87,10 @@
         </div>
     </div>
 {% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('js/load_more_figure.js') }}"></script>
+{% block perso_javascripts %}
+    <script src="{{ asset('js/Figure/confirm_delete.js') }}"></script>
+    <script src="{{ asset('js/load_more_figure.js') }}"></script> 
 {% endblock %}
 {% block perso_stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/home/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home/index.css') }}" />
 {% endblock %}
