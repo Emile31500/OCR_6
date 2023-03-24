@@ -20,6 +20,7 @@ return [
     'app_login' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::login'], [], [['text', '/connexion']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::logout'], [], [['text', '/logout']], [], [], []],
     'app_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::index'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure']], [], [], []],
+    'app_figure_liste' => [['max_result'], ['_controller' => 'App\\Controller\\FigureController::liste'], [], [['variable', '/', '[^/]++', 'max_result', true], ['text', '/figure/liste']], [], [], []],
     'app_message' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::message'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/message']], [], [], []],
     'app_supression_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::suppressionFigure'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure-suppression']], [], [], []],
     'app_edition_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::editionFigure'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/edition-figure']], [], [], []],

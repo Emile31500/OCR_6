@@ -166,75 +166,6 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         // line 50
         echo "    <div id='tricks-card-list' class=\"my-5 row row-cols-1 row-cols-md-2 g-4\">
     ";
-        // line 51
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 51, $this->source); })()));
-        foreach ($context['_seq'] as $context["_key"] => $context["figure"]) {
-            // line 52
-            echo "        <div class=\"col tricks-col ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 52), "slug", [], "any", false, false, false, 52), "html", null, true);
-            echo " d-flex justify-content-center\">
-            <div class=\"tricks-card card\">
-                <img class=\"top-img-card\" src=\"";
-            // line 54
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/img/figures/"), "html", null, true);
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "photo", [], "any", false, false, false, 54), "url", [], "any", false, false, false, 54), "html", null, true);
-            echo "\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 54), "nom", [], "any", false, false, false, 54), "html", null, true);
-            echo "\"/>
-                <div class=\"card-body\">
-                    <a href=\"";
-            // line 56
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 56), "slug", [], "any", false, false, false, 56)]), "html", null, true);
-            echo "\" >
-                        <h3 class=\"col-8 h4 text-dark\"> ";
-            // line 57
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 57), "nom", [], "any", false, false, false, 57), "html", null, true);
-            echo " </h3>
-                    </a>
-                    ";
-            // line 59
-            if ( !(null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 59, $this->source); })()), "user", [], "any", false, false, false, 59))) {
-                // line 60
-                echo "                        ";
-                if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 60, $this->source); })()), "user", [], "any", false, false, false, 60), "roles", [], "any", false, false, false, 60), 0, [], "array", false, false, false, 60) == "administrator")) {
-                    // line 61
-                    echo "                            <div class=\"col-2 edit-card-div\">
-                                <a href=\"";
-                    // line 62
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_edition_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 62), "slug", [], "any", false, false, false, 62)]), "html", null, true);
-                    echo "\">
-                                    <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">
-                                        <path d=\"M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z\"/>
-                                    </svg>
-                                </a>
-                            </div>
-                            <div class=\"col-2 trash-card-div\">
-                                <a href=\"#\" class=\"del-figure-btn\" link=\"";
-                    // line 69
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_supression_figure", ["slug" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 69), "slug", [], "any", false, false, false, 69)]), "html", null, true);
-                    echo "\" slug=\"";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["figure"], "figure", [], "any", false, false, false, 69), "slug", [], "any", false, false, false, 69), "html", null, true);
-                    echo "\" data-bs-toggle=\"modal\" data-bs-target=\"#confirmDelete\">
-                                    <svg class=\"icone\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\">
-                                        <path d=\"M296 432h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8zm-160 0h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8zM440 64H336l-33.6-44.8A48 48 0 0 0 264 0h-80a48 48 0 0 0-38.4 19.2L112 64H8a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h24v368a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96h24a8 8 0 0 0 8-8V72a8 8 0 0 0-8-8zM171.2 38.4A16.1 16.1 0 0 1 184 32h80a16.1 16.1 0 0 1 12.8 6.4L296 64H152zM384 464a16 16 0 0 1-16 16H80a16 16 0 0 1-16-16V96h320zm-168-32h16a8 8 0 0 0 8-8V152a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v272a8 8 0 0 0 8 8z\"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        ";
-                }
-                // line 76
-                echo "                    ";
-            }
-            // line 77
-            echo "                </div>
-            </div>
-        </div>
-    ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['figure'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
         // line 81
         echo "    </div>    
     <div class=\"clear\">
@@ -315,7 +246,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     public function getDebugInfo()
     {
-        return array (  294 => 95,  284 => 94,  272 => 92,  267 => 91,  257 => 90,  239 => 81,  230 => 77,  227 => 76,  215 => 69,  205 => 62,  202 => 61,  199 => 60,  197 => 59,  192 => 57,  188 => 56,  180 => 54,  174 => 52,  170 => 51,  167 => 50,  164 => 49,  138 => 27,  135 => 26,  132 => 25,  122 => 24,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
+        return array (  225 => 95,  215 => 94,  203 => 92,  198 => 91,  188 => 90,  170 => 81,  167 => 50,  164 => 49,  138 => 27,  135 => 26,  132 => 25,  122 => 24,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
     }
 
     public function getSourceContext()
@@ -370,7 +301,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
          {% endif %}
     {% endif %}
     <div id='tricks-card-list' class=\"my-5 row row-cols-1 row-cols-md-2 g-4\">
-    {% for figure in data %}
+    {# {% for figure in data %}
         <div class=\"col tricks-col {{figure.figure.slug}} d-flex justify-content-center\">
             <div class=\"tricks-card card\">
                 <img class=\"top-img-card\" src=\"{{ asset('media/img/figures/')}}{{figure.photo.url}}\" alt=\"{{figure.figure.nom}}\"/>
@@ -399,7 +330,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                 </div>
             </div>
         </div>
-    {% endfor %}
+    {% endfor %} #}
     </div>    
     <div class=\"clear\">
         <div  class=\"col d-flex m-5 align-itms-center  justify-content-center \">

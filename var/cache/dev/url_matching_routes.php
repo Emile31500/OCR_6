@@ -40,14 +40,17 @@ return [
                     .')'
                 .')'
                 .'|/figure(?'
-                    .'|/([^/]++)(*:188)'
-                    .'|\\-suppression/([^/]++)(*:218)'
+                    .'|/(?'
+                        .'|([^/]++)(*:191)'
+                        .'|liste/([^/]++)(*:213)'
+                    .')'
+                    .'|\\-suppression/([^/]++)(*:244)'
                 .')'
                 .'|/m(?'
-                    .'|essage/([^/]++)(*:247)'
-                    .'|odifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:291)'
+                    .'|essage/([^/]++)(*:273)'
+                    .'|odifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:317)'
                 .')'
-                .'|/edition\\-figure/([^/]++)(*:325)'
+                .'|/edition\\-figure/([^/]++)(*:351)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -58,11 +61,12 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        188 => [[['_route' => 'app_figure', '_controller' => 'App\\Controller\\FigureController::index'], ['slug'], null, null, false, true, null]],
-        218 => [[['_route' => 'app_supression_figure', '_controller' => 'App\\Controller\\FigureController::suppressionFigure'], ['slug'], null, null, false, true, null]],
-        247 => [[['_route' => 'app_message', '_controller' => 'App\\Controller\\FigureController::message'], ['slug'], null, null, false, true, null]],
-        291 => [[['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], null, null, false, true, null]],
-        325 => [
+        191 => [[['_route' => 'app_figure', '_controller' => 'App\\Controller\\FigureController::index'], ['slug'], null, null, false, true, null]],
+        213 => [[['_route' => 'app_figure_liste', '_controller' => 'App\\Controller\\FigureController::liste'], ['max_result'], null, null, false, true, null]],
+        244 => [[['_route' => 'app_supression_figure', '_controller' => 'App\\Controller\\FigureController::suppressionFigure'], ['slug'], null, null, false, true, null]],
+        273 => [[['_route' => 'app_message', '_controller' => 'App\\Controller\\FigureController::message'], ['slug'], null, null, false, true, null]],
+        317 => [[['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], null, null, false, true, null]],
+        351 => [
             [['_route' => 'app_edition_figure', '_controller' => 'App\\Controller\\FigureController::editionFigure'], ['slug'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use DateTimeInterface;
 
 
@@ -70,6 +71,52 @@ class FigureController extends AbstractController
             'form' => $form->createView(),
             'data' => $data
         ]);
+    }
+
+    #[Route('/figure/liste/{max_result}', name: 'app_figure_liste')]
+    public function liste (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository)
+    {
+        $figures = $figureRepository->findPublished($max_result);
+        if($authorizationChecker->isGranted("administrator")) {
+
+            $isAdmin = true;
+
+        } else {
+
+            $isAdmin = false;
+
+        }  
+
+        $data = [];
+
+
+        foreach ($figures as $figure) {
+
+            $photo = $photoFigureRepository->findByFigureId($figure->getId());
+
+            $photoFigureArr["nom"] = $photo->getNom();
+            $photoFigureArr["url"] = $photo->getUrl();
+            $figureArr["nom"] = $figure->getNom();
+            $figureArr["slug"] = $figure->getSlug();
+            $figureArr["article"] = $figure->getArticle();
+            
+            $temp["figure"] = $figureArr;
+            $temp["photo"] = $photoFigureArr;
+            
+            array_push($data, $temp);
+            unset($temp);
+            unset($figureArr);
+            unset($photoFigureArr);
+            unset($photo);
+
+        }
+        // var_dump($data);
+        // die;
+        return $this->render('figure/list.html.twig', [
+            'datas' => $data,
+            'isAdmin' => $isAdmin
+        ]);
+
     }
 
     #[Route('/message/{slug}', name: 'app_message')]

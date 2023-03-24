@@ -1,34 +1,37 @@
 let nb_clique = 0;
 let button = document.getElementById('load_more_tricks_button');
 let tricks_list = document.getElementById('tricks-card-list');
+let html_list;
+
+function loadFigure()
+{
+    
+    let max_res = 4 + nb_clique * 4;
+    const root = 'http://' + location.hostname + ':' + location.port;
+    html_list = '';
+    
+    fetch(root + '/figure/liste/' + max_res)
+    .then(response => response.text())
+    .then(data => {
+
+        dom = new DOMParser();
+        html_list = dom.parseFromString(data, "text/html").querySelector("#tricks-card-list").innerHTML;
+        tricks_list.innerHTML = html_list;
+
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
+    loadConfirmDelete();
+
+}
+loadFigure();
 
 button.addEventListener('click', function(){
 
     nb_clique++;
-    let max_res = 3 + nb_clique * 3;
-    let web_server = location.hostname + ':' + location.port;
-    let response = fetch('http://' + web_server + '/?max_result=' + max_res)
-        .then(function(response) {
-            return response.text();
-        })
-        .then(function(html) {
-
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            tricks_list.innerHTML = doc.querySelector('#tricks-card-list').innerHTML;
-        
-        })
-        .then(function(){
-            
-            let number_card = document.querySelectorAll('.tricks-card').length;
-            
-            if (number_card < max_res){
-        
-                button.remove();
-        
-            }
-            loadConfirmDelete();
-        });
+    loadFigure();
 
 })
-
+    
