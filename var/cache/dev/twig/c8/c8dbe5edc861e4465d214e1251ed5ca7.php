@@ -55,16 +55,30 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         // line 5
         $this->displayBlock('title', $context, $blocks);
         echo " | Snow Tricks</title>
-        <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>\">    
         ";
-        // line 8
+        // line 7
+        echo "        <link rel=\"icon\" href=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/img/icone/website-icone.png"), "html", null, true);
+        echo "\">    
+       
+        ";
+        // line 10
         echo "
     </head>
     <body>
         <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">
             <div class=\"container\">
                 <div>
-                    <a class=\"navbar-brand\" href=\"#\">Snow Tricks</a>
+                    <a class=\"navbar-brand\" href=\"";
+        // line 16
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_home");
+        echo "\">
+                        <img class=\"website-icone\" src=\"";
+        // line 17
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/img/icone/website-icone.png"), "html", null, true);
+        echo "\" />
+                        Snow Tricks
+                    </a>
                     <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                     <span class=\"navbar-toggler-icon\"></span>
                     </button>
@@ -74,44 +88,44 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
                         <ul class=\"navbar-nav ml-auto\">
                             <li class=\"nav-item\">
                                 <a class=\"nav-link\" href=\"";
-        // line 23
+        // line 28
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_home");
         echo "\">Home</a>
                             </li>
                             <li class=\"nav-item\">
                                 <a class=\"nav-link\" href=\"";
-        // line 26
+        // line 31
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_home");
         echo "\">Tricks</a>
                             </li> 
                             ";
-        // line 28
-        if ((null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 28, $this->source); })()), "user", [], "any", false, false, false, 28))) {
-            // line 29
+        // line 33
+        if ((null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 33, $this->source); })()), "user", [], "any", false, false, false, 33))) {
+            // line 34
             echo "                                <li class=\"nav-item unconnected_user_navzone\">
                                     <a class=\"nav-link\" href=\"";
-            // line 30
+            // line 35
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
             echo "\">Sign in</a>
                                 </li>
                                 <li class=\"nav-item unconnected_user_navzone\">
                                     <a class=\"nav-link\" href=\"";
-            // line 33
+            // line 38
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
             echo "\">Sign up</a>
                                 </li>
                             ";
         } else {
-            // line 36
+            // line 41
             echo "                                <li class=\"nav-item connected_user_navzone\">
                                     <a class=\"nav-link\" href=\"";
-            // line 37
+            // line 42
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             echo "\">Log out</a>
                                 </li> 
                             ";
         }
-        // line 40
+        // line 45
         echo "                        </ul>
                     </div>
                 </div>
@@ -120,15 +134,15 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
 
     <div id=\"bodyheader\">
         ";
-        // line 47
+        // line 52
         $this->displayBlock('bodyheader', $context, $blocks);
-        // line 49
+        // line 54
         echo "    </div>   
     <div class=\"container\">
         ";
-        // line 51
+        // line 56
         $this->displayBlock('body', $context, $blocks);
-        // line 53
+        // line 58
         echo "    </div>
     <footer class=\"mt-5 p-4 footer-body-element\">
         <div class=\"container\">
@@ -138,12 +152,12 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
     </footer>
 </body>
     ";
-        // line 61
+        // line 66
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 69
+        // line 75
         echo "    ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 75
+        // line 81
         echo "
 </html>
 ";
@@ -173,7 +187,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
 
     }
 
-    // line 47
+    // line 52
     public function block_bodyheader($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -183,7 +197,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "bodyheader"));
 
-        // line 48
+        // line 53
         echo "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -193,7 +207,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
 
     }
 
-    // line 51
+    // line 56
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -203,47 +217,8 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 52
+        // line 57
         echo "        ";
-        
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
-
-        
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
-
-    }
-
-    // line 61
-    public function block_stylesheets($context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
-
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
-
-        // line 62
-        echo "        ";
-        echo twig_escape_filter($this->env, $this->env->getFunction('encore_entry_link_tags')->getCallable()("app"), "html", null, true);
-        echo "
-        <link rel=\"stylesheet\" href=\"";
-        // line 63
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bootstrap/dist/css/bootstrap.min.css"), "html", null, true);
-        echo "\">
-        <link rel=\"stylesheet\" href=\"";
-        // line 64
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/main.css"), "html", null, true);
-        echo "\">
-        <link rel=\"stylesheet\" href=\"";
-        // line 65
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/base.css"), "html", null, true);
-        echo "\">
-        ";
-        // line 66
-        $this->displayBlock('perso_stylesheets', $context, $blocks);
-        // line 68
-        echo "    ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -253,46 +228,38 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
     }
 
     // line 66
-    public function block_perso_stylesheets($context, array $blocks = [])
+    public function block_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 67
         echo "        ";
-        
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
-
-        
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
-
-    }
-
-    // line 69
-    public function block_javascripts($context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
-
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
-
-        // line 70
-        echo "        ";
-        echo twig_escape_filter($this->env, $this->env->getFunction('encore_entry_script_tags')->getCallable()("app"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getFunction('encore_entry_link_tags')->getCallable()("app"), "html", null, true);
         echo "
-        <script src=\"";
+        <link rel=\"stylesheet\" href=\"";
+        // line 68
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bootstrap/dist/css/bootstrap.min.css"), "html", null, true);
+        echo "\">
+        <link rel=\"stylesheet\" href=\"";
+        // line 69
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bootstrap/scss/bootstrap.css"), "html", null, true);
+        echo "\">
+        <link rel=\"stylesheet\" href=\"";
+        // line 70
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/main.css"), "html", null, true);
+        echo "\">
+        <link rel=\"stylesheet\" href=\"";
         // line 71
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bootstrap/dist/js/bootstrap.min.js"), "html", null, true);
-        echo "\"></script>
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/base.css"), "html", null, true);
+        echo "\">
         ";
         // line 72
-        $this->displayBlock('perso_javascripts', $context, $blocks);
+        $this->displayBlock('perso_stylesheets', $context, $blocks);
         // line 74
         echo "    ";
         
@@ -304,6 +271,57 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
     }
 
     // line 72
+    public function block_perso_stylesheets($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
+
+        // line 73
+        echo "        ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 75
+    public function block_javascripts($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 76
+        echo "        ";
+        echo twig_escape_filter($this->env, $this->env->getFunction('encore_entry_script_tags')->getCallable()("app"), "html", null, true);
+        echo "
+        <script src=\"";
+        // line 77
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bootstrap/dist/js/bootstrap.min.js"), "html", null, true);
+        echo "\"></script>
+        ";
+        // line 78
+        $this->displayBlock('perso_javascripts', $context, $blocks);
+        // line 80
+        echo "    ";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 78
     public function block_perso_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -313,7 +331,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
 
-        // line 73
+        // line 79
         echo "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -335,7 +353,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
 
     public function getDebugInfo()
     {
-        return array (  317 => 73,  307 => 72,  297 => 74,  295 => 72,  291 => 71,  286 => 70,  276 => 69,  266 => 67,  256 => 66,  246 => 68,  244 => 66,  240 => 65,  236 => 64,  232 => 63,  227 => 62,  217 => 61,  207 => 52,  197 => 51,  187 => 48,  177 => 47,  159 => 5,  147 => 75,  144 => 69,  142 => 61,  132 => 53,  130 => 51,  126 => 49,  124 => 47,  115 => 40,  109 => 37,  106 => 36,  100 => 33,  94 => 30,  91 => 29,  89 => 28,  84 => 26,  78 => 23,  61 => 8,  56 => 5,  50 => 1,);
+        return array (  335 => 79,  325 => 78,  315 => 80,  313 => 78,  309 => 77,  304 => 76,  294 => 75,  284 => 73,  274 => 72,  264 => 74,  262 => 72,  258 => 71,  254 => 70,  250 => 69,  246 => 68,  241 => 67,  231 => 66,  221 => 57,  211 => 56,  201 => 53,  191 => 52,  173 => 5,  161 => 81,  158 => 75,  156 => 66,  146 => 58,  144 => 56,  140 => 54,  138 => 52,  129 => 45,  123 => 42,  120 => 41,  114 => 38,  108 => 35,  105 => 34,  103 => 33,  98 => 31,  92 => 28,  78 => 17,  74 => 16,  66 => 10,  60 => 7,  56 => 5,  50 => 1,);
     }
 
     public function getSourceContext()
@@ -345,7 +363,9 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
     <head>
         <meta charset=\"UTF-8\">
         <title>{% block title %}{% endblock %} | Snow Tricks</title>
-        <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>\">    
+        {# <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>\">     #}
+        <link rel=\"icon\" href=\"{{ asset('media/img/icone/website-icone.png') }}\">    
+       
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 
     </head>
@@ -353,7 +373,10 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
         <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">
             <div class=\"container\">
                 <div>
-                    <a class=\"navbar-brand\" href=\"#\">Snow Tricks</a>
+                    <a class=\"navbar-brand\" href=\"{{ path('app_home') }}\">
+                        <img class=\"website-icone\" src=\"{{ asset('media/img/icone/website-icone.png') }}\" />
+                        Snow Tricks
+                    </a>
                     <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                     <span class=\"navbar-toggler-icon\"></span>
                     </button>
@@ -403,6 +426,7 @@ class __TwigTemplate_b9d5eee1d542469374b3e8782f7c07a8 extends Template
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         <link rel=\"stylesheet\" href=\"{{ asset('bootstrap/dist/css/bootstrap.min.css') }}\">
+        <link rel=\"stylesheet\" href=\"{{ asset('bootstrap/scss/bootstrap.css') }}\">
         <link rel=\"stylesheet\" href=\"{{ asset('css/main.css') }}\">
         <link rel=\"stylesheet\" href=\"{{ asset('css/base.css') }}\">
         {% block perso_stylesheets %}
