@@ -87,6 +87,17 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         
         return $result;
     }
+    public function findByVerifcode(string $value): mixed
+    {
+        $result = $this->createQueryBuilder('u')
+            ->andWhere('u.verificationCode=:val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+        return $result;
+    }
 
    public function findOneBySomeField($selector, $value): ?Utilisateur
    {

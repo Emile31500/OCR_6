@@ -32,8 +32,7 @@ class ForgetPasswordController extends AbstractController
             $utilisateur = $UtilisateurRepository->findOneBySomeField('email', $response['email']);
 
             if ($utilisateur != null){
-
-                // date("Y-m-d h:i:s");
+                
                 $now = new \DateTime();
                 $dateLimit = $now->modify('+1 day');
                 

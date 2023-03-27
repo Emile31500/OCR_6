@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ controller_name }}{% endblock %}
+
+{% block body %}
+    <h2 class="header-body-element"> {{ controller_name }}</h2>
+    <div class="alert alert-{{message_tyle}}">
+        {{message | raw}}
+    </div>
+{% endblock %}

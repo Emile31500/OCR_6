@@ -51,6 +51,7 @@ return [
                     .'|odifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:317)'
                 .')'
                 .'|/edition\\-figure/([^/]++)(*:351)'
+                .'|/verifier\\-email/([^/]++)(*:384)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -66,8 +67,9 @@ return [
         244 => [[['_route' => 'app_supression_figure', '_controller' => 'App\\Controller\\FigureController::suppressionFigure'], ['slug'], null, null, false, true, null]],
         273 => [[['_route' => 'app_message', '_controller' => 'App\\Controller\\FigureController::message'], ['slug'], null, null, false, true, null]],
         317 => [[['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], null, null, false, true, null]],
-        351 => [
-            [['_route' => 'app_edition_figure', '_controller' => 'App\\Controller\\FigureController::editionFigure'], ['slug'], null, null, false, true, null],
+        351 => [[['_route' => 'app_edition_figure', '_controller' => 'App\\Controller\\FigureController::editionFigure'], ['slug'], null, null, false, true, null]],
+        384 => [
+            [['_route' => 'app_verif_email', '_controller' => 'App\\Controller\\RegistrationController::verification'], ['code_verification'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

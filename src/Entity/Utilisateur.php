@@ -57,6 +57,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $recupDate = null;
 
+    #[ORM\Column(length: 64, nullable: true)]
+    private ?string $verificationCode = null;
+
     public function __construct()
     {
         $this->Message = new ArrayCollection();
@@ -242,6 +245,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRecupDate(?\DateTimeInterface $recupDate): self
     {
         $this->recupDate = $recupDate;
+
+        return $this;
+    }
+
+    public function getVerificationCode(): ?string
+    {
+        return $this->verificationCode;
+    }
+
+    public function setVerificationCode(?string $verificationCode): self
+    {
+        $this->verificationCode = $verificationCode;
 
         return $this;
     }
