@@ -29,4 +29,5 @@ return [
     'app_edit_password' => [['code_recup'], ['_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], [], [['variable', '/', '[^/]++', 'code_recup', true], ['text', '/modifier-le-mot-de-passe']], [], [], []],
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/inscription']], [], [], []],
+    'app_verif_email' => [['code_verification'], ['_controller' => 'App\\Controller\\RegistrationController::verification'], [], [['variable', '/', '[^/]++', 'code_verification', true], ['text', '/verifier-email']], [], [], []],
 ];

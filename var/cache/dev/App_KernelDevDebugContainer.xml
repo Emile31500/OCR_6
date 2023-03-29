@@ -402,6 +402,7 @@
     <service id="App\Form\SendPasswordRecuperationCodeType" class="App\Form\SendPasswordRecuperationCodeType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Mail\verificationUtilisateurMailer" class="App\Mail\verificationUtilisateurMailer" autowire="true" autoconfigure="true"/>
     <service id="App\Repository\FigureRepository" class="App\Repository\FigureRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -424,6 +425,10 @@
     </service>
     <service id="App\Security\Authenticator" class="App\Security\Authenticator" autowire="true" autoconfigure="true">
       <argument type="service" id="router.default"/>
+    </service>
+    <service id="App\Security\UserChecker" class="App\Security\UserChecker" autowire="true" autoconfigure="true">
+      <argument type="service" id="mailer.mailer"/>
+      <argument type="service" id="App\Repository\UtilisateurRepository"/>
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
@@ -5236,7 +5241,7 @@
       <argument type="service" id=".service_locator.zJyh7qS"/>
       <argument type="iterator">
         <argument key="security.firewall.map.context.dev" type="service" id=".security.request_matcher.kLbKLHa"/>
-        <argument key="security.firewall.map.context.main">null</argument>
+        <argument key="security.firewall.map.context.main" type="service" id=".security.request_matcher.yy_ZK6T"/>
       </argument>
     </service>
     <service id="security.firewall.context" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext" abstract="true">
@@ -5670,8 +5675,8 @@
     </service>
     <service id="security.firewall.map.config.main" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
       <argument>main</argument>
-      <argument>security.user_checker</argument>
-      <argument>null</argument>
+      <argument>App\Security\UserChecker</argument>
+      <argument>.security.request_matcher.yy_ZK6T</argument>
       <argument>true</argument>
       <argument>false</argument>
       <argument>security.user.provider.concrete.app_user_provider</argument>
@@ -5691,6 +5696,14 @@
         <argument key="target">/</argument>
         <argument key="invalidate_session">true</argument>
         <argument key="delete_cookies" type="collection"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher._LA_AHr" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/</argument>
+    </service>
+    <service id=".security.request_matcher.yy_ZK6T" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher._LA_AHr"/>
       </argument>
     </service>
     <service id="security.listener.main.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
@@ -5847,7 +5860,7 @@
     </service>
     <service id="security.listener.user_checker.main" class="Symfony\Component\Security\Http\EventListener\UserCheckerListener">
       <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
-      <argument type="service" id="security.user_checker"/>
+      <argument type="service" id="App\Security\UserChecker"/>
     </service>
     <service id="security.exception_listener.main" class="Symfony\Component\Security\Http\Firewall\ExceptionListener">
       <argument type="service" id="security.token_storage"/>
@@ -6682,16 +6695,25 @@
         <argument key="utilisateurRepository" type="service_closure" id="App\Repository\UtilisateurRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.thm4f08" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.6DYySdB" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="authenticator" type="service_closure" id="App\Security\Authenticator"/>
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="mailerInterface" type="service_closure" id="mailer.mailer"/>
         <argument key="userAuthenticator" type="service_closure" id="security.user_authenticator"/>
         <argument key="userPasswordHasher" type="service_closure" id="security.user_password_hasher"/>
       </argument>
     </service>
-    <service id=".service_locator.HwwhGDs" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ozsNm6Q" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="authenticator" type="service_closure" id="App\Security\Authenticator"/>
+        <argument key="mailerInterface" type="service_closure" id="mailer.mailer"/>
+        <argument key="userAuthenticator" type="service_closure" id="security.user_authenticator"/>
+        <argument key="utilisateurRepo" type="service_closure" id="App\Repository\UtilisateurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.fDIFo5q" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdministrationController::index" type="service_closure" id=".service_locator.YgYapZ6"/>
@@ -6704,7 +6726,8 @@
         <argument key="App\Controller\FigureController::suppressionFigure" type="service_closure" id=".service_locator.JVI6tHc"/>
         <argument key="App\Controller\ForgetPasswordController::editPassword" type="service_closure" id=".service_locator.vjetzzK"/>
         <argument key="App\Controller\ForgetPasswordController::index" type="service_closure" id=".service_locator.8YhWmfT"/>
-        <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.thm4f08"/>
+        <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.6DYySdB"/>
+        <argument key="App\Controller\RegistrationController::verification" type="service_closure" id=".service_locator.ozsNm6Q"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -6719,7 +6742,8 @@
         <argument key="App\Controller\FigureController:suppressionFigure" type="service_closure" id=".service_locator.JVI6tHc"/>
         <argument key="App\Controller\ForgetPasswordController:editPassword" type="service_closure" id=".service_locator.vjetzzK"/>
         <argument key="App\Controller\ForgetPasswordController:index" type="service_closure" id=".service_locator.8YhWmfT"/>
-        <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.thm4f08"/>
+        <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.6DYySdB"/>
+        <argument key="App\Controller\RegistrationController:verification" type="service_closure" id=".service_locator.ozsNm6Q"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -7580,12 +7604,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.HwwhGDs"/>
+      <argument type="service" id=".service_locator.fDIFo5q"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.HwwhGDs"/>
+      <argument type="service" id=".service_locator.fDIFo5q"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8543,16 +8567,15 @@
     <service id="security.user_providers" alias="security.user.provider.concrete.app_user_provider"/>
     <service id="Symfony\Component\Security\Core\User\UserProviderInterface" alias="security.user.provider.concrete.app_user_provider"/>
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
-    <service id="security.user_checker.main" alias="security.user_checker"/>
+    <service id="security.user_checker.main" alias="App\Security\UserChecker"/>
     <service id="security.firewall.context_locator" alias=".service_locator.zJyh7qS"/>
-    <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="logger" alias="monolog.logger"/>
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="sensio_framework_extra.converter.doctrine.orm.expression_language" alias="sensio_framework_extra.converter.doctrine.orm.expression_language.default"/>
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.HwwhGDs"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.fDIFo5q"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8579,8 +8602,9 @@
     <service id=".service_locator.1oc_hT0" alias=".service_locator.OejEZuy"/>
     <service id=".service_locator.Fgfqy3N" alias=".service_locator.8JYXY.m"/>
     <service id=".service_locator.XudNM_b" alias=".service_locator.vjetzzK"/>
-    <service id=".service_locator.LLC6prh" alias=".service_locator.thm4f08"/>
-    <service id=".service_locator.CTipbtz" alias=".service_locator.HwwhGDs"/>
+    <service id=".service_locator.xcLLsDd" alias=".service_locator.6DYySdB"/>
+    <service id=".service_locator.MFrKG0n" alias=".service_locator.ozsNm6Q"/>
+    <service id=".service_locator.MUzWhsG" alias=".service_locator.fDIFo5q"/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
     <service id=".service_locator.eMCYbjD" alias=".service_locator.j0dZlcL"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
@@ -8641,7 +8665,8 @@
     <service id=".service_locator.OBJDmIo" alias=".service_locator.8JYXY.m"/>
     <service id=".service_locator.btPg0cP" alias=".service_locator.8YhWmfT"/>
     <service id=".service_locator.ekQhsBw" alias=".service_locator.vjetzzK"/>
-    <service id=".service_locator.ki3ISwl" alias=".service_locator.thm4f08"/>
+    <service id=".service_locator.hZI2fBl" alias=".service_locator.6DYySdB"/>
+    <service id=".service_locator.bLNTNT9" alias=".service_locator.ozsNm6Q"/>
     <service id=".service_locator.Kyflpr1" alias=".service_locator.CshazM0"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>
     <service id=".service_locator.hnz5ZNh" alias=".service_locator.0TACwl3"/>
