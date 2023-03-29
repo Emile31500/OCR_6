@@ -81,7 +81,7 @@ class RegistrationController extends AbstractController
             if(isset($utilisateur)){
 
                 $utilisateur->setVerificationCode(null);
-                $utilisateur->setIsVerified(true);
+                $utilisateur->setVerfication(true);
                 $utilisateurRepo->save($utilisateur, true);
     
                 return $userAuthenticator->authenticateUser(

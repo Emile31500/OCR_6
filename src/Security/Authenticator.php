@@ -27,9 +27,11 @@ class Authenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
+    //private $token; 
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
+        //$this->token = $token;
     }
 
     protected function getLoginUrl(Request $request): string
@@ -50,12 +52,13 @@ class Authenticator extends AbstractLoginFormAuthenticator
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
             ]
         );
-        
+
         return $passport;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+
         $utilisateur = $token->getUser();
         if ($utilisateur->isVerified() === false) {
             
@@ -67,18 +70,6 @@ class Authenticator extends AbstractLoginFormAuthenticator
 
         }
         
-    }
-
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
-    {
-        if ($exception instanceof CustomUserMessageAuthenticationException) {
-            
-            $message = $exception->getMessageKey();
-            
-        }
-        
-        return new JsonResponse($message, Response::HTTP_UNAUTHORIZED);
-
     }
 
 }
