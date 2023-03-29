@@ -3,8 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Figure;
-use App\Entity\VideoFigure;
-use App\Entity\PhotoFigure;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -36,7 +34,6 @@ class AppFixtures extends Fixture
     public function addFigure(string $nom, string $article, $manager): void{
 
         $figure = new Figure;
-        $photo = new PhotoFigure;
 
         $slug = str_replace(' ', '-', $nom);
         $slug = strtolower($slug);
@@ -49,14 +46,9 @@ class AppFixtures extends Fixture
         $figure->setSlug($slug);
         $figure->setArticle($article);
         
-        $photo->setUrl($photoUrl);
-        $photo->setNom($nom);
-        $photo->setFigure($figure);
-
-        $figure->addPhotoFigure($photo);
+        $figure->setImageUrl($photoUrl);
 
         $manager->persist($figure);
-        $manager->persist($photo);
         $manager->flush();
 
 

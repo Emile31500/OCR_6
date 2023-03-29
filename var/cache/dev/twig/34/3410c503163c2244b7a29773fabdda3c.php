@@ -198,7 +198,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         echo "\"></script>
     <script src=\"";
         // line 62
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/load_more_figure.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Figure/load.js"), "html", null, true);
         echo "\"></script> 
 ";
         
@@ -310,7 +310,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 {% endblock %}
 {% block perso_javascripts %}
     <script src=\"{{ asset('js/Figure/confirm_delete.js') }}\"></script>
-    <script src=\"{{ asset('js/load_more_figure.js') }}\"></script> 
+    <script src=\"{{ asset('js/Figure/load.js') }}\"></script> 
 {% endblock %}
 {% block perso_stylesheets %}
     <link rel=\"stylesheet\" href=\"{{ asset('css/home/index.css') }}\" />

@@ -5,14 +5,14 @@
 {% block body %}
     <div class="row mt-5 mb-5 d-flex justify-content-center optional-content">
         <div class="col text-center">
-            <img class="img-figure" src="{{ asset('media/img/figures/') }}{{data.photo.url}}"/>
+            <img class="img-figure" src="{{ asset('media/img/figures/') }}{{figure.imageUrl}}"/>
         </div>
         <div class="col">
             <h2> {{ controller_name }}</h2>
         </div>
     </div>
     <p class="mt-5 mb-5">
-        {{ data.figure.article|nl2br}}
+        {{ figure.article|nl2br}}
     </p>
     <div id="message-zone">
     </div>
@@ -41,7 +41,7 @@
                 </div>
             </form>
         {% endif %}
-        <span id="slug">{{data.figure.slug}}</span>
+        <span id="slug">{{figure.slug}}</span>
     </div>
 {% endblock %}
 {% block perso_stylesheets %}

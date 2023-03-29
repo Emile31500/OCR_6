@@ -7,8 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\FigureRepository;
-use App\Repository\VideoFigureRepository;
-use App\Repository\PhotoFigureRepository;
 use App\Repository\MessageRepository;
 use App\Form\CreationFigureType;
 use App\Form\EditionFigureType;
@@ -16,7 +14,6 @@ use App\Form\MessageType;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Entity\Figure;
 use App\Entity\Message;
-use App\Entity\PhotoFigure;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,16 +27,10 @@ use DateTimeInterface;
 class FigureController extends AbstractController
 {
     #[Route('/figure/{slug}', name: 'app_figure')]
-    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository, VideoFigureRepository $videoFigureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
+    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
         $message = new Message();
         $figure = $figureRepository->findOneBySlug($slug);
-
-        $data = [];    
-
-        $data["figure"] = $figure;
-        $data["photo"] =  $photoFigureRepository->findByFigureId($figure->getId());
-        $data["video"] =  $videoFigureRepository->findByFigureId($figure->getId());
 
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
@@ -69,12 +60,12 @@ class FigureController extends AbstractController
         return $this->render('figure/index.html.twig', [
             'controller_name' => $figure->getNom(),
             'form' => $form->createView(),
-            'data' => $data
+            'figure' => $figure
         ]);
     }
 
     #[Route('/figure/liste/{max_result}', name: 'app_figure_liste')]
-    public function liste (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository)
+    public function liste (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository)
     {
         $figures = $figureRepository->findPublished($max_result);
         if($authorizationChecker->isGranted("administrator")) {
@@ -85,35 +76,10 @@ class FigureController extends AbstractController
 
             $isAdmin = false;
 
-        }  
-
-        $data = [];
-
-
-        foreach ($figures as $figure) {
-
-            $photo = $photoFigureRepository->findByFigureId($figure->getId());
-
-            $photoFigureArr["nom"] = $photo->getNom();
-            $photoFigureArr["url"] = $photo->getUrl();
-            $figureArr["nom"] = $figure->getNom();
-            $figureArr["slug"] = $figure->getSlug();
-            $figureArr["article"] = $figure->getArticle();
-            
-            $temp["figure"] = $figureArr;
-            $temp["photo"] = $photoFigureArr;
-            
-            array_push($data, $temp);
-            unset($temp);
-            unset($figureArr);
-            unset($photoFigureArr);
-            unset($photo);
-
         }
-        // var_dump($data);
-        // die;
+
         return $this->render('figure/list.html.twig', [
-            'datas' => $data,
+            'figures' => $figures,
             'isAdmin' => $isAdmin
         ]);
 
@@ -144,7 +110,7 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure')]
-    public function suppressionFigure(FigureRepository $figureRepo, PhotoFigureRepository $photoFigureRepo, TokenStorageInterface $tokenStorage, Security $security, string $slug){
+    public function suppressionFigure(FigureRepository $figureRepo, TokenStorageInterface $tokenStorage, Security $security, string $slug){
 
         $user = $tokenStorage->getToken()->getUser();
         $isAdmin = $user->getRoles()[0] == "administrator";
@@ -152,9 +118,6 @@ class FigureController extends AbstractController
         if($isAdmin){
 
             $figure = $figureRepo->findOneBySlug($slug);
-            $photoFigure = $photoFigureRepo->findByFigureId($figure->getId());
-
-            $photoFigureRepo->remove($photoFigure, true);
             $figureRepo->remove($figure, true);
 
             header("Content-Type: applciation/json");
@@ -169,10 +132,8 @@ class FigureController extends AbstractController
     }
 
     #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
-    public function editionFigure(SessionInterface $session, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo, PhotoFigureRepository $photoFigureRepo, TokenStorageInterface $tokenStorage, Security $security){
+    public function editionFigure(SessionInterface $session, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo, TokenStorageInterface $tokenStorage, Security $security){
         
-        
-
         $user = $tokenStorage->getToken()->getUser();
         $isAdmin = $user->getRoles()[0] === "administrator";
 
@@ -188,8 +149,6 @@ class FigureController extends AbstractController
 
             $oldFigure = $figureRepo->findOneBySlug($slug);
             $figure = $oldFigure;
-            $oldPhoto = $figure->getPhotoFigure()[0];
-            $photoFigure = $photoFigureRepo->findByFigureId($figure->getId());
             $form = $this->createForm(CreationFigureType::class, [], [
                 'data' => [
                     'isFormEdit' => true,
@@ -206,7 +165,7 @@ class FigureController extends AbstractController
                 $slug = strtolower($slug);
                 $article = $form->get('article')->getData();
 
-                $imgPath = 'media/img/figures/'.$photoFigure->getUrl();
+                $imgPath = 'media/img/figures/'.$figure->getImageUrl();
                 $imgDefault = new File($imgPath);
 
                 if ($imageFile = $form->get('photo')->getData()) {
@@ -224,10 +183,8 @@ class FigureController extends AbstractController
                     }
 
                     // persist the new filename to the database or do whatever you want with it
-                    $photoFigure->setNom($nom);
-                    $photoFigure->setUrl($newFilename);
-                    $photoFigureRepo->save($photoFigure, true);
-                    $figure->addPhotoFigure($photoFigure);}
+                    $figure->setImageUrl($newFilename);
+                }
 
                 $session->set('slug', $slug);
                 
@@ -243,7 +200,6 @@ class FigureController extends AbstractController
                 'controller_name' => 'Edition d\'une figure',
                 'form' => $form->createView(),
                 'figure' => $oldFigure,
-                'photo' => $oldPhoto
 
             ]);
 
@@ -264,7 +220,6 @@ class FigureController extends AbstractController
         if($isAdmin){
 
             $figure = new Figure();
-            $photoFigure = new PhotoFigure();
             $form = $this->createForm(CreationFigureType::class, [], ['data' => [
                                                                             'isFormEdit' => true,
                                                                             'nom' => '',
@@ -296,16 +251,12 @@ class FigureController extends AbstractController
                     $slug = strtolower($slug);
                     $article = $form->get('article')->getData();
         
-                    $photoFigure->setNom($nom);
-                    $photoFigure->setUrl($newFilename );
-                    
+                    $figure->setImageUrl($newFilename );
                     $figure->setNom($nom);
                     $figure->setSlug($slug);
                     $figure->setArticle($article);
-                    $figure->addPhotoFigure($photoFigure);
         
                     $manager->persist($figure);
-                    $manager->persist($photoFigure);
                     $manager->flush();
 
                 }
