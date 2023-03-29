@@ -26,12 +26,11 @@ class Authenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_home';
-    //private $token; 
+    public const LOGIN_ROUTE = 'app_login'; 
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
-        //$this->token = $token;
+        
     }
 
     protected function getLoginUrl(Request $request): string

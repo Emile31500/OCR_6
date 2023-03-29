@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -41,20 +41,8 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $now = new \DateTime();
-            $dateLimit = $now->modify('+1 day');
-
-            $verificationCode = bin2hex(random_bytes(64));
-            $verificationCode = substr($verificationCode, 0, 64);
-
-            $user->setVerificationCode($verificationCode);
-            $user->setVerificationDate($now);
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-            
-            $mailer = new verificationUtilisateurMailer('emile00013@gmail.com', $mailerInterface);
-            $mailer->sendVerificationLink($verificationCode, $user->getNomUtilisateur(), $form->get('email')->getData());
+            $mailer = new verificationUtilisateurMailer($this->mailerInterface, $this->utilisateurRepo);
+            $mailer->sendVerificationLink($user);
 
             return $this->render('registration/verification_email.html.twig',  
                 [
@@ -97,19 +85,8 @@ class RegistrationController extends AbstractController
 
             } else {
 
-                $now = new \DateTime();
-                $dateLimit = $now->modify('+1 day');
-
-                $verificationCode = bin2hex(random_bytes(64));
-                $verificationCode = substr($verificationCode, 0, 64);
-
-                $utilisateur->setVerificationCode($verificationCode);
-                $utilisateur->setVerificationDate($dateLimit);
-                $utilisateur->setVerfication(false);
-                $utilisateurRepo->save($utilisateur, true);
-
-                $mailer = new verificationUtilisateurMailer('emile00013@gmail.com', $mailerInterface);
-                $mailer->sendVerificationLink($verificationCode, $utilisateur->getNomUtilisateur(), $utilisateur->getEmail());
+                $mailer = new verificationUtilisateurMailer($this->mailerInterface, $this->utilisateurRepo);
+                $mailer->sendVerificationLink($user);
 
                 return $this->render('registration/verification_email.html.twig',  
                 [
