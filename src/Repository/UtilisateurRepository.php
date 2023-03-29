@@ -90,7 +90,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
     public function findByVerifcode(string $value): mixed
     {
         $result = $this->createQueryBuilder('u')
-            ->andWhere('u.verificationCode=:val')
+            ->andWhere('u.verificationCode =:val')
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
             ->getQuery()

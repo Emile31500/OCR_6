@@ -26,7 +26,7 @@ class Authenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
+    public const LOGIN_ROUTE = 'app_home';
     //private $token; 
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
@@ -59,16 +59,15 @@ class Authenticator extends AbstractLoginFormAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
 
-        $utilisateur = $token->getUser();
-        if ($utilisateur->isVerified() === false) {
-            
-            throw new CustomUserMessageAuthenticationException('User account is not verified.');
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
 
-        } else if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-
-            return new RedirectResponse($targetPath);
+             return new RedirectResponse($targetPath);
 
         }
+
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+
+        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         
     }
 

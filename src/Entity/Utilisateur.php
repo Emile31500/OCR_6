@@ -60,6 +60,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 64, nullable: true)]
     private ?string $verificationCode = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $verificationDate = null;
+
     public function __construct()
     {
         $this->Message = new ArrayCollection();
@@ -257,6 +260,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerificationCode(?string $verificationCode): self
     {
         $this->verificationCode = $verificationCode;
+
+        return $this;
+    }
+
+    public function getVerificationDate(): ?\DateTimeInterface
+    {
+        return $this->verificationDate;
+    }
+
+    public function setVerificationDate(?\DateTimeInterface $verificationDate): self
+    {
+        $this->verificationDate = $verificationDate;
 
         return $this;
     }
