@@ -34,7 +34,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 64)]
-    private ?string $nom_utilisateur = null;
+    private ?string $nomUtilisateur = null;
 
     #[ORM\Column(length: 64)]
     private ?string $nom = null;
@@ -43,7 +43,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_de_naissance = null;
+    private ?\DateTimeInterface $dateDeNaissance = null;
     
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Message::class, orphanRemoval: true)]
     private Collection $Message;
@@ -140,12 +140,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getNomUtilisateur(): ?string
     {
-        return $this->nom_utilisateur;
+        return $this->nomUtilisateur;
     }
 
-    public function setNomUtilisateur(string $nom_utilisateur): self
+    public function setNomUtilisateur(string $nomUtilisateur): self
     {
-        $this->nom_utilisateur = $nom_utilisateur;
+        $this->nomUtilisateur = $nomUtilisateur;
 
         return $this;
     }
@@ -176,12 +176,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getDateDeNaissance(): ?\DateTimeInterface
     {
-        return $this->date_de_naissance;
+        return $this->dateDeNaissance;
     }
 
-    public function setDateDeNaissance(\DateTimeInterface $date_de_naissance): self
+    public function setDateDeNaissance(\DateTimeInterface $dateDeNaissance): self
     {
-        $this->date_de_naissance = $date_de_naissance;
+        $this->dateDeNaissance = $dateDeNaissance;
 
         return $this;
     }

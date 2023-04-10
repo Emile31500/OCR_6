@@ -27,7 +27,7 @@ class __TwigTemplate_03bb75ba3fc87527b2f7f0745ff4984f extends Template
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
-            'javascripts' => [$this, 'block_javascripts'],
+            'perso_javascripts' => [$this, 'block_perso_javascripts'],
         ];
     }
 
@@ -146,18 +146,18 @@ class __TwigTemplate_03bb75ba3fc87527b2f7f0745ff4984f extends Template
     }
 
     // line 30
-    public function block_javascripts($context, array $blocks = [])
+    public function block_perso_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
 
         // line 31
         echo "    <script src=\"";
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/editpassword.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Security/editpassword.js"), "html", null, true);
         echo "\"></script>
 ";
         
@@ -214,8 +214,8 @@ class __TwigTemplate_03bb75ba3fc87527b2f7f0745ff4984f extends Template
     </div>
 
 {% endblock %}
-{% block javascripts %}
-    <script src=\"{{ asset('js/editpassword.js') }}\"></script>
+{% block perso_javascripts %}
+    <script src=\"{{ asset('js/Security/editpassword.js') }}\"></script>
 {% endblock %}
 ", "forget_password/editpw.html.twig", "C:\\wamp64\\www\\Projet_OC6\\templates\\forget_password\\editpw.html.twig");
     }

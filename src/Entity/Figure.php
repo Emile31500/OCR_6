@@ -27,19 +27,14 @@ class Figure
     #[ORM\Column(length: 10, options : ["default" => "published"])]
     private ?string $statu = "published";
 
-    #[ORM\OneToMany(mappedBy: 'Figure', targetEntity: VideoFigure::class)]
-    private Collection $VideoFigure;
-
-    #[ORM\OneToMany(mappedBy: 'Figure', targetEntity: PhotoFigure::class)]
-    private Collection $PhotoFigure;
+    #[ORM\Column(length: 255)]
+    private ?string $imageUrl = null;
 
     #[ORM\OneToMany(mappedBy: 'figure', targetEntity: Message::class)]
     private Collection $Message;
 
     public function __construct()
     {
-        $this->VideoFigure = new ArrayCollection();
-        $this->PhotoFigure = new ArrayCollection();
         $this->Message = new ArrayCollection();
     }
 
@@ -84,6 +79,18 @@ class Figure
         return $this;
     }
 
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(string $imageUrl): self
+    {
+        $this->imageUrl = $imageUrl;
+
+        return $this;
+    }
+
     public function getStatu(): ?string
     {
         return $this->statu;
@@ -96,66 +103,6 @@ class Figure
         return $this;
     }
     
-    /**
-     * @return Collection<int, VideoFigure>
-     */
-    public function getVideoFigure(): Collection
-    {
-        return $this->VideoFigure;
-    }
-
-    public function addVideoFigure(VideoFigure $VideoFigure): self
-    {
-        if (!$this->VideoFigure->contains($VideoFigure)) {
-            $this->VideoFigure->add($VideoFigure);
-            $VideoFigure->setFigure($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVideoFigure(VideoFigure $VideoFigure): self
-    {
-        if ($this->VideoFigure->removeElement($VideoFigure)) {
-            // set the owning side to null (unless already changed)
-            if ($VideoFigure->getFigure() === $this) {
-                $VideoFigure->setFigure(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, PhotoFigure>
-     */
-    public function getPhotoFigure(): Collection
-    {
-        return $this->PhotoFigure;
-    }
-
-    public function addPhotoFigure(PhotoFigure $PhotoFigure): self
-    {
-        if (!$this->PhotoFigure->contains($PhotoFigure)) {
-            $this->PhotoFigure->add($PhotoFigure);
-            $PhotoFigure->setFigure($this);
-        }
-
-        return $this;
-    }
-
-    public function removePhotoFigure(PhotoFigure $PhotoFigure): self
-    {
-        if ($this->PhotoFigure->removeElement($PhotoFigure)) {
-            // set the owning side to null (unless already changed)
-            if ($PhotoFigure->getFigure() === $this) {
-                $PhotoFigure->setFigure(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Message>
      */

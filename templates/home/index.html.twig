@@ -22,8 +22,7 @@
     </div>
 {% endblock %}
 {% block body %}
-    {% if app.user is not null %}
-         {% if app.user.roles[0] == 'administrator' %}
+        {% if isAdmin == true %}
             <a href="{{ path('app_creation_figure') }}">
                 <button class="btn btn-success"> Ajouter </button>
             </a>
@@ -44,9 +43,7 @@
                     </div>
                 </div>
             </div>
-          
-         {% endif %}
-    {% endif %}
+        {% endif %}
     <div id='tricks-card-list' class="my-5 row row-cols-1 row-cols-md-2 g-4">
     </div>    
     <div class="clear">
@@ -58,8 +55,9 @@
     </div>
 {% endblock %}
 {% block perso_javascripts %}
+
     <script src="{{ asset('js/Figure/confirm_delete.js') }}"></script>
-    <script src="{{ asset('js/load_more_figure.js') }}"></script> 
+    <script src="{{ asset('js/Figure/load.js') }}"></script>
 {% endblock %}
 {% block perso_stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/home/index.css') }}" />
