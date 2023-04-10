@@ -26,8 +26,9 @@ use DateTimeInterface;
 
 class FigureController extends AbstractController
 {
+
     #[Route('/figure/{slug}', name: 'app_figure')]
-    public function index(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
+    public function liste(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
         $message = new Message();
         $figure = $figureRepository->findOneBySlug($slug);
@@ -35,21 +36,12 @@ class FigureController extends AbstractController
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
         
-        if ($tokenStorage->getToken()){
-
-            $user = $tokenStorage->getToken()->getUser();
-
-        }
-        
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()){
-
-            $dateString = date('Y-m-d');
-            $dateTime = \DateTimeImmutable::createFromFormat('Y-m-d', $dateString);
-
+            
             $message->setUtilisateur($user);
             $message->setMessage($form->get('message')->getData());    
-            $message->setDate($dateTime);
             $message->setFigure($figure);
 
             $manager->persist($message);
@@ -65,10 +57,10 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure/liste/{max_result}', name: 'app_figure_liste')]
-    public function liste (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository)
+    public function print (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository)
     {
         $figures = $figureRepository->findPublished($max_result);
-        if($authorizationChecker->isGranted("administrator")) {
+        if($authorizationChecker->isGranted('ROLE_ADMIN')) {
 
             $isAdmin = true;
 
@@ -110,12 +102,9 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure')]
-    public function suppressionFigure(FigureRepository $figureRepo, TokenStorageInterface $tokenStorage, Security $security, string $slug){
+    public function suppressionFigure(FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, string $slug){
 
-        $user = $tokenStorage->getToken()->getUser();
-        $isAdmin = $user->getRoles()[0] == "administrator";
-
-        if($isAdmin){
+        if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
             $figure = $figureRepo->findOneBySlug($slug);
             $figureRepo->remove($figure, true);
@@ -130,18 +119,14 @@ class FigureController extends AbstractController
         die;
 
     }
-
+    
     #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
-    public function editionFigure(SessionInterface $session, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo, TokenStorageInterface $tokenStorage, Security $security){
+    public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo){
         
-        $user = $tokenStorage->getToken()->getUser();
-        $isAdmin = $user->getRoles()[0] === "administrator";
-
-        if($isAdmin){
+        if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
             $session->start();
             if ($session->get('slug') !== null){
-
                 
                 $slug = $session->get('slug');
 
@@ -210,14 +195,11 @@ class FigureController extends AbstractController
 
         }
     }
-
+    
     #[Route('/creation-figure', name: 'app_creation_figure')]
-    public function creationFigure(Request $request, EntityManagerInterface $manager, TokenStorageInterface $tokenStorage, Security $security){
+    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker){
 
-        $user = $tokenStorage->getToken()->getUser();
-        $isAdmin = $user->getRoles()[0] == "administrator";
-
-        if($isAdmin){
+        if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
             $figure = new Figure();
             $form = $this->createForm(CreationFigureType::class, [], ['data' => [
@@ -251,7 +233,7 @@ class FigureController extends AbstractController
                     $slug = strtolower($slug);
                     $article = $form->get('article')->getData();
         
-                    $figure->setImageUrl($newFilename );
+                    $figure->setImageUrl($newFilename);
                     $figure->setNom($nom);
                     $figure->setSlug($slug);
                     $figure->setArticle($article);

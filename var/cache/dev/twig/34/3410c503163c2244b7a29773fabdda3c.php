@@ -129,15 +129,12 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 25
-        echo "    ";
-        if ( !(null === twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 25, $this->source); })()), "user", [], "any", false, false, false, 25))) {
+        echo "        ";
+        if (((isset($context["isAdmin"]) || array_key_exists("isAdmin", $context) ? $context["isAdmin"] : (function () { throw new RuntimeError('Variable "isAdmin" does not exist.', 25, $this->source); })()) == true)) {
             // line 26
-            echo "         ";
-            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 26, $this->source); })()), "user", [], "any", false, false, false, 26), "roles", [], "any", false, false, false, 26), 0, [], "array", false, false, false, 26) == "administrator")) {
-                // line 27
-                echo "            <a href=\"";
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_creation_figure");
-                echo "\">
+            echo "            <a href=\"";
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_creation_figure");
+            echo "\">
                 <button class=\"btn btn-success\"> Ajouter </button>
             </a>
             <div class=\"modal fade\" id=\"confirmDelete\" tabindex=\"-1\" aria-labelledby=\"confirmDeleteLabel\" aria-hidden=\"true\">
@@ -157,13 +154,9 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                     </div>
                 </div>
             </div>
-          
-         ";
-            }
-            // line 49
-            echo "    ";
+        ";
         }
-        // line 50
+        // line 47
         echo "    <div id='tricks-card-list' class=\"my-5 row row-cols-1 row-cols-md-2 g-4\">
     </div>    
     <div class=\"clear\">
@@ -182,7 +175,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 60
+    // line 57
     public function block_perso_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -192,14 +185,16 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
 
-        // line 61
-        echo "    <script src=\"";
+        // line 58
+        echo "
+    <script src=\"";
+        // line 59
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Figure/confirm_delete.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 62
+        // line 60
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Figure/load.js"), "html", null, true);
-        echo "\"></script> 
+        echo "\"></script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -209,7 +204,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 64
+    // line 62
     public function block_perso_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -219,7 +214,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
 
-        // line 65
+        // line 63
         echo "    <link rel=\"stylesheet\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/home/index.css"), "html", null, true);
         echo "\" />
@@ -244,7 +239,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     public function getDebugInfo()
     {
-        return array (  223 => 65,  213 => 64,  201 => 62,  196 => 61,  186 => 60,  167 => 50,  164 => 49,  138 => 27,  135 => 26,  132 => 25,  122 => 24,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
+        return array (  218 => 63,  208 => 62,  196 => 60,  192 => 59,  189 => 58,  179 => 57,  160 => 47,  135 => 26,  132 => 25,  122 => 24,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
     }
 
     public function getSourceContext()
@@ -273,8 +268,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
     </div>
 {% endblock %}
 {% block body %}
-    {% if app.user is not null %}
-         {% if app.user.roles[0] == 'administrator' %}
+        {% if isAdmin == true %}
             <a href=\"{{ path('app_creation_figure') }}\">
                 <button class=\"btn btn-success\"> Ajouter </button>
             </a>
@@ -295,9 +289,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                     </div>
                 </div>
             </div>
-          
-         {% endif %}
-    {% endif %}
+        {% endif %}
     <div id='tricks-card-list' class=\"my-5 row row-cols-1 row-cols-md-2 g-4\">
     </div>    
     <div class=\"clear\">
@@ -309,8 +301,9 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
     </div>
 {% endblock %}
 {% block perso_javascripts %}
+
     <script src=\"{{ asset('js/Figure/confirm_delete.js') }}\"></script>
-    <script src=\"{{ asset('js/Figure/load.js') }}\"></script> 
+    <script src=\"{{ asset('js/Figure/load.js') }}\"></script>
 {% endblock %}
 {% block perso_stylesheets %}
     <link rel=\"stylesheet\" href=\"{{ asset('css/home/index.css') }}\" />

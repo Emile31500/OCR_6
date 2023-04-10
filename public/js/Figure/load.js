@@ -17,15 +17,16 @@ function loadFigure()
         dom = new DOMParser();
         html_list = dom.parseFromString(data, "text/html").querySelector("#tricks-card-list").innerHTML;
         tricks_list.innerHTML = html_list;
+        loadConfirmDelete();
 
     })
     .catch(error => {
         console.error(error);
     });
-    
-    loadConfirmDelete();
 
+    
 }
+
 loadFigure();
 
 button.addEventListener('click', function(){

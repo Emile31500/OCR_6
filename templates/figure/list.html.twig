@@ -1,6 +1,6 @@
 <div id='tricks-card-list'>
     {% for figure in figures %}
-        <div class="col tricks-col {{figure.slug}} d-flex justify-content-center">
+        <div class="col tricks-col {{figure.slug}} d-flex justify-content-center" id="tricks-lmnt-{{figure.slug}}">
             <div class="tricks-card card">
                 <img class="top-img-card" src="{{ asset('media/img/figures/')}}{{figure.imageUrl}}" alt="{{figure.nom}}"/>
                 <div class="card-body">

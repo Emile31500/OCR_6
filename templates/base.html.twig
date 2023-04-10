@@ -27,9 +27,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_home')}}">Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_home') }}">Tricks</a>
-                            </li> 
                             {% if app.user is null %}
                                 <li class="nav-item unconnected_user_navzone">
                                     <a class="nav-link" href="{{ path('app_login')}}">Sign in</a>

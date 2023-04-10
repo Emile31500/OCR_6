@@ -21,6 +21,7 @@
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
+      <parameter key="StofDoctrineExtensionsBundle">Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -70,6 +71,10 @@
       <parameter key="DoctrineFixturesBundle" type="collection">
         <parameter key="path">C:\wamp64\www\Projet_OC6\vendor\doctrine\doctrine-fixtures-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\FixturesBundle</parameter>
+      </parameter>
+      <parameter key="StofDoctrineExtensionsBundle" type="collection">
+        <parameter key="path">C:\wamp64\www\Projet_OC6\vendor\stof\doctrine-extensions-bundle\src</parameter>
+        <parameter key="namespace">Stof\DoctrineExtensionsBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -241,6 +246,20 @@
         </parameter>
       </parameter>
     </parameter>
+    <parameter key="stof_doctrine_extensions.default_locale">en_US</parameter>
+    <parameter key="stof_doctrine_extensions.translation_fallback">false</parameter>
+    <parameter key="stof_doctrine_extensions.persist_default_translation">false</parameter>
+    <parameter key="stof_doctrine_extensions.skip_translation_on_load">false</parameter>
+    <parameter key="stof_doctrine_extensions.listener.translatable.class">Gedmo\Translatable\TranslatableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.timestampable.class">Gedmo\Timestampable\TimestampableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.blameable.class">Gedmo\Blameable\BlameableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.loggable.class">Gedmo\Loggable\LoggableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.sortable.class">Gedmo\Sortable\SortableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.softdeleteable.class">Gedmo\SoftDeleteable\SoftDeleteableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.uploadable.class">Gedmo\Uploadable\UploadableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.reference_integrity.class">Gedmo\ReferenceIntegrity\ReferenceIntegrityListener</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -411,15 +430,7 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\PhotoFigureRepository" class="App\Repository\PhotoFigureRepository" autowire="true" autoconfigure="true">
-      <tag name="doctrine.repository_service"/>
-      <argument type="service" id="doctrine"/>
-    </service>
     <service id="App\Repository\UtilisateurRepository" class="App\Repository\UtilisateurRepository" autowire="true" autoconfigure="true">
-      <tag name="doctrine.repository_service"/>
-      <argument type="service" id="doctrine"/>
-    </service>
-    <service id="App\Repository\VideoFigureRepository" class="App\Repository\VideoFigureRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -2029,6 +2040,7 @@
           <argument>C:\wamp64\www\Projet_OC6\vendor\symfony\maker-bundle\src/translations</argument>
           <argument>C:\wamp64\www\Projet_OC6\vendor\sensio\framework-extra-bundle\src/translations</argument>
           <argument>C:\wamp64\www\Projet_OC6\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
+          <argument>C:\wamp64\www\Projet_OC6\vendor\stof\doctrine-extensions-bundle\src/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -2048,6 +2060,7 @@
             <argument>C:\wamp64\www\Projet_OC6\vendor\symfony\maker-bundle\src/translations</argument>
             <argument>C:\wamp64\www\Projet_OC6\vendor\sensio\framework-extra-bundle\src/translations</argument>
             <argument>C:\wamp64\www\Projet_OC6\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
+            <argument>C:\wamp64\www\Projet_OC6\vendor\stof\doctrine-extensions-bundle\src/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -4244,7 +4257,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.Jn6Gcc3"/>
+      <argument type="service" id=".service_locator.GVDu_NP"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -6273,12 +6286,8 @@
     <service id=".abstract.instanceof.App\Repository\FigureRepository" class="App\Repository\FigureRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\MessageRepository" class="App\Repository\MessageRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\MessageRepository" class="App\Repository\MessageRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PhotoFigureRepository" class="App\Repository\PhotoFigureRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\PhotoFigureRepository" class="App\Repository\PhotoFigureRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UtilisateurRepository" class="App\Repository\UtilisateurRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UtilisateurRepository" class="App\Repository\UtilisateurRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\VideoFigureRepository" class="App\Repository\VideoFigureRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\VideoFigureRepository" class="App\Repository\VideoFigureRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.7nzbL4K" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6650,29 +6659,26 @@
         <argument key="messageRepo" type="service_closure" id="App\Repository\MessageRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.c.HjG1v" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.xDZ9wKP" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="authorizationChecker" type="service_closure" id="security.authorization_checker"/>
         <argument key="figureRepo" type="service_closure" id="App\Repository\FigureRepository"/>
-        <argument key="security" type="service_closure" id="security.helper"/>
-        <argument key="tokenStorage" type="service_closure" id="security.token_storage"/>
       </argument>
     </service>
-    <service id=".service_locator.n.cOGxu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.00tNKoW" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="authorizationChecker" type="service_closure" id="security.authorization_checker"/>
         <argument key="figureRepo" type="service_closure" id="App\Repository\FigureRepository"/>
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="security" type="service_closure" id="security.helper"/>
-        <argument key="tokenStorage" type="service_closure" id="security.token_storage"/>
       </argument>
     </service>
-    <service id=".service_locator.8JYXY.m" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.sMm5VD0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="authorizationChecker" type="service_closure" id="security.authorization_checker"/>
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="security" type="service_closure" id="security.helper"/>
-        <argument key="tokenStorage" type="service_closure" id="security.token_storage"/>
       </argument>
     </service>
     <service id=".service_locator.8YhWmfT" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6688,6 +6694,12 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="userPasswordHasher" type="service_closure" id="security.user_password_hasher"/>
         <argument key="utilisateurRepository" type="service_closure" id="App\Repository\UtilisateurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.u8tOvUF" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="authorizationChecker" type="service_closure" id="security.authorization_checker"/>
       </argument>
     </service>
     <service id=".service_locator.6DYySdB" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6708,19 +6720,20 @@
         <argument key="utilisateurRepo" type="service_closure" id="App\Repository\UtilisateurRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.VILevtP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.eXNuVfD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdministrationController::index" type="service_closure" id=".service_locator.YgYapZ6"/>
         <argument key="App\Controller\AuthenticatorController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\FigureController::creationFigure" type="service_closure" id=".service_locator.8JYXY.m"/>
-        <argument key="App\Controller\FigureController::editionFigure" type="service_closure" id=".service_locator.n.cOGxu"/>
-        <argument key="App\Controller\FigureController::index" type="service_closure" id=".service_locator.hIklMnt"/>
-        <argument key="App\Controller\FigureController::liste" type="service_closure" id=".service_locator.sSTSXrh"/>
+        <argument key="App\Controller\FigureController::creationFigure" type="service_closure" id=".service_locator.sMm5VD0"/>
+        <argument key="App\Controller\FigureController::editionFigure" type="service_closure" id=".service_locator.00tNKoW"/>
+        <argument key="App\Controller\FigureController::liste" type="service_closure" id=".service_locator.hIklMnt"/>
         <argument key="App\Controller\FigureController::message" type="service_closure" id=".service_locator.cA2yfBT"/>
-        <argument key="App\Controller\FigureController::suppressionFigure" type="service_closure" id=".service_locator.c.HjG1v"/>
+        <argument key="App\Controller\FigureController::print" type="service_closure" id=".service_locator.sSTSXrh"/>
+        <argument key="App\Controller\FigureController::suppressionFigure" type="service_closure" id=".service_locator.xDZ9wKP"/>
         <argument key="App\Controller\ForgetPasswordController::editPassword" type="service_closure" id=".service_locator.vjetzzK"/>
         <argument key="App\Controller\ForgetPasswordController::index" type="service_closure" id=".service_locator.8YhWmfT"/>
+        <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.u8tOvUF"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.6DYySdB"/>
         <argument key="App\Controller\RegistrationController::verification" type="service_closure" id=".service_locator.ozsNm6Q"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -6729,14 +6742,15 @@
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Controller\AdministrationController:index" type="service_closure" id=".service_locator.YgYapZ6"/>
         <argument key="App\Controller\AuthenticatorController:login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\FigureController:creationFigure" type="service_closure" id=".service_locator.8JYXY.m"/>
-        <argument key="App\Controller\FigureController:editionFigure" type="service_closure" id=".service_locator.n.cOGxu"/>
-        <argument key="App\Controller\FigureController:index" type="service_closure" id=".service_locator.hIklMnt"/>
-        <argument key="App\Controller\FigureController:liste" type="service_closure" id=".service_locator.sSTSXrh"/>
+        <argument key="App\Controller\FigureController:creationFigure" type="service_closure" id=".service_locator.sMm5VD0"/>
+        <argument key="App\Controller\FigureController:editionFigure" type="service_closure" id=".service_locator.00tNKoW"/>
+        <argument key="App\Controller\FigureController:liste" type="service_closure" id=".service_locator.hIklMnt"/>
         <argument key="App\Controller\FigureController:message" type="service_closure" id=".service_locator.cA2yfBT"/>
-        <argument key="App\Controller\FigureController:suppressionFigure" type="service_closure" id=".service_locator.c.HjG1v"/>
+        <argument key="App\Controller\FigureController:print" type="service_closure" id=".service_locator.sSTSXrh"/>
+        <argument key="App\Controller\FigureController:suppressionFigure" type="service_closure" id=".service_locator.xDZ9wKP"/>
         <argument key="App\Controller\ForgetPasswordController:editPassword" type="service_closure" id=".service_locator.vjetzzK"/>
         <argument key="App\Controller\ForgetPasswordController:index" type="service_closure" id=".service_locator.8YhWmfT"/>
+        <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.u8tOvUF"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.6DYySdB"/>
         <argument key="App\Controller\RegistrationController:verification" type="service_closure" id=".service_locator.ozsNm6Q"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -7014,14 +7028,12 @@
         <argument key="doctrine.orm.messenger.doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_subscriber"/>
       </argument>
     </service>
-    <service id=".service_locator.Jn6Gcc3" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.GVDu_NP" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\FigureRepository" type="service_closure" id="App\Repository\FigureRepository"/>
         <argument key="App\Repository\MessageRepository" type="service_closure" id="App\Repository\MessageRepository"/>
-        <argument key="App\Repository\PhotoFigureRepository" type="service_closure" id="App\Repository\PhotoFigureRepository"/>
         <argument key="App\Repository\UtilisateurRepository" type="service_closure" id="App\Repository\UtilisateurRepository"/>
-        <argument key="App\Repository\VideoFigureRepository" type="service_closure" id="App\Repository\VideoFigureRepository"/>
       </argument>
     </service>
     <service id=".service_locator.KLVvNIq" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7599,12 +7611,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.VILevtP"/>
+      <argument type="service" id=".service_locator.eXNuVfD"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.VILevtP"/>
+      <argument type="service" id=".service_locator.eXNuVfD"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8570,7 +8582,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.VILevtP"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.eXNuVfD"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8593,13 +8605,13 @@
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
     <service id=".service_locator.UHuvhWu" alias=".service_locator.hIklMnt"/>
     <service id=".service_locator.3VNHCl_" alias=".service_locator.cA2yfBT"/>
-    <service id=".service_locator.6ASuJ9S" alias=".service_locator.c.HjG1v"/>
-    <service id=".service_locator.ZtvbZ20" alias=".service_locator.n.cOGxu"/>
-    <service id=".service_locator.Fgfqy3N" alias=".service_locator.8JYXY.m"/>
+    <service id=".service_locator.PYQV3kM" alias=".service_locator.xDZ9wKP"/>
+    <service id=".service_locator.pziUXzv" alias=".service_locator.00tNKoW"/>
+    <service id=".service_locator.vmt2h64" alias=".service_locator.sMm5VD0"/>
     <service id=".service_locator.XudNM_b" alias=".service_locator.vjetzzK"/>
     <service id=".service_locator.xcLLsDd" alias=".service_locator.6DYySdB"/>
     <service id=".service_locator.MFrKG0n" alias=".service_locator.ozsNm6Q"/>
-    <service id=".service_locator.0SXK0K6" alias=".service_locator.VILevtP"/>
+    <service id=".service_locator.ahotzrP" alias=".service_locator.eXNuVfD"/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
     <service id=".service_locator.eMCYbjD" alias=".service_locator.j0dZlcL"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
@@ -8655,11 +8667,12 @@
     <service id=".service_locator.bxtX4OC" alias=".service_locator.hIklMnt"/>
     <service id=".service_locator.sIYF.Ku" alias=".service_locator.sSTSXrh"/>
     <service id=".service_locator.SqQ5qdu" alias=".service_locator.cA2yfBT"/>
-    <service id=".service_locator.mKmmruO" alias=".service_locator.c.HjG1v"/>
-    <service id=".service_locator.MB8vry0" alias=".service_locator.n.cOGxu"/>
-    <service id=".service_locator.OBJDmIo" alias=".service_locator.8JYXY.m"/>
+    <service id=".service_locator.FvS6NnQ" alias=".service_locator.xDZ9wKP"/>
+    <service id=".service_locator.P8S0dPZ" alias=".service_locator.00tNKoW"/>
+    <service id=".service_locator.8fvXuqf" alias=".service_locator.sMm5VD0"/>
     <service id=".service_locator.btPg0cP" alias=".service_locator.8YhWmfT"/>
     <service id=".service_locator.ekQhsBw" alias=".service_locator.vjetzzK"/>
+    <service id=".service_locator.geiC2LE" alias=".service_locator.u8tOvUF"/>
     <service id=".service_locator.hZI2fBl" alias=".service_locator.6DYySdB"/>
     <service id=".service_locator.bLNTNT9" alias=".service_locator.ozsNm6Q"/>
     <service id=".service_locator.Kyflpr1" alias=".service_locator.CshazM0"/>
