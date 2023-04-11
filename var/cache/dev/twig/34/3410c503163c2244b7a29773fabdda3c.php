@@ -108,6 +108,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                 <td class=\"fst-italic text-light\">\"La passion du Snowboard\"</td>
             </tr>
         </table>
+        
     </div>
 ";
         
@@ -118,7 +119,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 24
+    // line 25
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -128,10 +129,23 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 25
-        echo "        ";
-        if (((isset($context["isAdmin"]) || array_key_exists("isAdmin", $context) ? $context["isAdmin"] : (function () { throw new RuntimeError('Variable "isAdmin" does not exist.', 25, $this->source); })()) == true)) {
-            // line 26
+        // line 26
+        echo "        <div class=\"mb-3 mt-3 d-flex justify-content-end\">
+            <a href=\"#bottom-buton\">
+                <svg id=\"top-button\" width=\"18\" height=\"30\">
+                    <defs>
+                        <marker id=\"arrow\" viewBox=\"0 -5 10 10\" refX=\"5\" refY=\"0\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\">
+                            <path class=\"cool\" d=\"M0,-5L10,0L0,5\" class=\"arrowHead\"></path>
+                        </marker>
+                    </defs>
+                    <line class=\"cool\" x1=\"9\" y1=\"0\" x2=\"9\" y2=\"20\" stroke=\"teal\" stroke-width=\"4\" marker-end=\"url(#arrow)\"></line>
+                </svg>
+            </a>
+        </div>
+        ";
+        // line 38
+        if (((isset($context["isAdmin"]) || array_key_exists("isAdmin", $context) ? $context["isAdmin"] : (function () { throw new RuntimeError('Variable "isAdmin" does not exist.', 38, $this->source); })()) == true)) {
+            // line 39
             echo "            <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_creation_figure");
             echo "\">
@@ -156,7 +170,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
             </div>
         ";
         }
-        // line 47
+        // line 60
         echo "    <div id='tricks-card-list' class=\"my-5 row row-cols-1 row-cols-md-2 g-4\">
     </div>    
     <div class=\"clear\">
@@ -165,6 +179,18 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                 Load more
             </button>
         </div>
+    </div>
+    <div class=\"mb-3 mt-3 d-flex justify-content-end\">
+        <a href=\"#top-button\">
+            <svg id=\"bottom-button\" width=\"18\" height=\"30\">
+                <defs>
+                    <marker id=\"arrow\" viewBox=\"0 -5 10 10\" refX=\"5\" refY=\"0\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\">
+                    <path class=\"cool\" d=\"M0,-5L10,0L0,5\" class=\"arrowHead\"></path>
+                    </marker>
+                </defs>
+                <line class=\"cool\" x1=\"9\" y1=\"30\" x2=\"9\" y2=\"8\" stroke=\"teal\" stroke-width=\"4\" marker-end=\"url(#arrow)\"></line>
+            </svg>
+        </a>
     </div>
 ";
         
@@ -175,7 +201,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 57
+    // line 82
     public function block_perso_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -185,14 +211,14 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
 
-        // line 58
+        // line 83
         echo "
     <script src=\"";
-        // line 59
+        // line 84
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Figure/confirm_delete.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 60
+        // line 85
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Figure/load.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -204,7 +230,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     }
 
-    // line 62
+    // line 87
     public function block_perso_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -214,10 +240,16 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
 
-        // line 63
+        // line 88
         echo "    <link rel=\"stylesheet\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/home/index.css"), "html", null, true);
         echo "\" />
+    <style>
+  .cool {
+        fill: teal;
+        stroke: teal;
+    }
+</style>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -239,7 +271,7 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 
     public function getDebugInfo()
     {
-        return array (  218 => 63,  208 => 62,  196 => 60,  192 => 59,  189 => 58,  179 => 57,  160 => 47,  135 => 26,  132 => 25,  122 => 24,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
+        return array (  244 => 88,  234 => 87,  222 => 85,  218 => 84,  215 => 83,  205 => 82,  174 => 60,  149 => 39,  147 => 38,  133 => 26,  123 => 25,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
     }
 
     public function getSourceContext()
@@ -265,9 +297,22 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
                 <td class=\"fst-italic text-light\">\"La passion du Snowboard\"</td>
             </tr>
         </table>
+        
     </div>
 {% endblock %}
 {% block body %}
+        <div class=\"mb-3 mt-3 d-flex justify-content-end\">
+            <a href=\"#bottom-buton\">
+                <svg id=\"top-button\" width=\"18\" height=\"30\">
+                    <defs>
+                        <marker id=\"arrow\" viewBox=\"0 -5 10 10\" refX=\"5\" refY=\"0\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\">
+                            <path class=\"cool\" d=\"M0,-5L10,0L0,5\" class=\"arrowHead\"></path>
+                        </marker>
+                    </defs>
+                    <line class=\"cool\" x1=\"9\" y1=\"0\" x2=\"9\" y2=\"20\" stroke=\"teal\" stroke-width=\"4\" marker-end=\"url(#arrow)\"></line>
+                </svg>
+            </a>
+        </div>
         {% if isAdmin == true %}
             <a href=\"{{ path('app_creation_figure') }}\">
                 <button class=\"btn btn-success\"> Ajouter </button>
@@ -299,6 +344,18 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
             </button>
         </div>
     </div>
+    <div class=\"mb-3 mt-3 d-flex justify-content-end\">
+        <a href=\"#top-button\">
+            <svg id=\"bottom-button\" width=\"18\" height=\"30\">
+                <defs>
+                    <marker id=\"arrow\" viewBox=\"0 -5 10 10\" refX=\"5\" refY=\"0\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\">
+                    <path class=\"cool\" d=\"M0,-5L10,0L0,5\" class=\"arrowHead\"></path>
+                    </marker>
+                </defs>
+                <line class=\"cool\" x1=\"9\" y1=\"30\" x2=\"9\" y2=\"8\" stroke=\"teal\" stroke-width=\"4\" marker-end=\"url(#arrow)\"></line>
+            </svg>
+        </a>
+    </div>
 {% endblock %}
 {% block perso_javascripts %}
 
@@ -307,6 +364,12 @@ class __TwigTemplate_c2f121f355bcc22bd47ee2e1ee3e15c9 extends Template
 {% endblock %}
 {% block perso_stylesheets %}
     <link rel=\"stylesheet\" href=\"{{ asset('css/home/index.css') }}\" />
+    <style>
+  .cool {
+        fill: teal;
+        stroke: teal;
+    }
+</style>
 {% endblock %}", "home/index.html.twig", "C:\\wamp64\\www\\Projet_OC6\\templates\\home\\index.html.twig");
     }
 }

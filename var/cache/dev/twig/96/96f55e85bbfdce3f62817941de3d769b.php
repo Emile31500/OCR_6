@@ -86,7 +86,7 @@ class __TwigTemplate_fb29d07ca9c0a13f628011abb6432cb1 extends Template
 
         // line 6
         echo "<form method=\"post\">
-    <h1 class=\"h3 mb-3 font-weight-normal\">Please sign in</h1>
+    <h2 class=\"mt-5 mb-5 h3 font-weight-normal\">Connexion : </h2>
     <p>
         <label for=\"inputEmail\">Email : </label>
         <input type=\"email\" value=\"";
@@ -162,7 +162,7 @@ class __TwigTemplate_fb29d07ca9c0a13f628011abb6432cb1 extends Template
 
 {% block body %}
 <form method=\"post\">
-    <h1 class=\"h3 mb-3 font-weight-normal\">Please sign in</h1>
+    <h2 class=\"mt-5 mb-5 h3 font-weight-normal\">Connexion : </h2>
     <p>
         <label for=\"inputEmail\">Email : </label>
         <input type=\"email\" value=\"{{ last_username }}\" name=\"email\" id=\"inputEmail\" class=\"form-control\" autocomplete=\"email\" required autofocus>

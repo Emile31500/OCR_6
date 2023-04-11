@@ -86,7 +86,7 @@ class __TwigTemplate_a48b359646ab2af2c0e20d43dab3b1d2 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <h2 class=\"header-body-element\"> ";
+        echo "    <h2 class=\"mb-5 mt-5 header-body-element\"> ";
         echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 6, $this->source); })()), "html", null, true);
         echo "</h2>
 
@@ -182,7 +182,7 @@ class __TwigTemplate_a48b359646ab2af2c0e20d43dab3b1d2 extends Template
 {% block title %} {{ controller_name }}{% endblock %}
 
 {% block body %}
-    <h2 class=\"header-body-element\"> {{ controller_name }}</h2>
+    <h2 class=\"mb-5 mt-5 header-body-element\"> {{ controller_name }}</h2>
 
     {{ form_start(registrationForm) }}
         <p>

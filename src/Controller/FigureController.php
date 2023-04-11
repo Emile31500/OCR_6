@@ -2,26 +2,27 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Figure;
+use DateTimeInterface;
+use App\Entity\Message;
+use App\Form\MessageType;
+use App\Form\EditionFigureType;
+use App\Form\CreationFigureType;
 use App\Repository\FigureRepository;
 use App\Repository\MessageRepository;
-use App\Form\CreationFigureType;
-use App\Form\EditionFigureType;
-use App\Form\MessageType;
-use Symfony\Component\HttpFoundation\File\File;
-use App\Entity\Figure;
-use App\Entity\Message;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use DateTimeInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 class FigureController extends AbstractController
@@ -78,7 +79,7 @@ class FigureController extends AbstractController
     }
 
     #[Route('/message/{slug}', name: 'app_message')]
-    public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, string $slug){
+    public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, string $slug) : JsonResponse {
 
         $figure = $figureRepository->findOneBySlug($slug);
         $messages_obj = $messageRepo->findByFigure($figure->getId());
@@ -96,22 +97,18 @@ class FigureController extends AbstractController
 
         } 
 
-        header("Content-Type: application/json");
-        echo(json_encode($message));
-        die;
+        return new JsonResponse($message);
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure')]
-    public function suppressionFigure(FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, string $slug){
+    public function suppressionFigure(FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, string $slug) : JsonResponse{
 
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
             $figure = $figureRepo->findOneBySlug($slug);
             $figureRepo->remove($figure, true);
-
-            header("Content-Type: applciation/json");
-            echo json_encode(["status" => true]);
-            die;
+            
+            return new JsonResponse(["status" => true]);
 
         }
 
@@ -167,7 +164,6 @@ class FigureController extends AbstractController
                         // handle exception
                     }
 
-                    // persist the new filename to the database or do whatever you want with it
                     $figure->setImageUrl($newFilename);
                 }
 
@@ -226,8 +222,7 @@ class FigureController extends AbstractController
                     } catch (FileException $e) {
                         // handle exception
                     }
-
-                    // persist the new filename to the database or do whatever you want with it
+                    
                     $nom = $form->get('nom')->getData();
                     $slug = str_replace(' ', '-', $nom);
                     $slug = strtolower($slug);

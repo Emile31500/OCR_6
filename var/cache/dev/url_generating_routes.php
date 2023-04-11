@@ -19,6 +19,7 @@ return [
     'app_administration' => [[], ['_controller' => 'App\\Controller\\AdministrationController::index'], [], [['text', '/administration']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::login'], [], [['text', '/connexion']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::logout'], [], [['text', '/logout']], [], [], []],
+    'app_404' => [[], ['_controller' => 'App\\Controller\\ErrorController::error404'], [], [['text', '/404']], [], [], []],
     'app_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::liste'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure']], [], [], []],
     'app_figure_liste' => [['max_result'], ['_controller' => 'App\\Controller\\FigureController::print'], [], [['variable', '/', '[^/]++', 'max_result', true], ['text', '/figure/liste']], [], [], []],
     'app_message' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::message'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/message']], [], [], []],
@@ -30,4 +31,5 @@ return [
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/inscription']], [], [], []],
     'app_verif_email' => [['code_verification'], ['_controller' => 'App\\Controller\\RegistrationController::verification'], [], [['variable', '/', '[^/]++', 'code_verification', true], ['text', '/verifier-email']], [], [], []],
+    'error404' => [['wildcard'], ['_controller' => 'App\\Controller\\ErrorController::error404'], ['wildcard' => '.*'], [['variable', '/', '.*', 'wildcard', true]], [], [], []],
 ];
