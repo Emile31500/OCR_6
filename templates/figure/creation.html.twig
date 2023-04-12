@@ -3,13 +3,13 @@
 {% block title %}Hello AdministrationController!{% endblock %}
 
 {% block body %}
-<h2> {{ controller_name }}</h2>
- {{ form_start(form) }}
+<h2 class="mb-5 mt-5"> {{ controller_name }}</h2>
+{{ form_start(form) }}
     <p>
         {{ form_row(form.nom) }}
     </p>
     <p>
-        {{ form_row(form.photo) }}
+        {{ form_row(form.imageUrl) }}
     </p>
     <p>
         {{ form_row(form.article) }}
@@ -17,5 +17,15 @@
     <p>
         {{ form_row(form.submit) }}
     </p>
+    {% if error is defined %}
+        <p class="alert alert-danger">
+            {{ error }}
+        </p>
+    {% elseif success is defined %}
+        <p class="alert alert-success">
+            {{ success }}
+        </p>
+    {% endif %}
  {{ form_end(form) }}
+
 {% endblock %}

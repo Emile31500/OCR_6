@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -198,16 +199,19 @@ class FigureController extends AbstractController
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
             $figure = new Figure();
-            $form = $this->createForm(CreationFigureType::class, [], ['data' => [
-                                                                            'isFormEdit' => true,
-                                                                            'nom' => '',
-                                                                            'article' => ''
-                                                                        ]]);
+            $figure->setNom('');
+            $figure->setArticle('');
+
+            $form = $this->createForm(CreationFigureType::class, $figure);
+            // , ['data' => [
+            //                                                                 'isFormEdit' => true,
+            //                                                               ]]);
+            
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 
-                $imageFile = $form->get('photo')->getData();
+                $imageFile = $form->get('imageUrl')->getData();
 
                 if ($imageFile) {
 
@@ -223,25 +227,40 @@ class FigureController extends AbstractController
                         // handle exception
                     }
                     
-                    $nom = $form->get('nom')->getData();
-                    $slug = str_replace(' ', '-', $nom);
+                    $slug = str_replace(' ', '-', $form->get('nom')->getData());
                     $slug = strtolower($slug);
-                    $article = $form->get('article')->getData();
-        
-                    $figure->setImageUrl($newFilename);
-                    $figure->setNom($nom);
+
                     $figure->setSlug($slug);
-                    $figure->setArticle($article);
-        
-                    $manager->persist($figure);
-                    $manager->flush();
+                    $figure->setImageUrl($newFilename);
+                    
+                    $figure = $form->getData();
+                    
+                    try {
+
+                        $manager->persist($figure);
+                        $manager->flush();
+
+                        return $this->render('figure/creation.html.twig', [
+                            'controller_name' => "Création d'une figure",   
+                            'success' => "Figure enregistrée ",
+                            'form' => $form
+                        ]);
+
+                    } catch (UniqueConstraintViolationException $e) {
+                        
+                        return $this->render('figure/creation.html.twig', [
+                            'controller_name' => "Création d'une figure",
+                            'error' => "Attention : il y a un duplicata sur un des champs ! ",
+                            'form' => $form
+                        ]);
+                    }
 
                 }
             }
 
             return $this->render('figure/creation.html.twig', [
                 'controller_name' => "Création d'une figure",
-                "form" => $form->createView()
+                'form' => $form
             ]);
 
         } else {
