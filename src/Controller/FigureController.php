@@ -132,21 +132,14 @@ class FigureController extends AbstractController
 
             $oldFigure = $figureRepo->findOneBySlug($slug);
             $figure = $oldFigure;
-            $form = $this->createForm(CreationFigureType::class, [], [
-                'data' => [
-                    'isFormEdit' => true,
-                    'nom' => $figure->getNom(),
-                    'article' => $figure->getArticle()
-                    ]
-            ]);
+            $form = $this->createForm(CreationFigureType::class, $figure);
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
-            
-                $nom = $form->get('nom')->getData();
-                $slug = str_replace(' ', '-', $nom);
+                
+                $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
-                $article = $form->get('article')->getData();
+                $figure = $form->getData();
 
                 $imgPath = 'media/img/figures/'.$figure->getImageUrl();
                 $imgDefault = new File($imgPath);
@@ -169,10 +162,8 @@ class FigureController extends AbstractController
                 }
 
                 $session->set('slug', $slug);
-                
-                $figure->setNom($nom);
+
                 $figure->setSlug($slug);
-                $figure->setArticle($article);
                 $figureRepo->save($figure, true);
            
             }
@@ -203,10 +194,6 @@ class FigureController extends AbstractController
             $figure->setArticle('');
 
             $form = $this->createForm(CreationFigureType::class, $figure);
-            // , ['data' => [
-            //                                                                 'isFormEdit' => true,
-            //                                                               ]]);
-            
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
