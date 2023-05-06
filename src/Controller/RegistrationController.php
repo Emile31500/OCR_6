@@ -24,7 +24,7 @@ use DateTime;
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, EntityManagerInterface $entityManager, MailerInterface $mailerInterface): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, EntityManagerInterface $entityManager, MailerInterface $mailerInterface, UtilisateurRepository $utilisateurRepo): Response
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -41,7 +41,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $mailer = new verificationUtilisateurMailer($this->mailerInterface, $this->utilisateurRepo);
+            $mailer = new verificationUtilisateurMailer($mailerInterface, $utilisateurRepo);
             $mailer->sendVerificationLink($user);
 
             return $this->render('registration/verification_email.html.twig',  
@@ -85,7 +85,7 @@ class RegistrationController extends AbstractController
 
             } else {
 
-                $mailer = new verificationUtilisateurMailer($this->mailerInterface, $this->utilisateurRepo);
+                $mailer = new verificationUtilisateurMailer($mailerInterface, $utilisateurRepo);
                 $mailer->sendVerificationLink($user);
 
                 return $this->render('registration/verification_email.html.twig',  
