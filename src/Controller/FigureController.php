@@ -113,12 +113,13 @@ class FigureController extends AbstractController
 
         }
 
-        header('location: /');
+        return new JsonResponse(["status" => false]);
 
     }
     
     #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
-    public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo){
+    public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo) : Response
+    {
         
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
@@ -177,14 +178,16 @@ class FigureController extends AbstractController
 
         } else {
 
-            header("location: /");
-
+            return $this->render('home/index.html.twig', [
+                'controller_name' => 'Home',
+                'isAdmin' => false
+            ]);
 
         }
     }
     
     #[Route('/creation-figure', name: 'app_creation_figure')]
-    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker)  : ?Response 
+    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker)  : Response 
     {
 
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
@@ -252,9 +255,11 @@ class FigureController extends AbstractController
 
         } else {
 
-            header("location: /");
-
-
+            return $this->render('home/index.html.twig', [
+                'controller_name' => 'Home',
+                'isAdmin' => false
+            ]);
+            
         }
     }
 }
