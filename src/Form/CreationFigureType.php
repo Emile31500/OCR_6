@@ -84,6 +84,5 @@ class CreationFigureType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Figure::class,
         ]);
-        //$resolver->setAllowedTypes('data', 'array');
     }
 }

@@ -15,8 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Mailer\MailerInterface;
-// use Symfony\Component\Mime\Address;
-// use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use App\Mail\verificationUtilisateurMailer;
 use DateTime;
 
@@ -47,7 +45,10 @@ class RegistrationController extends AbstractController
             return $this->render('registration/verification_email.html.twig',  
                 [
                     'controller_name' => 'Vérification de l\' email',
-                    'message' => '<b>Information :</b><br> Pour pouvoir vous authentifier, cliquez sur lien envoyé par email pour vérifier votre compte.',
+                    'message' => [
+                        'header' => 'Information',
+                        'body' => 'Pour pouvoir vous authentifier, cliquez sur lien envoyé par email pour vérifier votre compte.'
+                    ],
                     'message_tyle' => 'warning'
                     
                 ]);
@@ -91,7 +92,10 @@ class RegistrationController extends AbstractController
                 return $this->render('registration/verification_email.html.twig',  
                 [
                     'controller_name' => 'Vérification de l\' email',
-                    'message' => '<b>Attention :</b><br> La date limite pour confirmer votre email a été dépassé. Un nouvelle eMail vous a été envoyé à votre addresse mail.',
+                    'message' => [
+                        'header' => 'Attention',
+                        'body' => 'La date limite pour confirmer votre email a été dépassé. Un nouvelle eMail vous a été envoyé à votre addresse mail.'
+                    ],
                     'message_tyle' => 'warning'
                     
                 ]);
@@ -104,7 +108,10 @@ class RegistrationController extends AbstractController
             return $this->render('registration/verification_email.html.twig',  
                 [
                     'controller_name' => 'Vérification de l\' email',
-                    'message' => '<b>Echec :</b><br> Aucun utilisateur n\' a été trouvé par ce lien. Vérifiez que l\'url de vérification est conforme à celle que SnowTricks vous a envoyé.',
+                    'message' => [
+                        'header' => 'Echec',
+                        'body' => 'Aucun utilisateur n\' a été trouvé par ce lien. Vérifiez que l\'url de vérification est conforme à celle que SnowTricks vous a envoyé.'
+                    ],
                     'message_tyle' => 'danger'
                     
                 ]);
