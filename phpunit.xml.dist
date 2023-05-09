@@ -21,8 +21,17 @@
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
         </testsuite>
+    </testsuites>
+
+    <testsuites>
         <testsuite name="Symfony Translation Contracts Tests">
             <directory>./vendor/symfony/translation-contracts/Test</directory>
+        </testsuite>
+    </testsuites>
+    
+    <testsuites>
+        <testsuite name="Twig tests">
+            <directory>.vendor/twig/twig/src/Node/Expression/Test/</directory>
         </testsuite>
     </testsuites>
 
