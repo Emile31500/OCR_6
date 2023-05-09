@@ -13,7 +13,7 @@ Class verificationUtilisateurMailer {
 
     public  const FROM = 'email00013@gmail.com';
 
-    public function __Construct(MailerInterface $mailerInterface,   $utilisateurRepo) {
+    public function __Construct(MailerInterface $mailerInterface, UtilisateurRepository $utilisateurRepo) {
 
         $this->from = self::FROM;
         $this->mailerInterface = $mailerInterface;

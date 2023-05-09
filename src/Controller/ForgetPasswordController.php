@@ -31,15 +31,16 @@ class ForgetPasswordController extends AbstractController
             $response = $form->getData();
             $utilisateur = $UtilisateurRepository->findOneBySomeField('email', $response['email']);
 
-            if ($utilisateur != null){
+            if ($utilisateur !== null){
                 
                 $now = new \DateTime();
                 $dateLimit = $now->modify('+1 day');
                 
-                $codeRecup = random_bytes(64);
+                $codeRecup = hash("sha256", random_bytes(64));
 
                 $utilisateur->setCodeRecup($codeRecup);
                 $utilisateur->setRecupDate($dateLimit);
+
                 $UtilisateurRepository->save($utilisateur, true);
 
                 $email = (new TemplatedEmail())
@@ -68,7 +69,7 @@ class ForgetPasswordController extends AbstractController
     {
 
         $utilisateur = $utilisateurRepository->findOneBySomeField('codeRecup', $code_recup);
-        if ($utilisateur != null) {
+        if ($utilisateur !== null) {
             
             $date_recup = $utilisateur->getRecupDate();
             $now = new \DateTime();

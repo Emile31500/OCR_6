@@ -60,7 +60,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
 //    /**
 //     * @return Utilisateur[] Returns an array of Utilisateur objects
 //     */
-    public function findByEmail($value): array
+    public function findByEmail(string $value): array
     {
         $result = $this->createQueryBuilder('u')
             ->andWhere('u.email = :val')
@@ -99,7 +99,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         return $result;
     }
 
-   public function findOneBySomeField($selector, $value): ?Utilisateur
+   public function findOneBySomeField(string $selector, mixed $value): ?Utilisateur
    {
        return $this->createQueryBuilder('u')
            ->andWhere('u.'.$selector.'=:val')

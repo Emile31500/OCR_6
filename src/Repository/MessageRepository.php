@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use App\Entity\Figure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -42,7 +43,7 @@ class MessageRepository extends ServiceEntityRepository
 //    /**
 //     * @return Message[] Returns an array of Message objects
 //     */
-    public function findByFigure($value): array
+    public function findByFigure(int $value): array
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.figure = :val')

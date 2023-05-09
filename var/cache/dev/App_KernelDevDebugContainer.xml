@@ -418,7 +418,10 @@
     <service id="App\Form\SendPasswordRecuperationCodeType" class="App\Form\SendPasswordRecuperationCodeType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Mail\verificationUtilisateurMailer" class="App\Mail\verificationUtilisateurMailer" autowire="true" autoconfigure="true"/>
+    <service id="App\Mail\verificationUtilisateurMailer" class="App\Mail\verificationUtilisateurMailer" autowire="true" autoconfigure="true">
+      <argument type="service" id="mailer.mailer"/>
+      <argument type="service" id="App\Repository\UtilisateurRepository"/>
+    </service>
     <service id="App\Repository\FigureRepository" class="App\Repository\FigureRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
