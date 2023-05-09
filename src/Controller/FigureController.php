@@ -37,12 +37,12 @@ class FigureController extends AbstractController
 
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
-        
         $user = $this->getUser();
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid() && isset($user)) {
             
             $message->setUtilisateur($user);
+            $message->setDate(new \DateTime());
             $message->setMessage($form->get('message')->getData());    
             $message->setFigure($figure);
 
@@ -59,7 +59,7 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure/liste/{max_result}', name: 'app_figure_liste')]
-    public function print (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository)
+    public function print (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository) : Response
     {
         $figures = $figureRepository->findPublished($max_result);
         if($authorizationChecker->isGranted('ROLE_ADMIN')) {
@@ -114,7 +114,6 @@ class FigureController extends AbstractController
         }
 
         header('location: /');
-        die;
 
     }
     
@@ -179,13 +178,14 @@ class FigureController extends AbstractController
         } else {
 
             header("location: /");
-            die;
+
 
         }
     }
     
     #[Route('/creation-figure', name: 'app_creation_figure')]
-    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker){
+    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker)  : ?Response 
+    {
 
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
@@ -253,7 +253,7 @@ class FigureController extends AbstractController
         } else {
 
             header("location: /");
-            die;
+
 
         }
     }

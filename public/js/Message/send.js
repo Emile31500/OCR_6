@@ -10,8 +10,10 @@ message_form.addEventListener('submit', function(event){
     let data = new FormData(this);
 
     let response = fetch(url, {
+
         method: 'POST',
         body: data
+
     }).then(function(response) {
         if (response.ok) {
             right_message.value = '';
