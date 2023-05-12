@@ -79,7 +79,7 @@ class FigureController extends AbstractController
 
     }
 
-    #[Route('/message/{slug}', name: 'app_message')]
+    #[Route('/message/{slug}', name: 'app_message', methods: ['GET'])]
     public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, string $slug) : JsonResponse {
 
         $figure = $figureRepository->findOneBySlug($slug);
