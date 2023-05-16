@@ -220,7 +220,7 @@ return [
     'App\\Form\\MessageType' => true,
     'App\\Form\\RegistrationFormType' => true,
     'App\\Form\\SendPasswordRecuperationCodeType' => true,
-    'App\\Mail\\verificationUtilisateurMailer' => true,
+    'App\\Mail\\VerificationUtilisateurMailer' => true,
     'App\\Repository\\FigureRepository' => true,
     'App\\Repository\\MessageRepository' => true,
     'App\\Repository\\UtilisateurRepository' => true,

@@ -15,13 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use App\Mail\verificationUtilisateurMailer;
+use App\Mail\VerificationUtilisateurMailer;
 use DateTime;
 
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/inscription', name: 'app_register')]
+    #[Route('/inscription', name: 'app_register', methods:['POST'])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, EntityManagerInterface $entityManager, MailerInterface $mailerInterface, UtilisateurRepository $utilisateurRepo): Response
     {
         $user = new Utilisateur();
@@ -39,7 +39,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $mailer = new verificationUtilisateurMailer($mailerInterface, $utilisateurRepo);
+            $mailer = new VerificationUtilisateurMailer($mailerInterface, $utilisateurRepo);
             $mailer->sendVerificationLink($user);
 
             return $this->render('registration/verification_email.html.twig',  
@@ -62,7 +62,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verifier-email/{code_verification}', name: 'app_verif_email')]
+    #[Route('/verifier-email/{code_verification}', name: 'app_verif_email', get: ["GET"])]
     public function verification(string $code_verification, UtilisateurRepository $utilisateurRepo, UserAuthenticatorInterface $userAuthenticator, Authenticator $authenticator, Request $request, MailerInterface $mailerInterface): response
     {
         $utilisateur = $utilisateurRepo->findByVerifcode($code_verification);
@@ -86,7 +86,7 @@ class RegistrationController extends AbstractController
 
             } else {
 
-                $mailer = new verificationUtilisateurMailer($mailerInterface, $utilisateurRepo);
+                $mailer = new VerificationUtilisateurMailer($mailerInterface, $utilisateurRepo);
                 $mailer->sendVerificationLink($user);
 
                 return $this->render('registration/verification_email.html.twig',  

@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home', methods:['GET'])]
     public function index(AuthorizationCheckerInterface $authorizationChecker): Response
     {
 

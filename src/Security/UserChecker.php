@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Exception\AccountExpiredException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Mail\verificationUtilisateurMailer;
+use App\Mail\VerificationUtilisateurMailer;
 use Symfony\Component\Mailer\MailerInterface;
 use DateTime;
 
@@ -29,7 +29,7 @@ class UserChecker implements UserCheckerInterface
 
         if ($user->isVerified() === false) {
 
-            $mailer = new verificationUtilisateurMailer($this->mailerInterface, $this->utilisateurRepo);
+            $mailer = new VerificationUtilisateurMailer($this->mailerInterface, $this->utilisateurRepo);
             $mailer->sendVerificationLink($user);
 
             throw new CustomUserMessageAccountStatusException('Votre compte n\'est pas vérifié. Un email vous a été envoyé pour activer votre compte');

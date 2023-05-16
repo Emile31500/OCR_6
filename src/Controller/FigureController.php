@@ -101,7 +101,7 @@ class FigureController extends AbstractController
         return new JsonResponse($message);
     }
 
-    #[Route('/figure-suppression/{slug}', name: 'app_supression_figure')]
+    #[Route('/figure-suppression/{slug}', name: 'app_supression_figure', methods:['DELETE'])]
     public function suppressionFigure(FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, string $slug) : JsonResponse{
 
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
@@ -117,7 +117,7 @@ class FigureController extends AbstractController
 
     }
     
-    #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
+    #[Route('/edition-figure/{slug}', name: 'app_edition_figure', methods:['PUT'])]
     public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo) : Response
     {
         
@@ -186,7 +186,7 @@ class FigureController extends AbstractController
         }
     }
     
-    #[Route('/creation-figure', name: 'app_creation_figure')]
+    #[Route('/creation-figure', name: 'app_creation_figure', methods:['POST'])]
     public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker)  : Response 
     {
 

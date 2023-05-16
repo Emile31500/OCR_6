@@ -9,7 +9,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 
-Class verificationUtilisateurMailer {
+class VerificationUtilisateurMailer {
 
     public  const FROM = 'email00013@gmail.com';
 

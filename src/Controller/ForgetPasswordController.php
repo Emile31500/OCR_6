@@ -20,7 +20,7 @@ use DateTime;
 
 class ForgetPasswordController extends AbstractController
 {
-    #[Route('/recuperation-mot-de-passe', name: 'app_forget_password')]
+    #[Route('/recuperation-mot-de-passe', name: 'app_forget_password', methods:['GET'])]
     public function index(Request $request, UtilisateurRepository $UtilisateurRepository, MailerInterface $mailer): Response
     {
         $form = $this->createForm(SendPasswordRecuperationCodeType::class);
@@ -64,7 +64,7 @@ class ForgetPasswordController extends AbstractController
         ]);
     }
 
-    #[Route('/modifier-le-mot-de-passe/{code_recup}', name: 'app_edit_password')]
+    #[Route('/modifier-le-mot-de-passe/{code_recup}', name: 'app_edit_password', methods:['POST'])]
     public function editPassword(string $code_recup, UtilisateurRepository $utilisateurRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) : response
     {
 
