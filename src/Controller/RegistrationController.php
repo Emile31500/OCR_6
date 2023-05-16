@@ -62,7 +62,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verifier-email/{code_verification}', name: 'app_verif_email', get: ["GET"])]
+    #[Route('/verifier-email/{code_verification}', name: 'app_verif_email', methods:['GET'])]
     public function verification(string $code_verification, UtilisateurRepository $utilisateurRepo, UserAuthenticatorInterface $userAuthenticator, Authenticator $authenticator, Request $request, MailerInterface $mailerInterface): response
     {
         $utilisateur = $utilisateurRepo->findByVerifcode($code_verification);
