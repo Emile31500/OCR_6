@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class FigureController extends AbstractController
 {
 
-    #[Route('/figure/{slug}', name: 'app_figure')]
+    #[Route('/figure/{slug}', name: 'app_figure', methods:['GET'])]
     public function liste(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
         $message = new Message();
@@ -58,7 +58,7 @@ class FigureController extends AbstractController
         ]);
     }
 
-    #[Route('/figure/liste/{max_result}', name: 'app_figure_liste')]
+    #[Route('/figure/liste/{max_result}', name: 'app_figure_liste', methods:['GET'])]
     public function print (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository) : Response
     {
         $figures = $figureRepository->findPublished($max_result);

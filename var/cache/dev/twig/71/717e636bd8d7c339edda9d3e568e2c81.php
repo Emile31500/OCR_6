@@ -59,7 +59,8 @@ class __TwigTemplate_c1c299d112c275f3c3796128dcf47395 extends Template
         </a>
         <br>Antetion ! Ce lien expirera sous 24 heures. Votre compte sera automatiquement supprimé après ce délais.
     </p> 
-</body>";
+</body>
+";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -98,6 +99,7 @@ class __TwigTemplate_c1c299d112c275f3c3796128dcf47395 extends Template
         </a>
         <br>Antetion ! Ce lien expirera sous 24 heures. Votre compte sera automatiquement supprimé après ce délais.
     </p> 
-</body>", "mail/verified_email.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/mail/verified_email.html.twig");
+</body>
+", "mail/verified_email.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/mail/verified_email.html.twig");
     }
 }

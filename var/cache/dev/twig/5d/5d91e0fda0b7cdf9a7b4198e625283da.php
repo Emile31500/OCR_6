@@ -108,7 +108,8 @@ class __TwigTemplate_9e6bd913469df4b9ac70a81f8e374b25 extends Template
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['figure'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 30
-        echo "</div>";
+        echo "</div>
+";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -163,6 +164,7 @@ class __TwigTemplate_9e6bd913469df4b9ac70a81f8e374b25 extends Template
             </div>
         </div>
     {% endfor %}
-</div>", "figure/list.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/figure/list.html.twig");
+</div>
+", "figure/list.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/figure/list.html.twig");
     }
 }

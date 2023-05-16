@@ -418,7 +418,7 @@
     <service id="App\Form\SendPasswordRecuperationCodeType" class="App\Form\SendPasswordRecuperationCodeType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Mail\verificationUtilisateurMailer" class="App\Mail\verificationUtilisateurMailer" autowire="true" autoconfigure="true">
+    <service id="App\Mail\VerificationUtilisateurMailer" class="App\Mail\VerificationUtilisateurMailer" autowire="true" autoconfigure="true">
       <argument type="service" id="mailer.mailer"/>
       <argument type="service" id="App\Repository\UtilisateurRepository"/>
     </service>
@@ -5985,7 +5985,7 @@
     <service id="monolog.handler.main" class="Monolog\Handler\StreamHandler">
       <tag name="kernel.reset" method="reset"/>
       <argument>/opt/lampp/htdocs/Projet OC6/var/log/dev.log</argument>
-      <argument>100</argument>
+      <argument>200</argument>
       <argument>true</argument>
       <argument>null</argument>
       <argument>false</argument>

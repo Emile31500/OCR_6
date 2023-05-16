@@ -370,6 +370,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
         stroke: teal;
     }
 </style>
-{% endblock %}", "home/index.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/home/index.html.twig");
+{% endblock %}
+", "home/index.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/home/index.html.twig");
     }
 }

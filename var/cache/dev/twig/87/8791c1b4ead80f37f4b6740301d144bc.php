@@ -59,7 +59,8 @@ class __TwigTemplate_7771272921f26db35186f377c727cf8c extends Template
         </a>
         Antetion ! Ce lien expirera sous 24 heures. Il ne vous sera plus possible de modifier votre mot de passe après ce delais.
     </p> 
-</body>";
+</body>
+";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -98,6 +99,7 @@ class __TwigTemplate_7771272921f26db35186f377c727cf8c extends Template
         </a>
         Antetion ! Ce lien expirera sous 24 heures. Il ne vous sera plus possible de modifier votre mot de passe après ce delais.
     </p> 
-</body>", "mail/password_recup.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/mail/password_recup.html.twig");
+</body>
+", "mail/password_recup.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/mail/password_recup.html.twig");
     }
 }
