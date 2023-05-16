@@ -8,9 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ErrorController extends AbstractController
 {
-    /**
-    * @Route("/404", name="app_404", methods="GET")
-    */
+   
+    #[Route('/404', name: 'app_404', methods:['GET'])]
     public function error404(): Response
     {
         return $this->render('error/index.html.twig', [
