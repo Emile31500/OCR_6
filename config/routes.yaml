@@ -5,6 +5,7 @@ controllers:
     type: attribute
 error404:
     path: /{wildcard}
+    methods: ["GET"]
     controller: App\Controller\ErrorController::error404
     requirements:
         wildcard: ".*"

@@ -16,7 +16,6 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/connexion' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\AuthenticatorController::login'], null, ['GET' => 0], null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\AuthenticatorController::logout'], null, ['GET' => 0], null, false, false, null]],
-        '/404' => [[['_route' => 'app_404', '_controller' => 'App\\Controller\\ErrorController::error404'], null, ['GET' => 0], null, false, false, null]],
         '/creation-figure' => [[['_route' => 'app_creation_figure', '_controller' => 'App\\Controller\\FigureController::creationFigure'], null, ['POST' => 0], null, false, false, null]],
         '/recuperation-mot-de-passe' => [[['_route' => 'app_forget_password', '_controller' => 'App\\Controller\\ForgetPasswordController::index'], null, ['GET' => 0], null, false, false, null]],
         '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, ['GET' => 0], null, false, false, null]],
@@ -71,7 +70,7 @@ return [
         351 => [[['_route' => 'app_edition_figure', '_controller' => 'App\\Controller\\FigureController::editionFigure'], ['slug'], ['PUT' => 0], null, false, true, null]],
         384 => [[['_route' => 'app_verif_email', '_controller' => 'App\\Controller\\RegistrationController::verification'], ['code_verification'], ['GET' => 0], null, false, true, null]],
         397 => [
-            [['_route' => 'error404', '_controller' => 'App\\Controller\\ErrorController::error404'], ['wildcard'], null, null, false, true, null],
+            [['_route' => 'error404', '_controller' => 'App\\Controller\\ErrorController::error404'], ['wildcard'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

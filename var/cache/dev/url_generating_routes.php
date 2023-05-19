@@ -18,7 +18,6 @@ return [
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::login'], [], [['text', '/connexion']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\AuthenticatorController::logout'], [], [['text', '/logout']], [], [], []],
-    'app_404' => [[], ['_controller' => 'App\\Controller\\ErrorController::error404'], [], [['text', '/404']], [], [], []],
     'app_figure' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::liste'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure']], [], [], []],
     'app_figure_liste' => [['max_result'], ['_controller' => 'App\\Controller\\FigureController::print'], [], [['variable', '/', '[^/]++', 'max_result', true], ['text', '/figure/liste']], [], [], []],
     'app_message' => [['slug'], ['_controller' => 'App\\Controller\\FigureController::message'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/message']], [], [], []],
