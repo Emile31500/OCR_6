@@ -21,7 +21,7 @@ use DateTime;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/inscription', name: 'app_register', methods:['POST'])]
+    #[Route('/inscription', name: 'app_register', methods:['GET'])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, EntityManagerInterface $entityManager, MailerInterface $mailerInterface, UtilisateurRepository $utilisateurRepo): Response
     {
         $user = new Utilisateur();

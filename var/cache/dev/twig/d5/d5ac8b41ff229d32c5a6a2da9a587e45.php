@@ -104,10 +104,8 @@ class __TwigTemplate_9db760ac05b55405c8149080073b759c extends Template
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("media/img/figures/" . twig_get_attribute($this->env, $this->source, (isset($context["figure"]) || array_key_exists("figure", $context) ? $context["figure"] : (function () { throw new RuntimeError('Variable "figure" does not exist.', 12, $this->source); })()), "ImageUrl", [], "any", false, false, false, 12))), "html", null, true);
         echo "\">
         ";
-        // line 13
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 13, $this->source); })()), "imageUrl", [], "any", false, false, false, 13), 'row');
-        echo "
-    </p>
+        // line 14
+        echo "    </p>
     <p>
         ";
         // line 16
@@ -145,7 +143,7 @@ class __TwigTemplate_9db760ac05b55405c8149080073b759c extends Template
 
     public function getDebugInfo()
     {
-        return array (  125 => 21,  120 => 19,  114 => 16,  108 => 13,  104 => 12,  98 => 9,  93 => 7,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  123 => 21,  118 => 19,  112 => 16,  108 => 14,  104 => 12,  98 => 9,  93 => 7,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -162,7 +160,7 @@ class __TwigTemplate_9db760ac05b55405c8149080073b759c extends Template
     </p>
     <p>
         <img style=\"max-height: 300px; max-width: 400px;\" src=\"{{ asset('media/img/figures/' ~ figure.ImageUrl) }}\">
-        {{ form_row(form.imageUrl) }}
+        {# {{ form_row(form.imageUrl) }} #}
     </p>
     <p>
         {{ form_row(form.article) }}

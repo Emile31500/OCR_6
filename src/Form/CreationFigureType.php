@@ -20,7 +20,7 @@ class CreationFigureType extends AbstractType
     {  
     
         $figure = $options["data"];
-        
+
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom : ',
@@ -39,6 +39,7 @@ class CreationFigureType extends AbstractType
                 $builder->add('imageUrl', FileType::class, [
                     'label' => 'Image : ',
                     'required' => false,
+                    'multiple' => true,
                     'attr' => [
                         'class' => 'form-control'
                     ],
@@ -52,6 +53,24 @@ class CreationFigureType extends AbstractType
                         ])
                     ]
                 ]);
+
+                // $builder->add('imageUrl', FileType::class, [
+                //     'label' => 'Image : ',
+                //     'required'=> false,
+                //     'attr' => [
+                //         'class' => 'form-control'
+                //     ],
+                //     'constraints' => [
+                //         new ConstrainFile([
+                //             'maxSize' => '1024k',
+                //             'mimeTypes' => [
+                //                 'image/jpeg'
+                //             ],
+                //             'mimeTypesMessage' => 'Please upload a valid image file',
+                //         ])
+                //     ]
+                // ]);
+
             } else {
                 $builder->add('imageUrl', FileType::class, [
                     'label' => 'Image : ',

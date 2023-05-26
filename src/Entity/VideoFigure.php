@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\VideoFigureRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: VideoFigureRepository::class)]
+class VideoFigure
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $urlVideo = null;
+
+    #[ORM\ManyToOne(inversedBy: 'videoFigures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Figure $figure = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUrlVideo(): ?string
+    {
+        return $this->urlVideo;
+    }
+
+    public function setUrlVideo(string $urlVideo): self
+    {
+        $this->urlVideo = $urlVideo;
+
+        return $this;
+    }
+
+    public function getFigure(): ?Figure
+    {
+        return $this->figure;
+    }
+
+    public function setFigure(?Figure $figure): self
+    {
+        $this->figure = $figure;
+
+        return $this;
+    }
+}

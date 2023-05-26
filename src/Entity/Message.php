@@ -26,7 +26,7 @@ class Message
     private ?string $message = null;
 
     #[Gedmo\Timestampable(on: 'create')]
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options : ["default" => "CURRENT_TIMESTAMP()"])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options : ["default" => "CURRENT_TIMESTAMP"])]
     private ?\DateTimeInterface $date;
     
     public function getId(): ?int

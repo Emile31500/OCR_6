@@ -6,6 +6,7 @@ use App\Entity\Figure;
 use DateTimeInterface;
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Entity\PhotoFigure;
 use App\Form\EditionFigureType;
 use App\Form\CreationFigureType;
 use App\Repository\FigureRepository;
@@ -29,7 +30,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class FigureController extends AbstractController
 {
 
-    #[Route('/figure/{slug}', name: 'app_figure', methods:['GET'])]
+    #[Route('/figure/{slug}', name: 'app_figure')]
     public function liste(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
     {
         $message = new Message();
@@ -79,28 +80,6 @@ class FigureController extends AbstractController
 
     }
 
-    #[Route('/message/{slug}', name: 'app_message', methods: ['GET'])]
-    public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, string $slug) : JsonResponse {
-
-        $figure = $figureRepository->findOneBySlug($slug);
-        $messages_obj = $messageRepo->findByFigure($figure->getId());
-        $max = count($messages_obj);
-        $message = [];
-
-        for ($i=0; $i < $max; $i++) { 
-
-            $temp["nom_utilisateur"] = $messages_obj[$i]->getUtilisateur()->getNomUtilisateur();
-            $temp["message"] = $messages_obj[$i]->getMessage();
-            $temp["date"] = $messages_obj[$i]->getDate();
-
-            array_push($message, $temp);
-            unset($temp);
-
-        } 
-
-        return new JsonResponse($message);
-    }
-
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure', methods:['DELETE'])]
     public function suppressionFigure(FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, string $slug) : JsonResponse{
 
@@ -117,7 +96,7 @@ class FigureController extends AbstractController
 
     }
     
-    #[Route('/edition-figure/{slug}', name: 'app_edition_figure', methods:['PUT'])]
+    #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
     public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo) : Response
     {
         
@@ -133,39 +112,62 @@ class FigureController extends AbstractController
             $oldFigure = $figureRepo->findOneBySlug($slug);
             $figure = $oldFigure;
             $form = $this->createForm(CreationFigureType::class, $figure);
+            var_dump($request);
+            die;
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
                 
-                $slug = str_replace(' ', '-', $form->get('nom')->getData());
-                $slug = strtolower($slug);
                 $figure = $form->getData();
+                $images = $form['imageUrl']->getData();
 
-                $imgPath = 'media/img/figures/'.$figure->getImageUrl();
-                $imgDefault = new File($imgPath);
+                foreach($images as $image){
 
-                if ($imageFile = $form->get('photo')->getData()) {
-
-                    $newFilename  = uniqid().'.'.$imageFile->guessExtension();
-
-                    try {
-                        $imageFile->move(
-                            $this->getParameter('figure_image_directory'),
-                            $newFilename
-                        );
-
-                    } catch (FileException $e) {
-                        // handle exception
-                    }
-
-                    $figure->setImageUrl($newFilename);
+                    $newFilename  = uniqid().'.'.$image->guessExtension();
+                    $image->move('media/img/figures/', $newFilename);
+                    
+                    var_dump($newFilename);
+                    die;
+                    
+                    $photoFigure = new PhotoFigure();
+                    $photoFigure->setImageUrl($newFilename);
+                    $photoFigure->setFigure($figure);
+                    $manager->flush($photoFigure);
                 }
 
+                /* 
+                    $imgPath = 'media/img/figures/'.$figure->getImageUrl();
+                    $imgDefault = new File($imgPath);
+
+                    if ($imageFile = $form->get('photo')->getData()) {
+
+                        c
+
+                        try {
+                            $imageFile->move(
+                                $this->getParameter('figure_image_directory'),
+                                $newFilename
+                            );
+
+                        } catch (FileException $e) {
+                            // handle exception
+                        }
+
+                        $figure->setImageUrl($newFilename);
+                    } 
+                */     
+
+                $slug = str_replace(' ', '-', $form->get('nom')->getData());
+                $slug = strtolower($slug);
                 $session->set('slug', $slug);
 
                 $figure->setSlug($slug);
-                $figureRepo->save($figure, true);
            
+                $manager->persist($figure);
+                $manager->persist($photoFigure);
+
+                $manager->flush();
+
             }
            
             
@@ -186,7 +188,7 @@ class FigureController extends AbstractController
         }
     }
     
-    #[Route('/creation-figure', name: 'app_creation_figure', methods:['POST'])]
+    #[Route('/creation-figure', name: 'app_creation_figure')]
     public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker)  : Response 
     {
 
