@@ -3,14 +3,14 @@
 {% block title %}{{ controller_name }}{% endblock %}
 
 {% block body %}
+{{dump(form) }}
 <h2 class="mb-5 mt-5"> {{ controller_name }}</h2>
  {{ form_start(form) }}
     <p>
         {{ form_row(form.nom) }}
     </p>
     <p>
-        <img style="max-height: 300px; max-width: 400px;" src="{{ asset('media/img/figures/' ~ figure.ImageUrl) }}">
-        {# {{ form_row(form.imageUrl) }} #}
+        {# <img style="max-height: 300px; max-width: 400px;" src="{{ asset('media/img/figures/' ~ figure.ImageUrl) }}"> #}
     </p>
     <p>
         {{ form_row(form.article) }}

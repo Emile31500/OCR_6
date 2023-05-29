@@ -9,6 +9,7 @@ use App\Form\MessageType;
 use App\Entity\PhotoFigure;
 use App\Form\EditionFigureType;
 use App\Form\CreationFigureType;
+use App\Service\PhotoFigureService;
 use App\Repository\FigureRepository;
 use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -97,7 +98,7 @@ class FigureController extends AbstractController
     }
     
     #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
-    public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo) : Response
+    public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo, PhotoFigureService $phtFigServ) : Response
     {
         
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
@@ -111,61 +112,42 @@ class FigureController extends AbstractController
 
             $oldFigure = $figureRepo->findOneBySlug($slug);
             $figure = $oldFigure;
+            
             $form = $this->createForm(CreationFigureType::class, $figure);
-            var_dump($request);
-            die;
+            
+
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $figure = $form->getData();
-                $images = $form['imageUrl']->getData();
+                $images = $form['image']->getData();
 
                 foreach($images as $image){
 
-                    $newFilename  = uniqid().'.'.$image->guessExtension();
-                    $image->move('media/img/figures/', $newFilename);
+                    $phtFigServ->add($image, 300, 300);
+                   
+                    // $newFilename  = uniqid().'.'.$image->guessExtension();
+                    // $image->move(
+                    //     $this->getParameters('figure_image_directory'),
+                    //     $newFilename
+                    // );
                     
-                    var_dump($newFilename);
-                    die;
-                    
-                    $photoFigure = new PhotoFigure();
-                    $photoFigure->setImageUrl($newFilename);
-                    $photoFigure->setFigure($figure);
-                    $manager->flush($photoFigure);
-                }
+                    // $pht = new PhotoFigure();
+                    // $pht->setImageUrl($newFilename);
+                    // $figure->addPhotoFigures($pht);
 
-                /* 
-                    $imgPath = 'media/img/figures/'.$figure->getImageUrl();
-                    $imgDefault = new File($imgPath);
-
-                    if ($imageFile = $form->get('photo')->getData()) {
-
-                        c
-
-                        try {
-                            $imageFile->move(
-                                $this->getParameter('figure_image_directory'),
-                                $newFilename
-                            );
-
-                        } catch (FileException $e) {
-                            // handle exception
-                        }
-
-                        $figure->setImageUrl($newFilename);
-                    } 
-                */     
+                }     
+                
+                die;
 
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
                 $session->set('slug', $slug);
-
                 $figure->setSlug($slug);
-           
-                $manager->persist($figure);
-                $manager->persist($photoFigure);
 
+                $manager->persist($figure);
+                $manager->persist($pht);
                 $manager->flush();
 
             }

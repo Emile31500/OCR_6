@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\VideoFigureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VideoFigureRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VideoFigureRepository::class)]
 class VideoFigure
@@ -11,9 +12,11 @@ class VideoFigure
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['figure'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['figure'])]
     private ?string $urlVideo = null;
 
     #[ORM\ManyToOne(inversedBy: 'videoFigures')]

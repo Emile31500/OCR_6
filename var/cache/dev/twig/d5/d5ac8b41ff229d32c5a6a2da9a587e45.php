@@ -85,24 +85,23 @@ class __TwigTemplate_9db760ac05b55405c8149080073b759c extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "<h2 class=\"mb-5 mt-5\"> ";
-        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\DumpExtension']->dump($this->env, $context, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 6, $this->source); })()));
+        echo "
+<h2 class=\"mb-5 mt-5\"> ";
+        // line 7
+        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 7, $this->source); })()), "html", null, true);
         echo "</h2>
  ";
-        // line 7
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 7, $this->source); })()), 'form_start');
+        // line 8
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 8, $this->source); })()), 'form_start');
         echo "
     <p>
         ";
-        // line 9
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), "nom", [], "any", false, false, false, 9), 'row');
+        // line 10
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 10, $this->source); })()), "nom", [], "any", false, false, false, 10), 'row');
         echo "
     </p>
     <p>
-        <img style=\"max-height: 300px; max-width: 400px;\" src=\"";
-        // line 12
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("media/img/figures/" . twig_get_attribute($this->env, $this->source, (isset($context["figure"]) || array_key_exists("figure", $context) ? $context["figure"] : (function () { throw new RuntimeError('Variable "figure" does not exist.', 12, $this->source); })()), "ImageUrl", [], "any", false, false, false, 12))), "html", null, true);
-        echo "\">
         ";
         // line 14
         echo "    </p>
@@ -143,7 +142,7 @@ class __TwigTemplate_9db760ac05b55405c8149080073b759c extends Template
 
     public function getDebugInfo()
     {
-        return array (  123 => 21,  118 => 19,  112 => 16,  108 => 14,  104 => 12,  98 => 9,  93 => 7,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  122 => 21,  117 => 19,  111 => 16,  107 => 14,  101 => 10,  96 => 8,  92 => 7,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -153,14 +152,14 @@ class __TwigTemplate_9db760ac05b55405c8149080073b759c extends Template
 {% block title %}{{ controller_name }}{% endblock %}
 
 {% block body %}
+{{dump(form) }}
 <h2 class=\"mb-5 mt-5\"> {{ controller_name }}</h2>
  {{ form_start(form) }}
     <p>
         {{ form_row(form.nom) }}
     </p>
     <p>
-        <img style=\"max-height: 300px; max-width: 400px;\" src=\"{{ asset('media/img/figures/' ~ figure.ImageUrl) }}\">
-        {# {{ form_row(form.imageUrl) }} #}
+        {# <img style=\"max-height: 300px; max-width: 400px;\" src=\"{{ asset('media/img/figures/' ~ figure.ImageUrl) }}\"> #}
     </p>
     <p>
         {{ form_row(form.article) }}

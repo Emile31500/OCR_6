@@ -3,15 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Figure;
+use App\Form\PhotoFigureType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File as ConstrainFile;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Validator\Constraints\File as ConstrainFile;
 
 
 class CreationFigureType extends AbstractType
@@ -19,7 +21,18 @@ class CreationFigureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {  
     
-        $figure = $options["data"];
+        // $figure = $options["data"];
+
+        // if ($figure->getId() !== null) {
+
+        //     $filesAreRequired = false;
+
+        // } else {
+
+        //     $filesAreRequired = true;
+
+        // }
+        $filesAreRequired = false;
 
         $builder
             ->add('nom', TextType::class, [
@@ -33,63 +46,16 @@ class CreationFigureType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ]
-                ]);
-            if ($figure->getId() !== null) {
-
-                $builder->add('imageUrl', FileType::class, [
-                    'label' => 'Image : ',
-                    'required' => false,
-                    'multiple' => true,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ],
-                    'constraints' => [
-                        new ConstrainFile([
-                            'maxSize' => '1024k',
-                            'mimeTypes' => [
-                                'image/jpeg'
-                            ],
-                            'mimeTypesMessage' => 'Please upload a valid image file',
-                        ])
-                    ]
-                ]);
-
-                // $builder->add('imageUrl', FileType::class, [
-                //     'label' => 'Image : ',
-                //     'required'=> false,
-                //     'attr' => [
-                //         'class' => 'form-control'
-                //     ],
-                //     'constraints' => [
-                //         new ConstrainFile([
-                //             'maxSize' => '1024k',
-                //             'mimeTypes' => [
-                //                 'image/jpeg'
-                //             ],
-                //             'mimeTypesMessage' => 'Please upload a valid image file',
-                //         ])
-                //     ]
-                // ]);
-
-            } else {
-                $builder->add('imageUrl', FileType::class, [
-                    'label' => 'Image : ',
-                    'attr' => [
-                        'class' => 'form-control'
-                    ],
-                    'constraints' => [
-                        new ConstrainFile([
-                            'maxSize' => '1024k',
-                            'mimeTypes' => [
-                                'image/jpeg'
-                            ],
-                            'mimeTypesMessage' => 'Please upload a valid image file',
-                        ])
-                    ]
-                ]);
-            }
-           
-            $builder->add('submit', SubmitType::class, [
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Article : ',
+                'multiple' => true,
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary'
                 ]
@@ -98,10 +64,10 @@ class CreationFigureType extends AbstractType
     }
 
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Figure::class,
-        ]);
-    }
+    // public function configureOptions(OptionsResolver $resolver): void
+    // {
+    //     $resolver->setDefaults([
+    //         'data_class' => Figure::class,
+    //     ]);
+    // }
 }
