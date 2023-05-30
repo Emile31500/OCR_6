@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Figure;
 use App\Entity\PhotoFigure;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<PhotoFigure>
@@ -42,17 +43,16 @@ class PhotoFigureRepository extends ServiceEntityRepository
 //    /**
 //     * @return PhotoFigure[] Returns an array of PhotoFigure objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByFigure($figure): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.figure = :fig')
+            ->setParameter('fig', $figure)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?PhotoFigure
 //    {

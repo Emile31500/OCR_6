@@ -16,7 +16,7 @@ class MessageController extends AbstractController{
     #[Route('/message/{slug}', name: 'app_message', methods: ['GET'])]
     public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, string $slug) : JsonResponse {
 
-        $figure = $figureRepository->findOneBySlug($slug);
+        $figure = $figureRepository->findBySlug($slug);
         $messages_obj = $messageRepo->findByFigure($figure->getId());
         $max = count($messages_obj);
         $message = [];

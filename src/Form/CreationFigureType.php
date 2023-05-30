@@ -20,19 +20,15 @@ class CreationFigureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {  
-    
-        // $figure = $options["data"];
+        
+        $filesAreRequired = true;
 
-        // if ($figure->getId() !== null) {
+        if (isset($options["data"])) {
 
-        //     $filesAreRequired = false;
+            $figure = $options["data"];
+            $filesAreRequired = false;
 
-        // } else {
-
-        //     $filesAreRequired = true;
-
-        // }
-        $filesAreRequired = false;
+        }
 
         $builder
             ->add('nom', TextType::class, [
@@ -49,6 +45,7 @@ class CreationFigureType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Article : ',
+                'required' => $filesAreRequired,
                 'multiple' => true,
                 'mapped' => false,
                 'attr' => [
@@ -64,10 +61,10 @@ class CreationFigureType extends AbstractType
     }
 
 
-    // public function configureOptions(OptionsResolver $resolver): void
-    // {
-    //     $resolver->setDefaults([
-    //         'data_class' => Figure::class,
-    //     ]);
-    // }
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Figure::class,
+        ]);
+    }
 }
