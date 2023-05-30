@@ -20,9 +20,6 @@ class PhotoFigure
     #[Groups(['figure'])]
     private ?string $imageUrl = null;
 
-    #[Groups(['figure'])]
-    private ?string $image;
-
     #[ORM\ManyToOne(inversedBy: 'photoFigures')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Figure $figure = null;
@@ -42,21 +39,6 @@ class PhotoFigure
         $this->imageUrl = $imageUrl;
 
         return $this;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-
-    }
-
-    public function getImage(): ?string
-    {
-       
-        return $this->image;
-        
     }
 
     public function getFigure(): ?Figure

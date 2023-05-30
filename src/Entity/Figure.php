@@ -144,6 +144,17 @@ class Figure
         return $this->photoFigures;
     }
 
+    public function setPhotoFigures(array $photoFigures): self
+    {
+
+        foreach($photoFigures as $photoFigure) {
+
+            $this->addPhotoFigure($photoFigure);
+        }
+
+        return $this;
+    }
+
     public function addPhotoFigure(PhotoFigure $photoFigure): self
     {
         if (!$this->photoFigures->contains($photoFigure)) {

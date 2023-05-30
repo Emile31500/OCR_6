@@ -101,7 +101,7 @@ class __TwigTemplate_8a66c997c0a0e25d0e287bb77fb8d361 extends Template
     <p>
         ";
         // line 12
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), "imageUrl", [], "any", false, false, false, 12), 'row');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), "image", [], "any", false, false, false, 12), 'row');
         echo "
     </p>
     <p>
@@ -180,7 +180,7 @@ array_key_exists("success", $context)) {
         {{ form_row(form.nom) }}
     </p>
     <p>
-        {{ form_row(form.imageUrl) }}
+        {{ form_row(form.image) }}
     </p>
     <p>
         {{ form_row(form.article) }}

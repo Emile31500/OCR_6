@@ -14,7 +14,7 @@ class PhotoFigureService {
         $this->params = $params;
     }
 
-    public function add(UploadedFile $picture, ?int $width=500, int $heigth=500)
+    public function add(UploadedFile $picture, ?int $width=500, int $heigth=500): string
     {
 
         $fichier = uniqid().'jpg';
@@ -36,6 +36,8 @@ class PhotoFigureService {
         $path = $this->params->get('figure_image_directory');
 
         $picture->move($path.'/', $fichier);
+
+        return $fichier;
 
     }
 
