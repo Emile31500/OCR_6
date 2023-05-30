@@ -56,7 +56,6 @@ class __TwigTemplate_9e6bd913469df4b9ac70a81f8e374b25 extends Template
                 <img class=\"top-img-card\" src=\"";
             // line 5
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/img/figures/"), "html", null, true);
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["figure"], "imageUrl", [], "any", false, false, false, 5), "html", null, true);
             echo "\" alt=\"";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["figure"], "nom", [], "any", false, false, false, 5), "html", null, true);
             echo "\"/>
@@ -130,7 +129,7 @@ class __TwigTemplate_9e6bd913469df4b9ac70a81f8e374b25 extends Template
 
     public function getDebugInfo()
     {
-        return array (  111 => 30,  102 => 26,  90 => 19,  80 => 12,  77 => 11,  75 => 10,  70 => 8,  66 => 7,  58 => 5,  50 => 3,  46 => 2,  43 => 1,);
+        return array (  110 => 30,  101 => 26,  89 => 19,  79 => 12,  76 => 11,  74 => 10,  69 => 8,  65 => 7,  58 => 5,  50 => 3,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -139,7 +138,7 @@ class __TwigTemplate_9e6bd913469df4b9ac70a81f8e374b25 extends Template
     {% for figure in figures %}
         <div class=\"col tricks-col {{figure.slug}} d-flex justify-content-center\" id=\"tricks-lmnt-{{figure.slug}}\">
             <div class=\"tricks-card card\">
-                <img class=\"top-img-card\" src=\"{{ asset('media/img/figures/')}}{{figure.imageUrl}}\" alt=\"{{figure.nom}}\"/>
+                <img class=\"top-img-card\" src=\"{{ asset('media/img/figures/')}}\" alt=\"{{figure.nom}}\"/>
                 <div class=\"card-body\">
                     <a href=\"{{ path('app_figure', {slug: figure.slug } ) }}\" >
                         <h3 class=\"col-8 h4 text-dark\"> {{figure.nom}} </h3>

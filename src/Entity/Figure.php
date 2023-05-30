@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\FigureRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FigureRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: FigureRepository::class)]
 class Figure
@@ -13,29 +15,42 @@ class Figure
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['figure'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['figure'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['figure'])]
     private ?string $slug = null;
 
     #[ORM\Column(length: 4096)]
+    #[Groups(['figure'])]
     private ?string $article = null;
     
     #[ORM\Column(length: 10, options : ["default" => "published"])]
+    #[Groups(['figure'])]
     private ?string $statu = "published";
 
-    #[ORM\Column(length: 255)]
-    private ?string $imageUrl = null;
-
     #[ORM\OneToMany(mappedBy: 'figure', targetEntity: Message::class)]
+    #[Groups(['figure'])]
     private Collection $Message;
+
+    #[ORM\OneToMany(mappedBy: 'figure', targetEntity: PhotoFigure::class)]
+    #[Groups(['figure'])]
+    private Collection $photoFigures;
+
+    #[ORM\OneToMany(mappedBy: 'figure', targetEntity: VideoFigure::class)]
+    #[Groups(['figure'])]
+    private Collection $videoFigures;
 
     public function __construct()
     {
         $this->Message = new ArrayCollection();
+        $this->photoFigures = new ArrayCollection();
+        $this->videoFigures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,18 +94,6 @@ class Figure
         return $this;
     }
 
-    public function getImageUrl(): ?string
-    {
-        return $this->imageUrl;
-    }
-
-    public function setImageUrl(string $imageUrl): self
-    {
-        $this->imageUrl = $imageUrl;
-
-        return $this;
-    }
-
     public function getStatu(): ?string
     {
         return $this->statu;
@@ -127,6 +130,66 @@ class Figure
             // set the owning side to null (unless already changed)
             if ($message->getFigure() === $this) {
                 $message->setFigure(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PhotoFigure>
+     */
+    public function getPhotoFigures(): Collection
+    {
+        return $this->photoFigures;
+    }
+
+    public function addPhotoFigure(PhotoFigure $photoFigure): self
+    {
+        if (!$this->photoFigures->contains($photoFigure)) {
+            $this->photoFigures->add($photoFigure);
+            $photoFigure->setFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhotoFigure(PhotoFigure $photoFigure): self
+    {
+        if ($this->photoFigures->removeElement($photoFigure)) {
+            // set the owning side to null (unless already changed)
+            if ($photoFigure->getFigure() === $this) {
+                $photoFigure->setFigure(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, VideoFigure>
+     */
+    public function getVideoFigures(): Collection
+    {
+        return $this->videoFigures;
+    }
+
+    public function addVideoFigure(VideoFigure $videoFigure): self
+    {
+        if (!$this->videoFigures->contains($videoFigure)) {
+            $this->videoFigures->add($videoFigure);
+            $videoFigure->setFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideoFigure(VideoFigure $videoFigure): self
+    {
+        if ($this->videoFigures->removeElement($videoFigure)) {
+            // set the owning side to null (unless already changed)
+            if ($videoFigure->getFigure() === $this) {
+                $videoFigure->setFigure(null);
             }
         }
 
