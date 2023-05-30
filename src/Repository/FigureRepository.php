@@ -61,7 +61,7 @@ class FigureRepository extends ServiceEntityRepository
 
     }
 
-    public function findOneBySlug(string $value): ?Figure
+    public function findBySlug(string $value): ?Figure
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.slug = :val')

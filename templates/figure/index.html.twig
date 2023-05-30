@@ -5,7 +5,21 @@
 {% block body %}
     <div class="row mt-5 mb-5 d-flex justify-content-center optional-content">
         <div class="col text-center">
-            <img class="img-figure" src="{{ asset('media/img/figures/') }}{{figure.imageUrl}}"/>
+            {% for photo in figure.photoFigures %}
+        
+                <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+
+            {% endfor %}
+            {% for photo in figure.photoFigures %}
+        
+                <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+
+            {% endfor %}
+            {% for photo in figure.photoFigures %}
+        
+                <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+
+            {% endfor %}
         </div>
         <div class="col">
             <h2> {{ controller_name }}</h2>
