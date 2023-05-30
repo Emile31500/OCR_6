@@ -18,7 +18,7 @@
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .container-sm, .container {
     max-width: 540px;
   }
@@ -101,7 +101,7 @@
   width: 16.6666666667%;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .col-sm {
     flex: 1 0 0%;
   }
@@ -435,7 +435,7 @@
   --bs-gutter-y: 3rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .col-sm-auto {
     flex: 0 0 auto;
     width: auto;
@@ -1727,7 +1727,7 @@
   padding-left: 3rem !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .d-sm-inline {
     display: inline !important;
   }

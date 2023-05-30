@@ -40,7 +40,7 @@ class __TwigTemplate_9e6bd913469df4b9ac70a81f8e374b25 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "figure/list.html.twig"));
 
         // line 1
-        echo "<div id='tricks-card-list'>
+        echo "<div class=\"row-cols-1\" id='tricks-card-list'>
     ";
         // line 2
         $context['_parent'] = $context;
@@ -144,7 +144,7 @@ class __TwigTemplate_9e6bd913469df4b9ac70a81f8e374b25 extends Template
 
     public function getSourceContext()
     {
-        return new Source("<div id='tricks-card-list'>
+        return new Source("<div class=\"row-cols-1\" id='tricks-card-list'>
     {% for figure in figures %} 
         <div class=\"col tricks-col {{figure.slug}} d-flex justify-content-center\" id=\"tricks-lmnt-{{figure.slug}}\">
             <div class=\"tricks-card card\">

@@ -121,7 +121,7 @@
   z-index: 1020;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .sticky-sm-top {
     position: sticky;
     top: 0;
@@ -1428,7 +1428,7 @@
   visibility: hidden !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .float-sm-start {
     float: left !important;
   }

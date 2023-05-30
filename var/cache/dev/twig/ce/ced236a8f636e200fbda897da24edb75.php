@@ -171,7 +171,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
         ";
         }
         // line 60
-        echo "    <div id='tricks-card-list' class=\"my-5 row row-cols-1 row-cols-md-2 g-4\">
+        echo "    <div id='tricks-card-list' class=\"my-5 row row-cols-lg-2 row-cols-md-1 g-4\">
     </div>    
     <div class=\"clear\">
         <div  class=\"col d-flex m-5 align-itms-center  justify-content-center \">
@@ -335,7 +335,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
                 </div>
             </div>
         {% endif %}
-    <div id='tricks-card-list' class=\"my-5 row row-cols-1 row-cols-md-2 g-4\">
+    <div id='tricks-card-list' class=\"my-5 row row-cols-lg-2 row-cols-md-1 g-4\">
     </div>    
     <div class=\"clear\">
         <div  class=\"col d-flex m-5 align-itms-center  justify-content-center \">

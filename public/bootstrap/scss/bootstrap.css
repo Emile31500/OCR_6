@@ -603,7 +603,7 @@ progress {
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .container-sm, .container {
     max-width: 540px;
   }
@@ -685,7 +685,7 @@ progress {
   width: 16.6666666667%;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .col-sm {
     flex: 1 0 0%;
   }
@@ -1019,7 +1019,7 @@ progress {
   --bs-gutter-y: 3rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .col-sm-auto {
     flex: 0 0 auto;
     width: auto;
@@ -1875,7 +1875,7 @@ progress {
   -webkit-overflow-scrolling: touch;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 449.98px) {
   .table-responsive-sm {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -3278,7 +3278,7 @@ textarea.form-control-lg {
   left: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .dropdown-menu-sm-start {
     --bs-position: start;
   }
@@ -3802,7 +3802,7 @@ textarea.form-control-lg {
   overflow-y: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .navbar-expand-sm {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -4148,7 +4148,7 @@ textarea.form-control-lg {
 .card-group > .card {
   margin-bottom: 0.75rem;
 }
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .card-group {
     display: flex;
     flex-flow: row wrap;
@@ -4663,7 +4663,7 @@ textarea.form-control-lg {
   border-left-width: 1px;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .list-group-horizontal-sm {
     flex-direction: row;
   }
@@ -5109,7 +5109,7 @@ textarea.form-control-lg {
   margin: 0.25rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .modal-dialog {
     max-width: 500px;
     margin: 1.75rem auto;
@@ -5156,7 +5156,7 @@ textarea.form-control-lg {
   border-radius: 0;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 449.98px) {
   .modal-fullscreen-sm-down {
     width: 100vw;
     max-width: none;
@@ -5521,8 +5521,7 @@ textarea.form-control-lg {
   float: left;
   width: 100%;
   margin-right: -100%;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   transition: transform 0.6s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -5955,7 +5954,7 @@ textarea.form-control-lg {
   z-index: 1020;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .sticky-sm-top {
     position: sticky;
     top: 0;
@@ -7262,7 +7261,7 @@ textarea.form-control-lg {
   visibility: hidden !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 450px) {
   .float-sm-start {
     float: left !important;
   }
