@@ -87,7 +87,7 @@ class __TwigTemplate_731083a7e48c55f55a8d087663a66534 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <h2 class=\"header-body-element\"> ";
+        echo "    <h2 class=\"my-5 header-body-element\"> ";
         echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 6, $this->source); })()), "html", null, true);
         echo " </h2>
     <p>Un lien vous sera envoyé par email pour pouvoir modifier votre mot de passe.</p>
@@ -144,7 +144,7 @@ class __TwigTemplate_731083a7e48c55f55a8d087663a66534 extends Template
 {% block title %} {{controller_name}} {% endblock %}
 
 {% block body %}
-    <h2 class=\"header-body-element\"> {{controller_name}} </h2>
+    <h2 class=\"my-5 header-body-element\"> {{controller_name}} </h2>
     <p>Un lien vous sera envoyé par email pour pouvoir modifier votre mot de passe.</p>
     {{ form_start(form_send_recup_code) }}
         <p>

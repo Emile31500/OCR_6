@@ -176,7 +176,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
     <div class=\"clear\">
         <div  class=\"col d-flex m-5 align-itms-center  justify-content-center \">
             <button id=\"load_more_tricks_button\" class=\" btn btn-primary p-3 pr-5 pl-5\">
-                Load more
+                Afficher plus
             </button>
         </div>
     </div>
@@ -340,7 +340,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
     <div class=\"clear\">
         <div  class=\"col d-flex m-5 align-itms-center  justify-content-center \">
             <button id=\"load_more_tricks_button\" class=\" btn btn-primary p-3 pr-5 pl-5\">
-                Load more
+                Afficher plus
             </button>
         </div>
     </div>

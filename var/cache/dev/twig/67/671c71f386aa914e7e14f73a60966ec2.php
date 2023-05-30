@@ -90,7 +90,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
                                 <a class=\"nav-link\" href=\"";
         // line 28
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_home");
-        echo "\">Home</a>
+        echo "\">Accueil</a>
                             </li>
                             ";
         // line 30
@@ -100,13 +100,13 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
                                     <a class=\"nav-link\" href=\"";
             // line 32
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
-            echo "\">Sign in</a>
+            echo "\">S'authentifier</a>
                                 </li>
                                 <li class=\"nav-item unconnected_user_navzone\">
                                     <a class=\"nav-link\" href=\"";
             // line 35
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
-            echo "\">Sign up</a>
+            echo "\">Inscrivez-vous !</a>
                                 </li>
                             ";
         } else {
@@ -115,7 +115,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
                                     <a class=\"nav-link\" href=\"";
             // line 39
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
-            echo "\">Log out</a>
+            echo "\">Se déconntecter</a>
                                 </li> 
                             ";
         }
@@ -379,18 +379,18 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
                     <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
                         <ul class=\"navbar-nav ml-auto\">
                             <li class=\"nav-item\">
-                                <a class=\"nav-link\" href=\"{{ path('app_home')}}\">Home</a>
+                                <a class=\"nav-link\" href=\"{{ path('app_home')}}\">Accueil</a>
                             </li>
                             {% if app.user is null %}
                                 <li class=\"nav-item unconnected_user_navzone\">
-                                    <a class=\"nav-link\" href=\"{{ path('app_login')}}\">Sign in</a>
+                                    <a class=\"nav-link\" href=\"{{ path('app_login')}}\">S'authentifier</a>
                                 </li>
                                 <li class=\"nav-item unconnected_user_navzone\">
-                                    <a class=\"nav-link\" href=\"{{ path('app_register')}}\">Sign up</a>
+                                    <a class=\"nav-link\" href=\"{{ path('app_register')}}\">Inscrivez-vous !</a>
                                 </li>
                             {% else %}
                                 <li class=\"nav-item connected_user_navzone\">
-                                    <a class=\"nav-link\" href=\"{{ path('app_logout') }}\">Log out</a>
+                                    <a class=\"nav-link\" href=\"{{ path('app_logout') }}\">Se déconntecter</a>
                                 </li> 
                             {% endif %}
                         </ul>

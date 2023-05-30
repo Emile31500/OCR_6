@@ -16,7 +16,7 @@ class HomeController extends AbstractController
         $isAdmin = $authorizationChecker->isGranted('ROLE_ADMIN');
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'Home',
+            'controller_name' => 'Accueil',
             'isAdmin' => $isAdmin
         ]);
     }

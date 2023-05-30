@@ -44,7 +44,7 @@ class CreationFigureType extends AbstractType
                 ]
             ])
             ->add('image', FileType::class, [
-                'label' => 'Article : ',
+                'label' => 'Images : ',
                 'required' => $filesAreRequired,
                 'multiple' => true,
                 'mapped' => false,
