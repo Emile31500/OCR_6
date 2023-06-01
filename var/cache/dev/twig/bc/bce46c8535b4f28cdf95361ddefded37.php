@@ -27,6 +27,7 @@ class __TwigTemplate_8a66c997c0a0e25d0e287bb77fb8d361 extends Template
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
+            'perso_javascripts' => [$this, 'block_perso_javascripts'],
         ];
     }
 
@@ -105,44 +106,87 @@ class __TwigTemplate_8a66c997c0a0e25d0e287bb77fb8d361 extends Template
         echo "
     </p>
     <p>
-        ";
+        <ul class=\"videoFigures\" data-index=\"";
         // line 15
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), "article", [], "any", false, false, false, 15), 'row');
+        (((twig_length_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), "videoFigures", [], "any", false, false, false, 15)) > 0)) ? (print (twig_escape_filter($this->env, (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_last($this->env, twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), "videoFigures", [], "any", false, false, false, 15)), "vars", [], "any", false, false, false, 15), "name", [], "any", false, false, false, 15) + 1), "html", null, true))) : (print (0)));
+        echo "\" data-prototype=\"";
+        echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), "videoFigures", [], "any", false, false, false, 15), "vars", [], "any", false, false, false, 15), "prototype", [], "any", false, false, false, 15), 'widget'), "html_attr");
+        echo "\">
+        </ul>
+        ";
+        // line 18
+        echo "
+        ";
+        // line 19
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 19, $this->source); })()), "videoFigures", [], "any", false, false, false, 19), 'widget');
         echo "
     </p>
     <p>
         ";
-        // line 18
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 18, $this->source); })()), "submit", [], "any", false, false, false, 18), 'row');
+        // line 22
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), "article", [], "any", false, false, false, 22), 'row');
+        echo "
+    </p>
+    <p>
+        ";
+        // line 25
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 25, $this->source); })()), "submit", [], "any", false, false, false, 25), 'row');
         echo "
     </p>
     ";
-        // line 20
+        // line 27
         if (array_key_exists("error", $context)) {
-            // line 21
+            // line 28
             echo "        <p class=\"alert alert-danger\">
             ";
-            // line 22
-            echo twig_escape_filter($this->env, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 22, $this->source); })()), "html", null, true);
+            // line 29
+            echo twig_escape_filter($this->env, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 29, $this->source); })()), "html", null, true);
             echo "
         </p>
     ";
-        } elseif (        // line 24
+        } elseif (        // line 31
 array_key_exists("success", $context)) {
-            // line 25
+            // line 32
             echo "        <p class=\"alert alert-success\">
             ";
-            // line 26
-            echo twig_escape_filter($this->env, (isset($context["success"]) || array_key_exists("success", $context) ? $context["success"] : (function () { throw new RuntimeError('Variable "success" does not exist.', 26, $this->source); })()), "html", null, true);
+            // line 33
+            echo twig_escape_filter($this->env, (isset($context["success"]) || array_key_exists("success", $context) ? $context["success"] : (function () { throw new RuntimeError('Variable "success" does not exist.', 33, $this->source); })()), "html", null, true);
             echo "
         </p>
     ";
         }
-        // line 29
+        // line 36
         echo " ";
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 29, $this->source); })()), 'form_end');
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 36, $this->source); })()), 'form_end');
         echo "
 
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 40
+    public function block_perso_javascripts($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
+
+        // line 41
+        echo "    <script type=\"module\" src=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/module.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 42
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/add.js"), "html", null, true);
+        echo "\"></script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -164,7 +208,7 @@ array_key_exists("success", $context)) {
 
     public function getDebugInfo()
     {
-        return array (  142 => 29,  136 => 26,  133 => 25,  131 => 24,  126 => 22,  123 => 21,  121 => 20,  116 => 18,  110 => 15,  104 => 12,  98 => 9,  93 => 7,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  188 => 42,  183 => 41,  173 => 40,  159 => 36,  153 => 33,  150 => 32,  148 => 31,  143 => 29,  140 => 28,  138 => 27,  133 => 25,  127 => 22,  121 => 19,  118 => 18,  111 => 15,  105 => 12,  99 => 9,  94 => 7,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -183,6 +227,13 @@ array_key_exists("success", $context)) {
         {{ form_row(form.image) }}
     </p>
     <p>
+        <ul class=\"videoFigures\" data-index=\"{{ form.videoFigures|length > 0 ? form.videoFigures|last.vars.name + 1 : 0 }}\" data-prototype=\"{{ form_widget(form.videoFigures.vars.prototype)|e('html_attr') }}\">
+        </ul>
+        {# <button type=\"button\" class=\"add_item_link\" data-collection-holder-class=\"videoFigures\">Ajouter vidéo</button>  #}
+
+        {{ form_widget(form.videoFigures)}}
+    </p>
+    <p>
         {{ form_row(form.article) }}
     </p>
     <p>
@@ -199,6 +250,11 @@ array_key_exists("success", $context)) {
     {% endif %}
  {{ form_end(form) }}
 
+{% endblock %}
+
+{% block perso_javascripts %}
+    <script type=\"module\" src=\"{{ asset('js/VideoFigure/module.js') }}\"></script>
+    <script src=\"{{ asset('js/VideoFigure/add.js') }}\"></script>
 {% endblock %}
 ", "figure/creation.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/figure/creation.html.twig");
     }

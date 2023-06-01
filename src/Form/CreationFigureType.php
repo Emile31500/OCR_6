@@ -3,11 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Figure;
+use App\Form\VideoType;
 use App\Form\PhotoFigureType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -52,6 +54,12 @@ class CreationFigureType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('videoFigures', CollectionType::class, [
+                'entry_type' => VideoType::class,
+                //'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary'
@@ -64,7 +72,7 @@ class CreationFigureType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Figure::class,
+             'data_class' => Figure::class,
         ]);
     }
 }

@@ -12,6 +12,13 @@
         {{ form_row(form.image) }}
     </p>
     <p>
+        <ul class="videoFigures" data-index="{{ form.videoFigures|length > 0 ? form.videoFigures|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.videoFigures.vars.prototype)|e('html_attr') }}">
+        </ul>
+        {# <button type="button" class="add_item_link" data-collection-holder-class="videoFigures">Ajouter vidéo</button>  #}
+
+        {{ form_widget(form.videoFigures)}}
+    </p>
+    <p>
         {{ form_row(form.article) }}
     </p>
     <p>
@@ -28,4 +35,9 @@
     {% endif %}
  {{ form_end(form) }}
 
+{% endblock %}
+
+{% block perso_javascripts %}
+    <script type="module" src="{{ asset('js/VideoFigure/module.js') }}"></script>
+    <script src="{{ asset('js/VideoFigure/add.js') }}"></script>
 {% endblock %}

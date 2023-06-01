@@ -39,6 +39,21 @@ class VideoFigureRepository extends ServiceEntityRepository
         }
     }
 
+    //    /**
+    //     * @return PhotoFigure[] Returns an array of PhotoFigure objects
+    //     */
+    public function findByFigure($figure): array
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.figure = :fig')
+            ->setParameter('fig', $figure)
+            ->orderBy('v.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 //    /**
 //     * @return VideoFigure[] Returns an array of VideoFigure objects
 //     */

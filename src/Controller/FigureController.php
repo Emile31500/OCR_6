@@ -7,13 +7,16 @@ use DateTimeInterface;
 use App\Entity\Message;
 use App\Form\MessageType;
 use App\Entity\PhotoFigure;
+use App\Entity\VideoFigure;
 use App\Form\EditionFigureType;
 use App\Form\CreationFigureType;
 use App\Service\PhotoFigureService;
+use App\Service\VideoFigureService;
 use App\Repository\FigureRepository;
 use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PhotoFigureRepository;
+use App\Repository\VideoFigureRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,17 +87,24 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure', methods:['DELETE'])]
-    public function suppressionFigure(PhotoFigureRepository $photoFigureRepo, FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, string $slug) : JsonResponse{
+    public function suppressionFigure(PhotoFigureRepository $photoFigureRepo, VideoFigureRepository $videoFigureRepo, FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, string $slug) : JsonResponse{
 
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
 
             $figure = $figureRepo->findBySlug($slug);
             $photos = $photoFigureRepo->findByFigure($figure->getId());
+            $videos = $videoFigureRepo->findByFigure($figure->getId());
 
             foreach ($photos as $photo)
             {
-                $phtFigServ->delete($photo->getImageUrl());
+                $file = $photo->getImageUrl();
+                $phtFigServ->delete($file);
                 $photoFigureRepo->remove($photo, true);
+            }
+
+            foreach ($videos as $video)
+            {
+                $videoFigureRepo->remove($video, true);
             }
             
             
@@ -170,7 +180,7 @@ class FigureController extends AbstractController
     }
     
     #[Route('/creation-figure', name: 'app_creation_figure')]
-    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ)  : Response 
+    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, VideoFigureService $vdFigServ)  : Response 
     {
 
         if($authorizationChecker->isGranted("ROLE_ADMIN")){
@@ -181,7 +191,6 @@ class FigureController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 
-                $figure = new Figure();
                 $figure = $form->getData();
                 $images = $form['image']->getData();
 
@@ -194,7 +203,14 @@ class FigureController extends AbstractController
                     $manager->persist($pht);
 
                 }
-                    
+
+                foreach($figure->getVideoFigures() as $video)
+                {
+                    $video->setFigure($figure);
+                    $manager->persist($video);
+                }
+
+
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
                 $figure->setSlug($slug);
