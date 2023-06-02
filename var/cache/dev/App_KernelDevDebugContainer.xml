@@ -6712,14 +6712,12 @@
         <argument key="phtFigServ" type="service_closure" id="App\Service\PhotoFigureService"/>
       </argument>
     </service>
-    <service id=".errored.ftkgWfz" class="App\Service\VideoFigureService"/>
-    <service id=".service_locator.q2rmHpi" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.pxsu.Bn" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="authorizationChecker" type="service_closure" id="security.authorization_checker"/>
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="phtFigServ" type="service_closure" id="App\Service\PhotoFigureService"/>
-        <argument key="vdFigServ" type="service_closure" id=".errored.ftkgWfz"/>
       </argument>
     </service>
     <service id=".service_locator.8YhWmfT" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6769,11 +6767,11 @@
         <argument key="utilisateurRepo" type="service_closure" id="App\Repository\UtilisateurRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.7I2YrO1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.acDrMjO" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AuthenticatorController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\FigureController::creationFigure" type="service_closure" id=".service_locator.q2rmHpi"/>
+        <argument key="App\Controller\FigureController::creationFigure" type="service_closure" id=".service_locator.pxsu.Bn"/>
         <argument key="App\Controller\FigureController::editionFigure" type="service_closure" id=".service_locator.qi1gJh9"/>
         <argument key="App\Controller\FigureController::liste" type="service_closure" id=".service_locator.hIklMnt"/>
         <argument key="App\Controller\FigureController::print" type="service_closure" id=".service_locator.O1lM3Dc"/>
@@ -6789,7 +6787,7 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Controller\AuthenticatorController:login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\FigureController:creationFigure" type="service_closure" id=".service_locator.q2rmHpi"/>
+        <argument key="App\Controller\FigureController:creationFigure" type="service_closure" id=".service_locator.pxsu.Bn"/>
         <argument key="App\Controller\FigureController:editionFigure" type="service_closure" id=".service_locator.qi1gJh9"/>
         <argument key="App\Controller\FigureController:liste" type="service_closure" id=".service_locator.hIklMnt"/>
         <argument key="App\Controller\FigureController:print" type="service_closure" id=".service_locator.O1lM3Dc"/>
@@ -7668,12 +7666,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.7I2YrO1"/>
+      <argument type="service" id=".service_locator.acDrMjO"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.7I2YrO1"/>
+      <argument type="service" id=".service_locator.acDrMjO"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8639,7 +8637,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.7I2YrO1"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.acDrMjO"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8663,12 +8661,12 @@
     <service id=".service_locator.UHuvhWu" alias=".service_locator.hIklMnt"/>
     <service id=".service_locator.pbHL2Ec" alias=".service_locator.YnxYWfe"/>
     <service id=".service_locator.WPooE.t" alias=".service_locator.qi1gJh9"/>
-    <service id=".service_locator.w8MNUzc" alias=".service_locator.q2rmHpi"/>
+    <service id=".service_locator.z5CQOaV" alias=".service_locator.pxsu.Bn"/>
     <service id=".service_locator.XudNM_b" alias=".service_locator.vjetzzK"/>
     <service id=".service_locator.3VNHCl_" alias=".service_locator.cA2yfBT"/>
     <service id=".service_locator.oi.6IsB" alias=".service_locator.oadqyYf"/>
     <service id=".service_locator.MFrKG0n" alias=".service_locator.ozsNm6Q"/>
-    <service id=".service_locator.DkkkYTu" alias=".service_locator.7I2YrO1"/>
+    <service id=".service_locator.durd7.c" alias=".service_locator.acDrMjO"/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
     <service id=".service_locator.twSC0oD" alias=".service_locator.XckUw1p"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
@@ -8724,7 +8722,7 @@
     <service id=".service_locator.wyyxg2O" alias=".service_locator.O1lM3Dc"/>
     <service id=".service_locator.CuzZJov" alias=".service_locator.YnxYWfe"/>
     <service id=".service_locator.1hgKxZx" alias=".service_locator.qi1gJh9"/>
-    <service id=".service_locator.a1eOc2B" alias=".service_locator.q2rmHpi"/>
+    <service id=".service_locator.EjPyAh." alias=".service_locator.pxsu.Bn"/>
     <service id=".service_locator.btPg0cP" alias=".service_locator.8YhWmfT"/>
     <service id=".service_locator.ekQhsBw" alias=".service_locator.vjetzzK"/>
     <service id=".service_locator.geiC2LE" alias=".service_locator.u8tOvUF"/>

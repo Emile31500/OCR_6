@@ -91,7 +91,7 @@ class __TwigTemplate_8a66c997c0a0e25d0e287bb77fb8d361 extends Template
         echo "</h2>
 ";
         // line 7
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 7, $this->source); })()), 'form_start');
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 7, $this->source); })()), 'form_start', ["attr" => ["id" => "figure-type"]]);
         echo "
     <p>
         ";
@@ -185,8 +185,13 @@ array_key_exists("success", $context)) {
         echo "\"></script>
     <script src=\"";
         // line 42
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/videoFieldController.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 43
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/add.js"), "html", null, true);
         echo "\"></script>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -208,7 +213,7 @@ array_key_exists("success", $context)) {
 
     public function getDebugInfo()
     {
-        return array (  188 => 42,  183 => 41,  173 => 40,  159 => 36,  153 => 33,  150 => 32,  148 => 31,  143 => 29,  140 => 28,  138 => 27,  133 => 25,  127 => 22,  121 => 19,  118 => 18,  111 => 15,  105 => 12,  99 => 9,  94 => 7,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  192 => 43,  188 => 42,  183 => 41,  173 => 40,  159 => 36,  153 => 33,  150 => 32,  148 => 31,  143 => 29,  140 => 28,  138 => 27,  133 => 25,  127 => 22,  121 => 19,  118 => 18,  111 => 15,  105 => 12,  99 => 9,  94 => 7,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -219,7 +224,7 @@ array_key_exists("success", $context)) {
 
 {% block body %}
 <h2 class=\"mb-5 mt-5\"> {{ controller_name }}</h2>
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'id': 'figure-type'}}) }}
     <p>
         {{ form_row(form.nom) }}
     </p>
@@ -254,7 +259,9 @@ array_key_exists("success", $context)) {
 
 {% block perso_javascripts %}
     <script type=\"module\" src=\"{{ asset('js/VideoFigure/module.js') }}\"></script>
+    <script src=\"{{ asset('js/VideoFigure/videoFieldController.js') }}\"></script>
     <script src=\"{{ asset('js/VideoFigure/add.js') }}\"></script>
+
 {% endblock %}
 ", "figure/creation.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/figure/creation.html.twig");
     }

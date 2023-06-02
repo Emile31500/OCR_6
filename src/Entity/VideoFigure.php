@@ -19,7 +19,7 @@ class VideoFigure
     #[Groups(['figure'])]
     private ?string $urlVideo = null;
 
-    #[ORM\ManyToOne(inversedBy: 'videoFigures')]
+    #[ORM\ManyToOne(inversedBy: 'videoFigures', cascade: ["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Figure $figure = null;
 

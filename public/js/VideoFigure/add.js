@@ -1,70 +1,64 @@
-const addVideoLink = document.createElement('button')
-addVideoLink.classList.add('add_video_list')
-addVideoLink.classList.add('btn')
-addVideoLink.classList.add('btn-light')
-addVideoLink.innerText='Ajouter une vidéo'
-addVideoLink.dataset.collectionHolderClass='videoFigures'
+let videoFields;
+let form = document.querySelector("#figure-type");
+let url;
 
-const newLinkLi = document.createElement('p').append(addVideoLink)
-
-const collectionHolder = document.querySelector('ul.videoFigures')
-
-collectionHolder.appendChild(addVideoLink)
-
-const addFormToCollection = (e) => {
-
-    e.preventDefault();
-    const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
-    const item = document.createElement('p');
-
-    item.innerHTML = collectionHolder
-        .dataset
-        .prototype
-        .replace(
-        /__name__/g,
-        collectionHolder.dataset.index
-        );
-
-    collectionHolder.appendChild(item);
-
-    collectionHolder.dataset.index++;
-}
-
-addVideoLink.addEventListener("click", addFormToCollection)
-
-document
-.querySelectorAll('.add_item_link')
-.forEach(btn => {
-btn.addEventListener("click", addFormToCollection)
-});
-
-// let addingVideoUrl = document.querySelector("#adding-video-url");
-// let urlFieldList = document.querySelector("#creation_figure_url");
-// let videoList = document.querySelector("#video_list");
-
-// console.log(urlFieldList);
-
-// addingVideoUrl.addEventListener('click', function(event){
-
-//     event.preventDefault();
-//     let url = urlFieldList.value; 
-
-//     if (url.includes("https://www.youtube.com/watch?v=") || url.includes("https://vimeo.com/")){
-        
-//         url = url.replace('https://www.youtube.com/watch?v=', '');
-//         url = url.substring(0, url.indexOf("&ab_channel"));
-
-//         videoList.innerHTML += "<span class='border rounded bg-light color-dark m-3 p-3'> " + url +"</span>"
-//         urlFieldList.value = '';
-        
-//         return true;
-
-//     } else {
-
-//         alert("Attetion:La vidéo doit contenir un lien vers une vidéo youtube")
-//         return false;
-
-//     }
+form.addEventListener('submit', function(event){
     
-// });
+    event.preventDefault();
+
+    videoFields = document.querySelectorAll(".video-figure-url");
+    
+    var data = new FormData(this);
+
+    let index = 0;
+    videoFields.forEach(videoField => {
+        
+        url = videoField.value;
+
+        if (url.includes("https://www.youtube.com/watch?v=")){
+            
+            url = url.replace('https://www.youtube.com/watch?v=', '');
+            if (url.includes("&ab_channel"))  url = url.substring(0, url.indexOf("&ab_channel"));
+            if (url.includes("&t")) url.substring(0, url.indexOf("&t"));
+            console.log(url);            
+            data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', 'https://www.youtube.com/embed/'+url);
+            index++;
+
+        } else {
+
+            alert("Attetion:La vidéo doit contenir un lien vers une vidéo youtube")
+            return false;
+
+        }
+
+    });
+
+    fetch(window.location, {
+
+        method: 'POST',
+        body: data
+
+    })
+    .then(response => response.text())
+    .then(data => {
+
+        const parser = new DOMParser();
+        const responseElement = parser.parseFromString(data, 'text/html');
+    
+        if(responseElement.querySelector('.alert-success').innerHTML !== undefined){
+
+            alert(responseElement.querySelector('.alert-success').innerHTML);
+
+        } else if (responseElement.querySelector('.alert-danger').innerHTML !== undefined) {
+
+            alert(responseElement.querySelector('.alert-success').innerHTML);
+
+        }
+    })
+    .catch(error => {
+
+        console.error(error);
+
+    });
+
+});

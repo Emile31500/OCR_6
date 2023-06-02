@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\Common\Collections\Collection;
 use App\Entity\Figure;
 use DateTimeInterface;
 use App\Entity\Message;
@@ -11,7 +12,6 @@ use App\Entity\VideoFigure;
 use App\Form\EditionFigureType;
 use App\Form\CreationFigureType;
 use App\Service\PhotoFigureService;
-use App\Service\VideoFigureService;
 use App\Repository\FigureRepository;
 use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -137,6 +137,7 @@ class FigureController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $figure = $form->getData();
+ 
                 if ($images = $form['image']->getData()) {
 
                     foreach($images as $image){
@@ -147,6 +148,15 @@ class FigureController extends AbstractController
                         $figure->addPhotoFigure($pht);
                         $manager->persist($pht);
     
+                    }
+
+                }
+
+                if ($videos = $form['videoFigures']->getData()) {
+
+                    foreach($videos as $video){
+
+                        $video->setFigure($figure);
                     }
 
                 }
@@ -180,7 +190,7 @@ class FigureController extends AbstractController
     }
     
     #[Route('/creation-figure', name: 'app_creation_figure')]
-    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, VideoFigureService $vdFigServ)  : Response 
+    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ)  : Response 
     {
 
         if($authorizationChecker->isGranted("ROLE_ADMIN")){

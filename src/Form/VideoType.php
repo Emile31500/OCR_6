@@ -18,7 +18,7 @@ class VideoType extends AbstractType
                 'label' => 'Url YouTuve/vimeo : ',
                 'attr' => [
                     'placeholder' => 'https://www.youtube.com/watch?v=..',
-                    'class' => 'form-control'
+                    'class' => 'form-control video-figure-url'
                 ]]);
 
     }

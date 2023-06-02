@@ -42,7 +42,7 @@ class Figure
     #[Groups(['figure'])]
     private Collection $photoFigures;
 
-    #[ORM\OneToMany(mappedBy: 'figure', targetEntity: VideoFigure::class)]
+    #[ORM\OneToMany(mappedBy: 'figure', targetEntity: VideoFigure::class, cascade: ["persist"])]
     #[Groups(['figure'])]
     private Collection $videoFigures;
 
@@ -183,6 +183,17 @@ class Figure
     public function getVideoFigures(): Collection
     {
         return $this->videoFigures;
+    }
+
+    public function setVideoFigures(Collection $videoFigures): self
+    {
+
+        foreach($videoFigures as $videoFigure) {
+
+            $this->addVideoFigure($videoFigure);
+        }
+
+        return $this;
     }
 
     public function addVideoFigure(VideoFigure $videoFigure): self

@@ -4,7 +4,7 @@
 
 {% block body %}
 <h2 class="mb-5 mt-5"> {{ controller_name }}</h2>
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'id': 'figure-type'}}) }}
     <p>
         {{ form_row(form.nom) }}
     </p>
@@ -39,5 +39,7 @@
 
 {% block perso_javascripts %}
     <script type="module" src="{{ asset('js/VideoFigure/module.js') }}"></script>
+    <script src="{{ asset('js/VideoFigure/videoFieldController.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/add.js') }}"></script>
+
 {% endblock %}
