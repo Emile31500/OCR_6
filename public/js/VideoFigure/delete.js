@@ -6,9 +6,16 @@ document
 
 const addTagFormDeleteLink = (item) => {
     const removeFormButton = document.createElement('button');
-    removeFormButton.innerText = 'Delete this tag';
+    removeFormButton.classList.add('btn')
+    removeFormButton.classList.add('btn-danger')
+    removeFormButton.innerText = 'Supprimer';
 
-    item.append(removeFormButton);
+    var deleteCol = document.createElement('div')
+    deleteCol.classList.add('col-auto');
+    deleteCol.append(removeFormButton);
+    
+
+    item.append(deleteCol);
 
     removeFormButton.addEventListener('click', (e) => {
         e.preventDefault();

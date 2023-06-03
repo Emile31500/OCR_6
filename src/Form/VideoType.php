@@ -15,7 +15,7 @@ class VideoType extends AbstractType
     {
         $builder
             ->add('urlVideo', UrlType::class, [
-                'label' => 'Url YouTuve/vimeo : ',
+                'label' => 'Url YouTuve : ',
                 'attr' => [
                     'placeholder' => 'https://www.youtube.com/watch?v=..',
                     'class' => 'form-control video-figure-url'

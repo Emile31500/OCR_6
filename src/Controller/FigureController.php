@@ -151,13 +151,7 @@ class FigureController extends AbstractController
                     if (false === $figure->getVideoFigures()->contains($video)) {
                         
                         $video->getFigures()->removeElement($figure);
-    
-                        // if it was a many-to-one relationship, remove the relationship like this
-                        // $video->setTask(null);
-    
                         $entityManager->persist($video);
-    
-                        // if you wanted to delete the Tag entirely, you can also do that
                         $entityManager->remove($video);
                     }
                 }
@@ -176,14 +170,14 @@ class FigureController extends AbstractController
 
                 }
 
-                if ($videos = $form['videoFigures']->getData()) {
+                // if ($videos = $form['videoFigures']->getData()) {
 
-                    foreach($videos as $video){
+                //     foreach($videos as $video){
 
-                        $video->setFigure($figure);
-                    }
+                //         $video->setFigure($figure);
+                //     }
 
-                }
+                // }
                 
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);

@@ -5,7 +5,8 @@ addVideoLink.classList.add('btn-light')
 addVideoLink.innerText='Ajouter une vidéo'
 addVideoLink.dataset.collectionHolderClass='videoFigures'
 
-const newLinkLi = document.createElement('p').append(addVideoLink)
+var newLinkLi = document.createElement('div')
+newLinkLi.append(addVideoLink)
 
 const collectionHolder = document.querySelector('ul.videoFigures')
 
@@ -17,6 +18,7 @@ const addFormToCollection = (e) => {
     const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
     const item = document.createElement('p');
+    item.classList.add('my-3');
 
     item.innerHTML = collectionHolder
         .dataset
@@ -27,9 +29,25 @@ const addFormToCollection = (e) => {
         );
 
     collectionHolder.appendChild(item);
+    // item.querySelector('#creation_figure_videoFigures_' + collectionHolder.dataset.index++).classList.add('col-auto')
+    let rowElement = item.querySelector('label').parentNode;
+    rowElement.classList.add('row');
+
+    function encapsulate(element) {
+
+        let parent = element.parentNode;
+        let divContainer = document.createElement('div');
+        divContainer.classList.add('col-auto');
+        divContainer.appendChild(element);
+        parent.appendChild(divContainer);
+
+    }
+
+    encapsulate(item.querySelector('label'));
+    encapsulate(item.querySelector('input'));
 
     collectionHolder.dataset.index++;
-    addTagFormDeleteLink(item);
+    addTagFormDeleteLink(rowElement);
 }
 
 addVideoLink.addEventListener("click", addFormToCollection)
