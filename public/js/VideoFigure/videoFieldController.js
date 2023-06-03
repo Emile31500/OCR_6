@@ -29,6 +29,7 @@ const addFormToCollection = (e) => {
     collectionHolder.appendChild(item);
 
     collectionHolder.dataset.index++;
+    addTagFormDeleteLink(item);
 }
 
 addVideoLink.addEventListener("click", addFormToCollection)

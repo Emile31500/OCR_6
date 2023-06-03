@@ -51,4 +51,16 @@ class VideoFigure
 
         return $this;
     }
+
+    public function removeFigure(Figure $figure): self
+    {
+        if ($this->Figures->removeElement($figure)) {
+            
+            if ($figure->getFigure() === $this) {
+                $figure->setFigure(null);
+            }
+        }
+
+        return $this;
+    }
 }

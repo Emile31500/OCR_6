@@ -1,5 +1,3 @@
-// assets/controllers/form-collection_controller.js
-
 import { Controller } from '@/hotwired/stimulus';
 
 export default class extends Controller {
@@ -12,7 +10,7 @@ export default class extends Controller {
 
     addCollectionElement(event)
     {
-        const item = document.createElement('p');
+        const item = document.createElement('li');
         item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
         this.collectionContainerTarget.appendChild(item);
         this.indexValue++;

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Doctrine\Common\Collections\Collection;
 use App\Entity\Figure;
 use DateTimeInterface;
 use App\Entity\Message;
@@ -17,11 +16,13 @@ use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PhotoFigureRepository;
 use App\Repository\VideoFigureRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -127,6 +128,13 @@ class FigureController extends AbstractController
             $session->start();
 
             $oldFigure = $figureRepo->findBySlug($slug);
+            $oldVideos = new ArrayCollection();
+
+            foreach ($oldFigure->getVideoFIgures() as $video) {
+                
+                $oldVideos->add($video);
+            }
+
             $figure = $oldFigure;
             
             $form = $this->createForm(CreationFigureType::class, $figure);
@@ -137,6 +145,22 @@ class FigureController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $figure = $form->getData();
+
+                foreach ($oldVideos as $video) {
+
+                    if (false === $figure->getVideoFigures()->contains($video)) {
+                        
+                        $video->getFigures()->removeElement($figure);
+    
+                        // if it was a many-to-one relationship, remove the relationship like this
+                        // $video->setTask(null);
+    
+                        $entityManager->persist($video);
+    
+                        // if you wanted to delete the Tag entirely, you can also do that
+                        $entityManager->remove($video);
+                    }
+                }
  
                 if ($images = $form['image']->getData()) {
 
