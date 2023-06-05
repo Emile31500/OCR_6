@@ -58,7 +58,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
 
     }
 
-    // line 3
+    // line 2
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -69,7 +69,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
         echo " ";
-        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 3, $this->source); })()), "html", null, true);
+        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 2, $this->source); })()), "html", null, true);
         echo " ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -79,7 +79,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
 
     }
 
-    // line 5
+    // line 3
     public function block_bodyheader($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -89,7 +89,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "bodyheader"));
 
-        // line 6
+        // line 4
         echo " <div class=\"header-body-element w-100 d-flex align-items-center justify-content-center\" style=\"background-image: url('";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/img/snowboard_wallpaper.jpg"), "html", null, true);
         echo "');
@@ -119,7 +119,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
 
     }
 
-    // line 25
+    // line 23
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -129,7 +129,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 26
+        // line 24
         echo "        <div class=\"mb-3 mt-3 d-flex justify-content-end\">
             <a href=\"#bottom-buton\">
                 <svg id=\"top-button\" width=\"18\" height=\"30\">
@@ -143,9 +143,9 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
             </a>
         </div>
         ";
-        // line 38
-        if (((isset($context["isAdmin"]) || array_key_exists("isAdmin", $context) ? $context["isAdmin"] : (function () { throw new RuntimeError('Variable "isAdmin" does not exist.', 38, $this->source); })()) == true)) {
-            // line 39
+        // line 36
+        if (((isset($context["isAdmin"]) || array_key_exists("isAdmin", $context) ? $context["isAdmin"] : (function () { throw new RuntimeError('Variable "isAdmin" does not exist.', 36, $this->source); })()) == true)) {
+            // line 37
             echo "            <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_creation_figure");
             echo "\">
@@ -170,7 +170,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
             </div>
         ";
         }
-        // line 60
+        // line 58
         echo "    <div id='tricks-card-list' class=\"my-5 row row-cols-lg-2 row-cols-md-1 g-4\">
     </div>    
     <div class=\"clear\">
@@ -201,7 +201,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
 
     }
 
-    // line 82
+    // line 80
     public function block_perso_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -211,14 +211,14 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_javascripts"));
 
-        // line 83
+        // line 81
         echo "
     <script src=\"";
-        // line 84
+        // line 82
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Figure/confirm_delete.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 85
+        // line 83
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/Figure/load.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -230,7 +230,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
 
     }
 
-    // line 87
+    // line 85
     public function block_perso_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -240,7 +240,7 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "perso_stylesheets"));
 
-        // line 88
+        // line 86
         echo "    <link rel=\"stylesheet\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/home/index.css"), "html", null, true);
         echo "\" />
@@ -271,15 +271,13 @@ class __TwigTemplate_821dfb006c0f708a776ac3e3e28b1568 extends Template
 
     public function getDebugInfo()
     {
-        return array (  244 => 88,  234 => 87,  222 => 85,  218 => 84,  215 => 83,  205 => 82,  174 => 60,  149 => 39,  147 => 38,  133 => 26,  123 => 25,  93 => 6,  83 => 5,  62 => 3,  39 => 1,);
+        return array (  244 => 86,  234 => 85,  222 => 83,  218 => 82,  215 => 81,  205 => 80,  174 => 58,  149 => 37,  147 => 36,  133 => 24,  123 => 23,  93 => 4,  83 => 3,  62 => 2,  39 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'base.html.twig' %}
-
 {% block title %} {{ controller_name }} {% endblock %}
-
 {% block bodyheader %}
  <div class=\"header-body-element w-100 d-flex align-items-center justify-content-center\" style=\"background-image: url('{{asset('media/img/snowboard_wallpaper.jpg')}}');
     height: 30vh;

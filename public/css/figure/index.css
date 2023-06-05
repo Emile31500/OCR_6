@@ -1,3 +1,7 @@
+.header-body-element{
+    height: 50vh;
+}
+
 .img-figure {
 
     max-width: 350px;
@@ -20,4 +24,23 @@
 #slug {
 
     display: none
+}
+
+#see-media{
+    display: none;
+}
+
+@media (max-width: 1000px) {
+
+    .header-body-element{
+        height: 35vh;
+    }
+
+    #media{
+        display: none;
+    }
+
+    #see-media{
+        display: inline;
+    }
 }

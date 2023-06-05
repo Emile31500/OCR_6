@@ -61,7 +61,8 @@ class FigureController extends AbstractController
         return $this->render('figure/index.html.twig', [
             'controller_name' => $figure->getNom(),
             'form' => $form->createView(),
-            'figure' => $figure
+            'figure' => $figure,
+            'imageHeader' => $figure->getPhotoFigures()[0]
         ]);
     }
 

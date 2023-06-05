@@ -1,28 +1,38 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Figure {% endblock %}
-
+{% block bodyheader %}
+ <div class="header-body-element w-100 d-flex align-items-center justify-content-center" style="background-image: url('{{asset('media/img/figures/' ~ imageHeader.imageUrl )}}');
+    background-color: rgb(0, 0, 0);
+    background-blend-mode: screen;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}">
+        <table>
+            <tr>
+                <td><h2 class="shadow fst-italic align-middle text-light text-center"> {{figure.nom}}  </h2></td>
+            </tr>
+        </table>
+        
+    </div>
+{% endblock %}
 {% block body %}
     <div class="row mt-5 mb-5 d-flex justify-content-center optional-content">
-        <div class="col text-center">
+        <div id="media" >
             {% for photo in figure.photoFigures %}
         
                 <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
 
             {% endfor %}
-            {% for photo in figure.photoFigures %}
-        
-                <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
-
-            {% endfor %}
-            {% for photo in figure.photoFigures %}
-        
-                <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
-
+            {% for video in figure.videoFigures %}
+                <iframe class="m-3" style="max-height: 155px; max-width: 250px;" src="https://www.youtube.com/embed/{{video.UrlVideo}}">
+                </iframe>
             {% endfor %}
         </div>
-        <div class="col">
-            <h2> {{ controller_name }}</h2>
+        <div class="m-5 p-1 text-center">
+
+            <button class="btn btn-primary" id="see-media"> Afficher les médias </button>
+
         </div>
     </div>
     <p class="mt-5 mb-5">
@@ -62,6 +72,7 @@
     <link rel="stylesheet" href="{{ asset('css/figure/index.css') }}">
 {% endblock %}
 {% block perso_javascripts %}
+    <script src="{{ asset('js/Figure/detail.js') }}"></script>
     <script src="{{ asset('js/Message/load.js') }}"></script>
     <script src="{{ asset('js/Message/send.js') }}"></script>
 {% endblock %}
