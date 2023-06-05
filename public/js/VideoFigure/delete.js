@@ -1,25 +1,36 @@
-document
-    .querySelectorAll('ul.videoFigures li')
-    .forEach((tag) => {
-        addTagFormDeleteLink(tag)
-    })
+let butonsDeleteVideo = document.querySelectorAll(".video-delete-button");
+let butonsDeletePhoto = document.querySelectorAll(".photo-delete-button");
+const root = 'http://' + location.hostname + ':' + location.port;
+let videoId = '';
+let videoCardSelector = ''
+let videoDOM = ''
 
-const addTagFormDeleteLink = (item) => {
-    const removeFormButton = document.createElement('button');
-    removeFormButton.classList.add('btn')
-    removeFormButton.classList.add('btn-danger')
-    removeFormButton.innerText = 'Supprimer';
+butonsDeleteVideo.forEach(btn => {
 
-    var deleteCol = document.createElement('div')
-    deleteCol.classList.add('col-auto');
-    deleteCol.append(removeFormButton);
-    
+    btn.addEventListener('click', function(e){
 
-    item.append(deleteCol);
-
-    removeFormButton.addEventListener('click', (e) => {
         e.preventDefault();
-        // remove the li for the tag form
-        item.remove();
+        videoId = btn.getAttribute('videodelbtn');
+        videoCardSelector = "card_video_" + videoId;
+
+        document.getElementById(videoCardSelector).remove();
+
+        fetch(root + '/figure/video/supprimer/' + videoId, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+        
+            console.log(data)
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
     });
-}
+
+});

@@ -1,6 +1,8 @@
-let videoFields;
-let form = document.querySelector("#figure-type");
-let url;
+let videoFields = '';
+let form = document.getElementById("figure-type");
+let url = '';
+
+console.log(form);
 
 form.addEventListener('submit', function(event){
     
@@ -20,7 +22,6 @@ form.addEventListener('submit', function(event){
             url = url.replace('https://www.youtube.com/watch?v=', '');
             if (url.includes("&ab_channel"))  url = url.substring(0, url.indexOf("&ab_channel"));
             if (url.includes("&t")) url.substring(0, url.indexOf("&t"));
-            console.log(url);            
             data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', 'https://www.youtube.com/embed/'+url);
             index++;
 
@@ -57,7 +58,7 @@ form.addEventListener('submit', function(event){
     })
     .catch(error => {
 
-        console.error(error);
+        alert("Erreur : " + error);
 
     });
 

@@ -42,16 +42,20 @@ return [
                     .'|/(?'
                         .'|([^/]++)(*:191)'
                         .'|liste/([^/]++)(*:213)'
+                        .'|video(?'
+                            .'|s/([^/]++)(*:239)'
+                            .'|/supprimer/([^/]++)(*:266)'
+                        .')'
                     .')'
-                    .'|\\-suppression/([^/]++)(*:244)'
+                    .'|\\-suppression/([^/]++)(*:298)'
                 .')'
-                .'|/edition\\-figure/([^/]++)(*:278)'
+                .'|/edition\\-figure/([^/]++)(*:332)'
                 .'|/m(?'
-                    .'|odifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:327)'
-                    .'|essage/([^/]++)(*:350)'
+                    .'|odifier\\-le\\-mot\\-de\\-passe/([^/]++)(*:381)'
+                    .'|essage/([^/]++)(*:404)'
                 .')'
-                .'|/verifier\\-email/([^/]++)(*:384)'
-                .'|/(.*)(*:397)'
+                .'|/verifier\\-email/([^/]++)(*:438)'
+                .'|/(.*)(*:451)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -64,12 +68,14 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         191 => [[['_route' => 'app_figure', '_controller' => 'App\\Controller\\FigureController::liste'], ['slug'], null, null, false, true, null]],
         213 => [[['_route' => 'app_figure_liste', '_controller' => 'App\\Controller\\FigureController::print'], ['max_result'], ['GET' => 0], null, false, true, null]],
-        244 => [[['_route' => 'app_supression_figure', '_controller' => 'App\\Controller\\FigureController::suppressionFigure'], ['slug'], ['DELETE' => 0], null, false, true, null]],
-        278 => [[['_route' => 'app_edition_figure', '_controller' => 'App\\Controller\\FigureController::editionFigure'], ['slug'], null, null, false, true, null]],
-        327 => [[['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], ['POST' => 0], null, false, true, null]],
-        350 => [[['_route' => 'app_message', '_controller' => 'App\\Controller\\MessageController::message'], ['slug'], ['GET' => 0], null, false, true, null]],
-        384 => [[['_route' => 'app_verif_email', '_controller' => 'App\\Controller\\RegistrationController::verification'], ['code_verification'], ['GET' => 0], null, false, true, null]],
-        397 => [
+        239 => [[['_route' => 'app_get_video_figure', '_controller' => 'App\\Controller\\VideoFigureController::get'], ['slug'], ['GET' => 0], null, false, true, null]],
+        266 => [[['_route' => 'app_delete_video_figure', '_controller' => 'App\\Controller\\VideoFigureController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        298 => [[['_route' => 'app_supression_figure', '_controller' => 'App\\Controller\\FigureController::suppressionFigure'], ['slug'], ['DELETE' => 0], null, false, true, null]],
+        332 => [[['_route' => 'app_edition_figure', '_controller' => 'App\\Controller\\FigureController::editionFigure'], ['slug'], null, null, false, true, null]],
+        381 => [[['_route' => 'app_edit_password', '_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], ['code_recup'], ['POST' => 0], null, false, true, null]],
+        404 => [[['_route' => 'app_message', '_controller' => 'App\\Controller\\MessageController::message'], ['slug'], ['GET' => 0], null, false, true, null]],
+        438 => [[['_route' => 'app_verif_email', '_controller' => 'App\\Controller\\RegistrationController::verification'], ['code_verification'], ['GET' => 0], null, false, true, null]],
+        451 => [
             [['_route' => 'error404', '_controller' => 'App\\Controller\\ErrorController::error404'], ['wildcard'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

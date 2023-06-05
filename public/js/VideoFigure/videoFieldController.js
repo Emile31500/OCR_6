@@ -13,7 +13,7 @@ const collectionHolder = document.querySelector('ul.videoFigures')
 collectionHolder.appendChild(addVideoLink)
 
 const addFormToCollection = (e) => {
-
+    
     e.preventDefault();
     const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
@@ -29,7 +29,7 @@ const addFormToCollection = (e) => {
         );
 
     collectionHolder.appendChild(item);
-    // item.querySelector('#creation_figure_videoFigures_' + collectionHolder.dataset.index++).classList.add('col-auto')
+
     let rowElement = item.querySelector('label').parentNode;
     rowElement.classList.add('row');
 
@@ -46,9 +46,12 @@ const addFormToCollection = (e) => {
     encapsulate(item.querySelector('label'));
     encapsulate(item.querySelector('input'));
 
+
     collectionHolder.dataset.index++;
     addTagFormDeleteLink(rowElement);
+    
 }
+
 
 addVideoLink.addEventListener("click", addFormToCollection)
 
@@ -57,5 +60,4 @@ document
 .forEach(btn => {
 btn.addEventListener("click", addFormToCollection)
 });
-
 

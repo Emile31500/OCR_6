@@ -410,6 +410,13 @@
         <argument type="service" id=".service_locator.CshazM0.App\Controller\RegistrationController"/>
       </call>
     </service>
+    <service id="App\Controller\VideoFigureController" class="App\Controller\VideoFigureController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\VideoFigureController"/>
+      </call>
+    </service>
     <service id="App\Form\CreationFigureType" class="App\Form\CreationFigureType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -6310,6 +6317,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\VideoFigureController" class="App\Controller\VideoFigureController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\VideoFigureController" class="App\Controller\VideoFigureController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\VideoFigureController" class="App\Controller\VideoFigureController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CreationFigureType" class="App\Form\CreationFigureType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CreationFigureType" class="App\Form\CreationFigureType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EditPsswFormType" class="App\Form\EditPsswFormType" autowire="true" abstract="true"/>
@@ -6767,7 +6777,23 @@
         <argument key="utilisateurRepo" type="service_closure" id="App\Repository\UtilisateurRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.acDrMjO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.MFAYf9t" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="figureRepository" type="service_closure" id="App\Repository\FigureRepository"/>
+        <argument key="serializer" type="service_closure" id="debug.serializer"/>
+        <argument key="videoFigureRepository" type="service_closure" id="App\Repository\VideoFigureRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.MyHGl4g" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="serializer" type="service_closure" id="debug.serializer"/>
+        <argument key="videoFigureRepository" type="service_closure" id="App\Repository\VideoFigureRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.ndjg0J0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AuthenticatorController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
@@ -6782,6 +6808,8 @@
         <argument key="App\Controller\MessageController::message" type="service_closure" id=".service_locator.cA2yfBT"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.oadqyYf"/>
         <argument key="App\Controller\RegistrationController::verification" type="service_closure" id=".service_locator.ozsNm6Q"/>
+        <argument key="App\Controller\VideoFigureController::delete" type="service_closure" id=".service_locator.MyHGl4g"/>
+        <argument key="App\Controller\VideoFigureController::get" type="service_closure" id=".service_locator.MFAYf9t"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -6798,6 +6826,8 @@
         <argument key="App\Controller\MessageController:message" type="service_closure" id=".service_locator.cA2yfBT"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.oadqyYf"/>
         <argument key="App\Controller\RegistrationController:verification" type="service_closure" id=".service_locator.ozsNm6Q"/>
+        <argument key="App\Controller\VideoFigureController:delete" type="service_closure" id=".service_locator.MyHGl4g"/>
+        <argument key="App\Controller\VideoFigureController:get" type="service_closure" id=".service_locator.MFAYf9t"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -7389,6 +7419,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.CshazM0" method="withContext"/>
     </service>
+    <service id=".service_locator.CshazM0.App\Controller\VideoFigureController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\VideoFigureController"/>
+      <argument>App\Controller\VideoFigureController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
     <service id=".service_locator.fuYM_Z." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7666,12 +7702,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.acDrMjO"/>
+      <argument type="service" id=".service_locator.ndjg0J0"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.acDrMjO"/>
+      <argument type="service" id=".service_locator.ndjg0J0"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8637,7 +8673,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.acDrMjO"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.ndjg0J0"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8666,7 +8702,9 @@
     <service id=".service_locator.3VNHCl_" alias=".service_locator.cA2yfBT"/>
     <service id=".service_locator.oi.6IsB" alias=".service_locator.oadqyYf"/>
     <service id=".service_locator.MFrKG0n" alias=".service_locator.ozsNm6Q"/>
-    <service id=".service_locator.durd7.c" alias=".service_locator.acDrMjO"/>
+    <service id=".service_locator.zstklsl" alias=".service_locator.MFAYf9t"/>
+    <service id=".service_locator.mkvl3sy" alias=".service_locator.MyHGl4g"/>
+    <service id=".service_locator.DJhXIgO" alias=".service_locator.ndjg0J0"/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
     <service id=".service_locator.twSC0oD" alias=".service_locator.XckUw1p"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
@@ -8729,6 +8767,8 @@
     <service id=".service_locator.SqQ5qdu" alias=".service_locator.cA2yfBT"/>
     <service id=".service_locator.v7a15fM" alias=".service_locator.oadqyYf"/>
     <service id=".service_locator.bLNTNT9" alias=".service_locator.ozsNm6Q"/>
+    <service id=".service_locator.ukxkLy." alias=".service_locator.MFAYf9t"/>
+    <service id=".service_locator.A9aawHv" alias=".service_locator.MyHGl4g"/>
     <service id=".service_locator.Kyflpr1" alias=".service_locator.CshazM0"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>
     <service id=".service_locator.hnz5ZNh" alias=".service_locator.0TACwl3"/>

@@ -69,13 +69,13 @@ class VideoFigureRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?VideoFigure
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findById(int $id): ?VideoFigure
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

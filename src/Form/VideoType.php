@@ -16,6 +16,7 @@ class VideoType extends AbstractType
         $builder
             ->add('urlVideo', UrlType::class, [
                 'label' => 'Url YouTuve : ',
+                'mapped' => false,
                 'attr' => [
                     'placeholder' => 'https://www.youtube.com/watch?v=..',
                     'class' => 'form-control video-figure-url'
@@ -25,8 +26,8 @@ class VideoType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-             'data_class' => VideoFigure::class,
-        ]);
+        // $resolver->setDefaults([
+        //      'data_class' => VideoFigure::class,
+        // ]);
     }
 }

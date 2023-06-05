@@ -57,6 +57,7 @@ class CreationFigureType extends AbstractType
             ->add('videoFigures', CollectionType::class, [
                 'entry_type' => VideoType::class,
                 //'entry_options' => ['label' => false],
+                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true
             ])

@@ -130,7 +130,7 @@ class FigureController extends AbstractController
             $oldFigure = $figureRepo->findBySlug($slug);
             $oldVideos = new ArrayCollection();
 
-            foreach ($oldFigure->getVideoFIgures() as $video) {
+            foreach ($oldFigure->getVideoFigures() as $video) {
                 
                 $oldVideos->add($video);
             }
@@ -145,7 +145,8 @@ class FigureController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $figure = $form->getData();
-
+                $videos = $form->get('videoFigures');
+                
                 foreach ($oldVideos as $video) {
 
                     if (false === $figure->getVideoFigures()->contains($video)) {
@@ -169,15 +170,16 @@ class FigureController extends AbstractController
                     }
 
                 }
+                
+                foreach($videos as $video){
 
-                // if ($videos = $form['videoFigures']->getData()) {
+                    $vd = new VideoFigure();
+                    $vd->setUrlVideo($video['urlVideo']->getData());
+                    $figure->addVideoFigure($vd);
+                    $manager->persist($vd);
 
-                //     foreach($videos as $video){
+                }
 
-                //         $video->setFigure($figure);
-                //     }
-
-                // }
                 
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
@@ -189,13 +191,28 @@ class FigureController extends AbstractController
 
             }
            
-            
-            return $this->render('figure/edition.html.twig', [
-                'controller_name' => 'Edition d\'une figure',
-                'form' => $form->createView(),
-                'figure' => $oldFigure,
+            try {
 
-            ]);
+                return $this->render('figure/edition.html.twig', [
+                    'controller_name' => 'Edition d\'une figure',
+                    'form' => $form->createView(),
+                    'success' => 'Figure enregistré',
+                    'figure' => $oldFigure,
+    
+                ]);
+
+            } catch(UniqueConstraintViolationException $e) {
+
+                return $this->render('figure/edition.html.twig', [
+                    'controller_name' => 'Edition d\'une figure',
+                    'form' => $form->createView(),
+                    'error' => 'Attention : il y a un duplicata sur un des champs ! ',
+                    'figure' => $oldFigure,
+    
+                ]);
+
+            }
+            
 
         } else {
 
@@ -221,6 +238,8 @@ class FigureController extends AbstractController
                 
                 $figure = $form->getData();
                 $images = $form['image']->getData();
+                // $videos = $form['videoFigures']->getData();
+                $videos = $form->get('videoFigures');
 
                 foreach($images as $image){
 
@@ -232,13 +251,15 @@ class FigureController extends AbstractController
 
                 }
 
-                foreach($figure->getVideoFigures() as $video)
-                {
-                    $video->setFigure($figure);
-                    $manager->persist($video);
+                foreach($videos as $video){
+
+                    $vd = new VideoFigure();
+                    $vd->setUrlVideo($video['urlVideo']->getData());
+                    $figure->addVideoFigure($vd);
+                    $manager->persist($vd);
+
                 }
-
-
+                
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
                 $figure->setSlug($slug);

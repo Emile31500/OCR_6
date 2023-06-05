@@ -191,11 +191,7 @@ array_key_exists("success", $context)) {
         // line 43
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/delete.js"), "html", null, true);
         echo "\"></script>
-    <script src=\"";
-        // line 44
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/add.js"), "html", null, true);
-        echo "\"></script>
-";
+    ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -216,7 +212,7 @@ array_key_exists("success", $context)) {
 
     public function getDebugInfo()
     {
-        return array (  196 => 44,  192 => 43,  188 => 42,  183 => 41,  173 => 40,  159 => 36,  153 => 33,  150 => 32,  148 => 31,  143 => 29,  140 => 28,  138 => 27,  133 => 25,  127 => 22,  122 => 19,  117 => 16,  111 => 15,  105 => 12,  99 => 9,  94 => 7,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  192 => 43,  188 => 42,  183 => 41,  173 => 40,  159 => 36,  153 => 33,  150 => 32,  148 => 31,  143 => 29,  140 => 28,  138 => 27,  133 => 25,  127 => 22,  122 => 19,  117 => 16,  111 => 15,  105 => 12,  99 => 9,  94 => 7,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -264,7 +260,7 @@ array_key_exists("success", $context)) {
     <script type=\"module\" src=\"{{ asset('js/VideoFigure/module.js') }}\"></script>
     <script src=\"{{ asset('js/VideoFigure/videoFieldController.js') }}\"></script>
     <script src=\"{{ asset('js/VideoFigure/delete.js') }}\"></script>
-    <script src=\"{{ asset('js/VideoFigure/add.js') }}\"></script>
+    {# <script src=\"{{ asset('js/VideoFigure/add.js') }}\"></script> #}
 {% endblock %}
 ", "figure/creation.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/figure/creation.html.twig");
     }

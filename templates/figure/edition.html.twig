@@ -4,22 +4,32 @@
 
 {% block body %}
 <h2 class="mb-5 mt-5"> {{ controller_name }}</h2>
- {{ form_start(form) }}
+ {{ form_start(form, {'attr': {'id': 'figure-type'}}) }}
     <p>
         {{ form_row(form.nom) }}
     </p>
     <p>
-        {% for photo in figure.photoFigures %}
-            
-            <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+        <div class="row">
+            {% for photo in figure.photoFigures %}
+                <div class="card m-3" id="card_photo_{{ photo.id }}" style="width: 18rem">  
+                    <img class="card-img-top" id='photo_figure_{{ photo.id }}' src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+                    <div class="card-footer">
+                        <button class="btn btn-danger image-delete-button" photodelbtn="{{photo.id}}" > Supprimer </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
-        {% endfor %}
-
-        {% for video in figure.videoFigures %}
-
-            <iframe width="420" height="315" src="{{ video.urlVideo }}"></iframe> 
-
-        {% endfor %}
+        <div class="row">
+            {% for video in figure.videoFigures %}
+                <div class="card m-3" id="card_video_{{ video.id }}" style="width: 18rem">  
+                    <iframe width="250" height="140" id='video_figure_{{ video.id}}' src="{{ video.urlVideo }}"></iframe>
+                    <div class="card-footer">
+                        <button class="btn btn-danger video-delete-button" videodelbtn="{{video.id}}" > Supprimer </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
         {{ form_row(form.image) }}
 
@@ -38,13 +48,22 @@
     <p>
         {{ form_row(form.submit) }}
     </p>
+    {% if error is defined %}
+        <p class="alert alert-danger">
+            {{ error }}
+        </p>
+    {% elseif success is defined %}
+        <p class="alert alert-success">
+            {{ success }}
+        </p>
+    {% endif %}
  {{ form_end(form) }}
 {% endblock %}
 
 {% block perso_javascripts %}
     <script type="module" src="{{ asset('js/VideoFigure/module.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/videoFieldController.js') }}"></script>
-    <script src="{{ asset('js/VideoFigure/delete.js') }}"></script>
+    <script src="{{ asset('js/VideoFigure/cancel.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/add.js') }}"></script>
-  
+    <script src="{{ asset('js/VideoFigure/delete.js') }}"></script>
 {% endblock %}
