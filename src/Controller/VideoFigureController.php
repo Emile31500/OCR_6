@@ -47,7 +47,7 @@ class VideoFigureController extends AbstractController
         
         } else {
 
-            throw new HttpException(JsonResponse::HTTP_BAD_REQUEST, "User invalide");
+            throw new HttpException(JsonResponse::HTTP_BAD_REQUEST, "Requête invalide");
 
         }
         

@@ -14,7 +14,7 @@
                 <div class="card m-3" id="card_photo_{{ photo.id }}" style="width: 18rem">  
                     <img class="card-img-top" id='photo_figure_{{ photo.id }}' src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
                     <div class="card-footer">
-                        <button class="btn btn-danger image-delete-button" photodelbtn="{{photo.id}}" > Supprimer </button>
+                        <button class="btn btn-danger photo-delete-button" photodelbtn="{{photo.id}}" > Supprimer </button>
                     </div>
                 </div>
             {% endfor %}
@@ -66,4 +66,6 @@
     <script src="{{ asset('js/VideoFigure/cancel.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/add.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/delete.js') }}"></script>
+    <script src="{{ asset('js/PhotoFigure/delete.js') }}"></script>
+
 {% endblock %}

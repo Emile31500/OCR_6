@@ -117,7 +117,7 @@ class __TwigTemplate_9db760ac05b55405c8149080073b759c extends Template
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("media/img/figures/" . twig_get_attribute($this->env, $this->source, $context["photo"], "ImageUrl", [], "any", false, false, false, 15))), "html", null, true);
             echo "\">
                     <div class=\"card-footer\">
-                        <button class=\"btn btn-danger image-delete-button\" photodelbtn=\"";
+                        <button class=\"btn btn-danger photo-delete-button\" photodelbtn=\"";
             // line 17
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["photo"], "id", [], "any", false, false, false, 17), "html", null, true);
             echo "\" > Supprimer </button>
@@ -254,15 +254,19 @@ array_key_exists("success", $context)) {
         // line 66
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/cancel.js"), "html", null, true);
         echo "\"></script>
-    ";
-        // line 68
-        echo "    <script src=\"";
+    <script src=\"";
+        // line 67
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/add.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 69
+        // line 68
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/VideoFigure/delete.js"), "html", null, true);
         echo "\"></script>
+    <script src=\"";
+        // line 69
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/PhotoFigure/delete.js"), "html", null, true);
+        echo "\"></script>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -284,7 +288,7 @@ array_key_exists("success", $context)) {
 
     public function getDebugInfo()
     {
-        return array (  264 => 69,  259 => 68,  255 => 66,  251 => 65,  246 => 64,  236 => 63,  223 => 60,  217 => 57,  214 => 56,  212 => 55,  207 => 53,  204 => 52,  202 => 51,  197 => 49,  191 => 46,  185 => 42,  180 => 39,  174 => 38,  167 => 34,  163 => 32,  153 => 28,  146 => 26,  141 => 25,  137 => 24,  132 => 21,  122 => 17,  115 => 15,  110 => 14,  106 => 13,  99 => 9,  94 => 7,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  267 => 69,  263 => 68,  259 => 67,  255 => 66,  251 => 65,  246 => 64,  236 => 63,  223 => 60,  217 => 57,  214 => 56,  212 => 55,  207 => 53,  204 => 52,  202 => 51,  197 => 49,  191 => 46,  185 => 42,  180 => 39,  174 => 38,  167 => 34,  163 => 32,  153 => 28,  146 => 26,  141 => 25,  137 => 24,  132 => 21,  122 => 17,  115 => 15,  110 => 14,  106 => 13,  99 => 9,  94 => 7,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -305,7 +309,7 @@ array_key_exists("success", $context)) {
                 <div class=\"card m-3\" id=\"card_photo_{{ photo.id }}\" style=\"width: 18rem\">  
                     <img class=\"card-img-top\" id='photo_figure_{{ photo.id }}' src=\"{{ asset('media/img/figures/' ~ photo.ImageUrl) }}\">
                     <div class=\"card-footer\">
-                        <button class=\"btn btn-danger image-delete-button\" photodelbtn=\"{{photo.id}}\" > Supprimer </button>
+                        <button class=\"btn btn-danger photo-delete-button\" photodelbtn=\"{{photo.id}}\" > Supprimer </button>
                     </div>
                 </div>
             {% endfor %}
@@ -355,9 +359,10 @@ array_key_exists("success", $context)) {
     <script type=\"module\" src=\"{{ asset('js/VideoFigure/module.js') }}\"></script>
     <script src=\"{{ asset('js/VideoFigure/videoFieldController.js') }}\"></script>
     <script src=\"{{ asset('js/VideoFigure/cancel.js') }}\"></script>
-    {# <script src=\"{{ asset('js/VideoFigure/load.js') }}\"></script> #}
     <script src=\"{{ asset('js/VideoFigure/add.js') }}\"></script>
     <script src=\"{{ asset('js/VideoFigure/delete.js') }}\"></script>
+    <script src=\"{{ asset('js/PhotoFigure/delete.js') }}\"></script>
+
 {% endblock %}
 ", "figure/edition.html.twig", "/opt/lampp/htdocs/Projet OC6/templates/figure/edition.html.twig");
     }

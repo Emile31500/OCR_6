@@ -1,5 +1,4 @@
 let butonsDeleteVideo = document.querySelectorAll(".video-delete-button");
-let butonsDeletePhoto = document.querySelectorAll(".photo-delete-button");
 const root = 'http://' + location.hostname + ':' + location.port;
 let videoId = '';
 let videoCardSelector = ''
@@ -12,9 +11,7 @@ butonsDeleteVideo.forEach(btn => {
         e.preventDefault();
         videoId = btn.getAttribute('videodelbtn');
         videoCardSelector = "card_video_" + videoId;
-
-        document.getElementById(videoCardSelector).remove();
-
+        
         fetch(root + '/figure/video/supprimer/' + videoId, {
             method: 'DELETE',
             headers: {
@@ -24,11 +21,11 @@ butonsDeleteVideo.forEach(btn => {
         .then(response => response.json())
         .then(data => {
         
-            console.log(data)
+            document.getElementById(videoCardSelector).remove();
 
         })
         .catch(error => {
-            console.log(error);
+            alert(error);
         });
 
     });

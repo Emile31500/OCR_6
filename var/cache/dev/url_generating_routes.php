@@ -27,6 +27,7 @@ return [
     'app_edit_password' => [['code_recup'], ['_controller' => 'App\\Controller\\ForgetPasswordController::editPassword'], [], [['variable', '/', '[^/]++', 'code_recup', true], ['text', '/modifier-le-mot-de-passe']], [], [], []],
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'app_message' => [['slug'], ['_controller' => 'App\\Controller\\MessageController::message'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/message']], [], [], []],
+    'app_delete_photo_figure' => [['id'], ['_controller' => 'App\\Controller\\PhotoFigureController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/figure/photo/supprimer']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/inscription']], [], [], []],
     'app_verif_email' => [['code_verification'], ['_controller' => 'App\\Controller\\RegistrationController::verification'], [], [['variable', '/', '[^/]++', 'code_verification', true], ['text', '/verifier-email']], [], [], []],
     'app_get_video_figure' => [['slug'], ['_controller' => 'App\\Controller\\VideoFigureController::get'], [], [['variable', '/', '[^/]++', 'slug', true], ['text', '/figure/videos']], [], [], []],
