@@ -43,14 +43,14 @@ class MessageRepository extends ServiceEntityRepository
 //    /**
 //     * @return Message[] Returns an array of Message objects
 //     */
-    public function findByFigure(int $value): array
+    public function findByFigure(int $value, int $max = 10): array
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.figure = :val')
             ->setParameter('val', $value)
             ->orderBy('m.date', 'ASC')
+            ->setMaxResults($max)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 }

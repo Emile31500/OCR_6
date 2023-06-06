@@ -21,6 +21,7 @@ class MessageType extends AbstractType
                 ]
             ])
             ->add('submit', SubmitType::class, [
+                'label' => ' Envoyer ',
                 "attr" => [
                     'class' => 'btn btn-primary position-relative start-50'
                 ]
