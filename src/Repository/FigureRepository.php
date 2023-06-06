@@ -48,7 +48,7 @@ class FigureRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('f')
             ->andWhere('f.statu = :val')
             ->setParameter('val', 'published')
-            ->orderBy('f.id', 'ASC');
+            ->orderBy('f.editedDate', 'ASC');
 
         if ($max_result > 1) {
             

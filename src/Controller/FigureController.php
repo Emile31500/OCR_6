@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Figure;
-use DateTimeInterface;
 use App\Entity\Message;
 use App\Form\MessageType;
 use App\Entity\PhotoFigure;
@@ -137,16 +136,14 @@ class FigureController extends AbstractController
             }
 
             $figure = $oldFigure;
-            
             $form = $this->createForm(CreationFigureType::class, $figure);
-            
-
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $figure = $form->getData();
                 $videos = $form->get('videoFigures');
+                $figure->setEditedDate(new \DateTime());
                 
                 foreach ($oldVideos as $video) {
 
@@ -190,31 +187,37 @@ class FigureController extends AbstractController
                 $manager->persist($figure);
                 $manager->flush();
 
-            }
-           
-            try {
+                try {
 
-                return $this->render('figure/edition.html.twig', [
-                    'controller_name' => 'Edition d\'une figure',
-                    'form' => $form->createView(),
-                    'success' => 'Figure enregistré',
-                    'figure' => $oldFigure,
+                    return $this->render('figure/edition.html.twig', [
+                        'controller_name' => 'Edition d\'une figure',
+                        'form' => $form->createView(),
+                        'success' => 'Figure enregistré',
+                        'figure' => $oldFigure,
+        
+                    ]);
     
-                ]);
-
-            } catch(UniqueConstraintViolationException $e) {
-
-                return $this->render('figure/edition.html.twig', [
-                    'controller_name' => 'Edition d\'une figure',
-                    'form' => $form->createView(),
-                    'error' => 'Attention : il y a un duplicata sur un des champs ! ',
-                    'figure' => $oldFigure,
+                } catch(UniqueConstraintViolationException $e) {
     
-                ]);
+                    return $this->render('figure/edition.html.twig', [
+                        'controller_name' => 'Edition d\'une figure',
+                        'form' => $form->createView(),
+                        'error' => 'Attention : il y a un duplicata sur un des champs ! ',
+                        'figure' => $oldFigure,
+        
+                    ]);
+    
+                }
 
             }
-            
 
+            return $this->render('figure/edition.html.twig', [
+                'controller_name' => 'Edition d\'une figure',
+                'form' => $form->createView(),
+                'figure' => $oldFigure,
+
+            ]);
+        
         } else {
 
             return $this->render('home/index.html.twig', [

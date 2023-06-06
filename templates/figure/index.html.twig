@@ -38,7 +38,18 @@
     <p class="mt-5 mb-5">
         {{ figure.article|nl2br}}
     </p>
-     <div>
+    <p>
+        <span class="p-2 m-3 mx-5 bg-light rounded">
+            {{ figure.createdDate|format_datetime('full', 'short', locale='fr') }}
+        </span>
+
+    {% if figure.createdDate != figure.editedDate %}
+        <span class="p-2 m-3 mx-5 bg-light rounded">
+            {{ figure.createdDate|format_datetime('full', 'short', locale='fr') }}
+        </span>
+    {% endif %}
+    </p>
+    <div>
         {% if app.user %}
             {{ form_start(form, {'attr': {'id': 'message-form', 'class': 'row my-5'}}) }}
                 <div class="col-9 md-col-8">
