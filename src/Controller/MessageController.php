@@ -13,15 +13,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MessageController extends AbstractController{
 
-    #[Route('/message/{slug}', name: 'app_message', methods: ['GET'])]
-    public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, string $slug) : JsonResponse {
+    #[Route('/message/{slug}', name: 'app_message', methods: ['POST'])]
+    public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, Request $request, string $slug) : JsonResponse {
+        
+        $max = $request->toArray()['max_result'];
 
         $figure = $figureRepository->findBySlug($slug);
-        $messages_obj = $messageRepo->findByFigure($figure->getId());
-        $max = count($messages_obj);
+        $messages_obj = $messageRepo->findByFigure($figure->getId(), $max);
+        $nbMessage = count($messages_obj);
         $message = [];
 
-        for ($i=0; $i < $max; $i++) { 
+        for ($i=0; $i < $nbMessage; $i++) { 
 
             $temp["nom_utilisateur"] = $messages_obj[$i]->getUtilisateur()->getNomUtilisateur();
             $temp["message"] = $messages_obj[$i]->getMessage();
@@ -30,7 +32,7 @@ class MessageController extends AbstractController{
             array_push($message, $temp);
             unset($temp);
 
-        } 
+        }
 
         return new JsonResponse($message);
     }
