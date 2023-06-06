@@ -2,8 +2,6 @@ let videoFields = '';
 let form = document.getElementById("figure-type");
 let url = '';
 
-console.log(form);
-
 form.addEventListener('submit', function(event){
     
     event.preventDefault();
@@ -45,7 +43,8 @@ form.addEventListener('submit', function(event){
 
         const parser = new DOMParser();
         const responseElement = parser.parseFromString(data, 'text/html');
-    
+        console.log(responseElement);
+
         if(responseElement.querySelector('.alert-success').innerHTML !== undefined){
 
             alert(responseElement.querySelector('.alert-success').innerHTML);

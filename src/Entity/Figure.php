@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FigureRepository;
 use Doctrine\Common\Collections\Collection;
@@ -33,6 +34,12 @@ class Figure
     #[ORM\Column(length: 10, options : ["default" => "published"])]
     #[Groups(['figure'])]
     private ?string $statu = "published";
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options : ["default" => "CURRENT_TIMESTAMP"])]
+    private ?\DateTimeInterface $createdDate;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options : ["default" => "CURRENT_TIMESTAMP"])]
+    private ?\DateTimeInterface $editedDate;
 
     #[ORM\OneToMany(mappedBy: 'figure', targetEntity: Message::class)]
     #[Groups(['figure'])]
@@ -102,6 +109,35 @@ class Figure
     public function setStatu(string $statu): self
     {
         $this->statu = $statu;
+
+        return $this;
+    }
+
+    public function getCreatedDate(): ?\DateTimeInterface {
+
+        return $this->createdDate;
+
+    }
+
+    public function setCreatedDate(\DateTimeInterface $date): self
+    {
+        
+        return $this->createdDate = $date;
+
+        return $this;
+
+    }
+
+    public function getEditedDate(): ?\DateTimeInterface 
+    {
+
+        return $this->editedDate;
+
+    }
+
+    public function setEditedDate(\DateTimeInterface $date): self
+    {
+        $this->editedDate = $date;
 
         return $this;
     }
