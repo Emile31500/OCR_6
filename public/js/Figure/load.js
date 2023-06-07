@@ -24,7 +24,6 @@ function loadFigure()
         console.error(error);
     });
 
-    
 }
 
 loadFigure();
@@ -32,7 +31,11 @@ loadFigure();
 button.addEventListener('click', function(){
 
     nb_clique++;
-    loadFigure();
+    loadFigure()
+    if (document.querySelectorAll('.tricks-card').length >= 15) {
 
+        document.querySelector('#content-footer').innerHTML = '<a href="#top-button"><svg id="bottom-buton" width="18" height="30"><defs><marker id="arrow" viewBox="0 -5 10 10" refX="5" refY="0" markerWidth="4" markerHeight="4" orient="auto"><path class="cool" d="M0,-5L10,0L0,5" class="arrowHead"></path></marker></defs><line class="cool" x1="9" y1="30" x2="9" y2="8" stroke="teal" stroke-width="4" marker-end="url(#arrow)"></line></svg></a>'
+    
+    }
 })
     

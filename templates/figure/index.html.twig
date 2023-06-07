@@ -18,15 +18,26 @@
 {% endblock %}
 {% block body %}
     <div class="row mt-5 mb-5 d-flex justify-content-center optional-content">
-        <div id="media" >
+        <div class="row">
             {% for photo in figure.photoFigures %}
-        
-                <img class="m-3" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
-
+                <div class="col m-1 p-1" media-container>
+                    <img style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+                </div>
             {% endfor %}
+            <div class="col m-1 p-1" media-container>
+                <img style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/647c398136faejpg') }}">
+            </div>
+            <div class="col m-1 p-1" media-container>
+                <img style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/647c398136faejpg') }}">
+            </div>
+            <div class="col m-1 p-1" media-container>
+                <img style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/647c398136faejpg') }}">
+            </div>
             {% for video in figure.videoFigures %}
-                <iframe class="m-3" style="max-height: 155px; max-width: 250px;" src="https://www.youtube.com/embed/{{video.UrlVideo}}">
-                </iframe>
+                <div class="col m-1 p-1" media-container>
+                    <iframe width="250" height="155" src="https://www.youtube.com/embed/{{video.UrlVideo}}">
+                    </iframe>
+                </div>
             {% endfor %}
         </div>
         <div class="m-5 p-1 text-center">
