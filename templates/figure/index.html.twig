@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Figure {% endblock %}
 {% block bodyheader %}
- <div class="header-body-element w-100 d-flex align-items-center justify-content-center" style="background-image: url('{{asset('media/img/figures/' ~ imageHeader.imageUrl )}}');
+ <div class="header-body-element w-100 d-flex align-items-center justify-content-center" style="background-image: url('{{asset('media/img/figures/' ~ figure.coverImageUrl )}}');
     background-color: rgb(0, 0, 0);
     background-blend-mode: screen;
     background-size: cover;
@@ -38,13 +38,17 @@
     <p class="mt-5 mb-5">
         {{ figure.article|nl2br}}
     </p>
-    <p>
-        <span class="p-2 m-3 mx-5 bg-light rounded">
+    <p class="text-center">
+        <span class="p-2 m-2 mx-3 bg-light rounded">
             {{ figure.createdDate|format_datetime('full', 'short', locale='fr') }}
         </span>
 
+        <span class="p-2 m-2 mx-3 bg-light rounded">
+            {{ figure.groupe.name }}
+        </span>
+
     {% if figure.createdDate != figure.editedDate %}
-        <span class="p-2 m-3 mx-5 bg-light rounded">
+        <span class="p-2 m-2 mx-3 bg-light rounded">
             {{ figure.createdDate|format_datetime('full', 'short', locale='fr') }}
         </span>
     {% endif %}

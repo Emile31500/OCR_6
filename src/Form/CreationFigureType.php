@@ -3,15 +3,19 @@
 namespace App\Form;
 
 use App\Entity\Figure;
+use App\Entity\Groupe;
 use App\Form\VideoType;
+use App\Form\GroupeType;
 use App\Form\PhotoFigureType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -45,6 +49,14 @@ class CreationFigureType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('coverImage', FileType::class, [
+                'label' => 'Image de couverture : ',
+                'required' => $filesAreRequired,
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('image', FileType::class, [
                 'label' => 'Images : ',
                 'required' => $filesAreRequired,
@@ -54,9 +66,14 @@ class CreationFigureType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('groupe', EntityType::class, [
+                'label' => 'Groupe : ',
+                'class' => Groupe::class,
+                'choice_label' => 'name',
+                'attr' => ['class' => 'form-select form-select-sm']
+            ])
             ->add('videoFigures', CollectionType::class, [
                 'entry_type' => VideoType::class,
-                //'entry_options' => ['label' => false],
                 'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true

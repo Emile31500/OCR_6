@@ -60,8 +60,7 @@ class FigureController extends AbstractController
         return $this->render('figure/index.html.twig', [
             'controller_name' => $figure->getNom(),
             'form' => $form->createView(),
-            'figure' => $figure,
-            'imageHeader' => $figure->getPhotoFigures()[0]
+            'figure' => $figure
         ]);
     }
 
@@ -88,13 +87,18 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure', methods:['DELETE'])]
-    public function suppressionFigure(PhotoFigureRepository $photoFigureRepo, VideoFigureRepository $videoFigureRepo, FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, string $slug) : JsonResponse{
+    public function suppressionFigure(MessageRepository $messageRepository, PhotoFigureRepository $photoFigureRepo, VideoFigureRepository $videoFigureRepo, FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, string $slug) : JsonResponse{
 
-        if($authorizationChecker->isGranted("ROLE_ADMIN")){
+        if($authorizationChecker->isGranted('ROLE_ADMIN')){
 
             $figure = $figureRepo->findBySlug($slug);
             $photos = $photoFigureRepo->findByFigure($figure->getId());
             $videos = $videoFigureRepo->findByFigure($figure->getId());
+            $messages = $messageRepository->findByFigure($figure->getId());
+            
+            if($coverImageFile = $figure->getCoverImageUrl()){
+                $phtFigServ->delete($coverImageFile);
+            }
 
             foreach ($photos as $photo)
             {
@@ -108,15 +112,21 @@ class FigureController extends AbstractController
                 $videoFigureRepo->remove($video, true);
             }
             
-            
+            foreach ($messages as $message)
+            {
+                $messageRepository->remove($message, true);
+            }
+
             $figureRepo->remove($figure, true);
             
             return new JsonResponse(["status" => true]);
 
+        } else {
+
+             return new JsonResponse(["status" => false]);
+
         }
-
-        return new JsonResponse(["status" => false]);
-
+    
     }
     
     #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
@@ -178,6 +188,12 @@ class FigureController extends AbstractController
 
                 }
 
+                if ($coverImage = $form['coverImage']->getData()) {
+
+                    $imgUrl = $phtFigServ->add($coverImage, 1280, 720);
+                    $figure->setCoverImageUrl($imgUrl);
+                    
+                }
                 
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
@@ -241,8 +257,10 @@ class FigureController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 $figure = $form->getData();
+                $figure->setCreatedDate(new \DateTime());
+                $figure->setEditedDate(new \DateTime());
                 $images = $form['image']->getData();
-                // $videos = $form['videoFigures']->getData();
+                $coverImage = $form['coverImage']->getData();
                 $videos = $form->get('videoFigures');
 
                 foreach($images as $image){
@@ -263,7 +281,10 @@ class FigureController extends AbstractController
                     $manager->persist($vd);
 
                 }
-                
+
+                $imgUrl = $phtFigServ->add($coverImage, 1280, 720);
+                $figure->setCoverImageUrl($imgUrl);
+
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
                 $figure->setSlug($slug);

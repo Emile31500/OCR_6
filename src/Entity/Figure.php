@@ -30,6 +30,10 @@ class Figure
     #[ORM\Column(length: 4096)]
     #[Groups(['figure'])]
     private ?string $article = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['figure'])]
+    private ?string $coverImageUrl = null;
     
     #[ORM\Column(length: 10, options : ["default" => "published"])]
     #[Groups(['figure'])]
@@ -52,6 +56,10 @@ class Figure
     #[ORM\OneToMany(mappedBy: 'figure', targetEntity: VideoFigure::class, cascade: ["persist"])]
     #[Groups(['figure'])]
     private Collection $videoFigures;
+
+    #[ORM\ManyToOne(inversedBy: 'figures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Groupe $Groupe = null;
 
     public function __construct()
     {
@@ -101,6 +109,18 @@ class Figure
         return $this;
     }
 
+    public function getCoverImageUrl(): ?string
+    {
+        return $this->coverImageUrl;
+    }
+
+    public function setCoverImageUrl(string $coverImageUrl): self
+    {
+        $this->coverImageUrl = $coverImageUrl;
+
+        return $this;
+    }
+
     public function getStatu(): ?string
     {
         return $this->statu;
@@ -122,7 +142,7 @@ class Figure
     public function setCreatedDate(\DateTimeInterface $date): self
     {
         
-        return $this->createdDate = $date;
+        $this->createdDate = $date;
 
         return $this;
 
@@ -250,6 +270,18 @@ class Figure
                 $videoFigure->setFigure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->Groupe;
+    }
+
+    public function setGroupe(?Groupe $Groupe): self
+    {
+        $this->Groupe = $Groupe;
 
         return $this;
     }

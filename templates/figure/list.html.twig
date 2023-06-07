@@ -2,9 +2,8 @@
     {% for figure in figures %} 
         <div class="col tricks-col {{figure.slug}} d-flex justify-content-center" id="tricks-lmnt-{{figure.slug}}">
             <div class="tricks-card card">
-                {% if  figure.photoFigures|first != false %}
-                    {% set url = figure.photoFigures|first.imageUrl %}
-                    <img class="top-img-card" src="{{ asset('media/img/figures/' ~ url) }}" alt="{{figure.nom}}"/>
+                {% if  figure.coverImageUrl != false %}
+                    <img class="top-img-card" src="{{ asset('media/img/figures/' ~ figure.coverImageUrl) }}" alt="{{figure.nom}}"/>
                 {% endif %}
                 <div class="card-body">
                     <a href="{{ path('app_figure', {slug: figure.slug } ) }}" >

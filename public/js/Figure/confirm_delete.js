@@ -25,14 +25,11 @@ function loadConfirmDelete(){
             confirmBtn.addEventListener('click', func = function(){
 
                 fetch(url, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
+                    method: "DELETE"
                 })
                 .then(response => response.json())
                 .then(data => {
-                
+                    
                     if (data["status"] === true) {
 
                         document.querySelector("#tricks-lmnt-"+slug).remove();
