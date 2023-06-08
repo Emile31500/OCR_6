@@ -1,6 +1,7 @@
 let videoFields = '';
 let form = document.getElementById("figure-type");
 let url = '';
+let i = 0;
 
 form.addEventListener('submit', function(event){
     
@@ -20,16 +21,29 @@ form.addEventListener('submit', function(event){
             url = url.replace('https://www.youtube.com/watch?v=', '');
             if (url.includes("&ab_channel"))  url = url.substring(0, url.indexOf("&ab_channel"));
             if (url.includes("&t")) url.substring(0, url.indexOf("&t"));
-            data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', 'https://www.youtube.com/embed/'+url);
-            index++;
+            url =' https://www.youtube.com/embed/' + url;
+            
+
+        } else if (url.includes("https://www.dailymotion.com/video/")) {
+
+            i = url.indexOf('/video/');
+            url = url.replace('/video/', '/embed/video/');
+        
+        } else if (url.includes('vimeo.com/')) {
+
+            url = url.replace('vimeo.com/', 'vimeo.com/embed/'); 
+            url = url.replace('vimeo.com/', 'player.vimeo.com/')
 
         } else {
 
-            alert("Attetion:La vidéo doit contenir un lien vers une vidéo youtube")
+            alert("Attetion: La vidéo doit contenir un lien vers une vidéo youtube")
             return false;
 
         }
 
+        data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', url);
+        index++;
+        
     });
 
     fetch(window.location, {

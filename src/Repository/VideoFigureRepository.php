@@ -42,7 +42,7 @@ class VideoFigureRepository extends ServiceEntityRepository
     //    /**
     //     * @return PhotoFigure[] Returns an array of PhotoFigure objects
     //     */
-    public function findByFigure($figure): array
+    public function findByFigure(int $figure): array
     {
         return $this->createQueryBuilder('v')
             ->andWhere('v.figure = :fig')
@@ -52,22 +52,6 @@ class VideoFigureRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-
-//    /**
-//     * @return VideoFigure[] Returns an array of VideoFigure objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
     public function findById(int $id): ?VideoFigure
     {

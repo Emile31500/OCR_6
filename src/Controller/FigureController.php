@@ -29,14 +29,13 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 class FigureController extends AbstractController
 {
 
-    #[Route('/figure/{slug}', name: 'app_figure')]
-    public function liste(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, TokenStorageInterface $tokenStorage, string $slug): Response
+    #[Route('/figure/{slug}', name: 'app_figure', methods: ['GET', 'POST'])]
+    public function liste(Request $request, EntityManagerInterface $manager, FigureRepository $figureRepository, string $slug): Response
     {
         $message = new Message();
         $figure = $figureRepository->findBySlug($slug);
@@ -65,203 +64,87 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure/liste/{max_result}', name: 'app_figure_liste', methods:['GET'])]
-    public function print (int $max_result, AuthorizationCheckerInterface $authorizationChecker, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository) : Response
+    public function print (int $max_result, FigureRepository $figureRepository, PhotoFigureRepository $photoFigureRepository) : Response
     {
         $figures = $figureRepository->findPublished($max_result);
-        
-        if($authorizationChecker->isGranted('ROLE_ADMIN')) {
-
-            $isAdmin = true;
-
-        } else {
-
-            $isAdmin = false;
-
-        }
 
         return $this->render('figure/list.html.twig', [
-            "figures" => $figures,
-            'isAdmin' => $isAdmin
+            "figures" => $figures
         ]);
 
     }
 
     #[Route('/figure-suppression/{slug}', name: 'app_supression_figure', methods:['DELETE'])]
-    public function suppressionFigure(MessageRepository $messageRepository, PhotoFigureRepository $photoFigureRepo, VideoFigureRepository $videoFigureRepo, FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, string $slug) : JsonResponse{
-
-        if($authorizationChecker->isGranted('ROLE_ADMIN')){
-
-            $figure = $figureRepo->findBySlug($slug);
-            $photos = $photoFigureRepo->findByFigure($figure->getId());
-            $videos = $videoFigureRepo->findByFigure($figure->getId());
-            $messages = $messageRepository->findByFigure($figure->getId());
-            
-            if($coverImageFile = $figure->getCoverImageUrl()){
-                $phtFigServ->delete($coverImageFile);
-            }
-
-            foreach ($photos as $photo)
-            {
-                $file = $photo->getImageUrl();
-                $phtFigServ->delete($file);
-                $photoFigureRepo->remove($photo, true);
-            }
-
-            foreach ($videos as $video)
-            {
-                $videoFigureRepo->remove($video, true);
-            }
-            
-            foreach ($messages as $message)
-            {
-                $messageRepository->remove($message, true);
-            }
-
-            $figureRepo->remove($figure, true);
-            
-            return new JsonResponse(["status" => true]);
-
-        } else {
-
-             return new JsonResponse(["status" => false]);
-
+    public function suppressionFigure(MessageRepository $messageRepository, PhotoFigureRepository $photoFigureRepo, VideoFigureRepository $videoFigureRepo, FigureRepository $figureRepo, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ, string $slug) : JsonResponse
+    {
+        
+        $figure = $figureRepo->findBySlug($slug);
+        $photos = $photoFigureRepo->findByFigure($figure->getId());
+        $videos = $videoFigureRepo->findByFigure($figure->getId());
+        $messages = $messageRepository->findByFigure($figure->getId());
+        
+        if($coverImageFile = $figure->getCoverImageUrl()){
+            $phtFigServ->delete($coverImageFile);
         }
+
+        foreach ($photos as $photo)
+        {
+            $file = $photo->getImageUrl();
+            $phtFigServ->delete($file);
+            $photoFigureRepo->remove($photo, true);
+        }
+
+        foreach ($videos as $video)
+        {
+            $videoFigureRepo->remove($video, true);
+        }
+        
+        foreach ($messages as $message)
+        {
+            $messageRepository->remove($message, true);
+        }
+
+        $figureRepo->remove($figure, true);
+        
+        return new JsonResponse(["status" => true]);
     
     }
     
-    #[Route('/edition-figure/{slug}', name: 'app_edition_figure')]
-    public function editionFigure(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo, PhotoFigureService $phtFigServ) : Response
+    #[Route('/edition-figure/{slug}', name: 'app_edition_figure', methods: ['GET', 'POST'])]
+    public function editionFigure(SessionInterface $session, string $slug, Request $request, EntityManagerInterface $manager,  FigureRepository $figureRepo, PhotoFigureService $phtFigServ) : Response
     {
         
-        if($authorizationChecker->isGranted("ROLE_ADMIN")){
+        $session->start();
 
-            $session->start();
+        $oldFigure = $figureRepo->findBySlug($slug);
+        $oldVideos = new ArrayCollection();
 
-            $oldFigure = $figureRepo->findBySlug($slug);
-            $oldVideos = new ArrayCollection();
-
-            foreach ($oldFigure->getVideoFigures() as $video) {
-                
-                $oldVideos->add($video);
-            }
-
-            $figure = $oldFigure;
-            $form = $this->createForm(CreationFigureType::class, $figure);
-            $form->handleRequest($request);
+        foreach ($oldFigure->getVideoFigures() as $video) {
             
-            if ($form->isSubmitted() && $form->isValid()) {
-                
-                $figure = $form->getData();
-                $videos = $form->get('videoFigures');
-                $figure->setEditedDate(new \DateTime());
-                
-                foreach ($oldVideos as $video) {
+            $oldVideos->add($video);
+        }
 
-                    if (false === $figure->getVideoFigures()->contains($video)) {
-                        
-                        $video->getFigures()->removeElement($figure);
-                        $entityManager->persist($video);
-                        $entityManager->remove($video);
-                    }
-                }
- 
-                if ($images = $form['image']->getData()) {
+        $figure = $oldFigure;
+        $form = $this->createForm(CreationFigureType::class, $figure);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $figure = $form->getData();
+            $videos = $form->get('videoFigures');
+            $figure->setEditedDate(new \DateTime());
+            
+            foreach ($oldVideos as $video) {
 
-                    foreach($images as $image){
-
-                        $imgUrl = $phtFigServ->add($image, 300, 300);
-                        $pht = new PhotoFigure();
-                        $pht->setImageUrl($imgUrl);
-                        $figure->addPhotoFigure($pht);
-                        $manager->persist($pht);
-    
-                    }
-
-                }
-                
-                foreach($videos as $video){
-
-                    $vd = new VideoFigure();
-                    $vd->setUrlVideo($video['urlVideo']->getData());
-                    $figure->addVideoFigure($vd);
-                    $manager->persist($vd);
-
-                }
-
-                if ($coverImage = $form['coverImage']->getData()) {
-
-                    $imgUrl = $phtFigServ->add($coverImage, 1280, 720);
-                    $figure->setCoverImageUrl($imgUrl);
+                if (false === $figure->getVideoFigures()->contains($video)) {
                     
+                    $video->getFigures()->removeElement($figure);
+                    $entityManager->persist($video);
+                    $entityManager->remove($video);
                 }
-                
-                $slug = str_replace(' ', '-', $form->get('nom')->getData());
-                $slug = strtolower($slug);
-                $session->set('slug', $slug);
-                $figure->setSlug($slug);
-
-                $manager->persist($figure);
-                $manager->flush();
-
-                try {
-
-                    return $this->render('figure/edition.html.twig', [
-                        'controller_name' => 'Edition d\'une figure',
-                        'form' => $form->createView(),
-                        'success' => 'Figure enregistré',
-                        'figure' => $oldFigure,
-        
-                    ]);
-    
-                } catch(UniqueConstraintViolationException $e) {
-    
-                    return $this->render('figure/edition.html.twig', [
-                        'controller_name' => 'Edition d\'une figure',
-                        'form' => $form->createView(),
-                        'error' => 'Attention : il y a un duplicata sur un des champs ! ',
-                        'figure' => $oldFigure,
-        
-                    ]);
-    
-                }
-
             }
 
-            return $this->render('figure/edition.html.twig', [
-                'controller_name' => 'Edition d\'une figure',
-                'form' => $form->createView(),
-                'figure' => $oldFigure,
-
-            ]);
-        
-        } else {
-
-            return $this->render('home/index.html.twig', [
-                'controller_name' => 'Home',
-                'isAdmin' => false
-            ]);
-
-        }
-    }
-    
-    #[Route('/creation-figure', name: 'app_creation_figure')]
-    public function creationFigure(Request $request, EntityManagerInterface $manager, AuthorizationCheckerInterface $authorizationChecker, PhotoFigureService $phtFigServ)  : Response 
-    {
-
-        if($authorizationChecker->isGranted("ROLE_ADMIN")){
-
-
-            $form = $this->createForm(CreationFigureType::class);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                
-                $figure = $form->getData();
-                $figure->setCreatedDate(new \DateTime());
-                $figure->setEditedDate(new \DateTime());
-                $images = $form['image']->getData();
-                $coverImage = $form['coverImage']->getData();
-                $videos = $form->get('videoFigures');
+            if ($images = $form['image']->getData()) {
 
                 foreach($images as $image){
 
@@ -273,55 +156,131 @@ class FigureController extends AbstractController
 
                 }
 
-                foreach($videos as $video){
+            }
+            
+            foreach($videos as $video){
 
-                    $vd = new VideoFigure();
-                    $vd->setUrlVideo($video['urlVideo']->getData());
-                    $figure->addVideoFigure($vd);
-                    $manager->persist($vd);
+                $vd = new VideoFigure();
+                $vd->setUrlVideo($video['urlVideo']->getData());
+                $figure->addVideoFigure($vd);
+                $manager->persist($vd);
 
-                }
+            }
+
+            if ($coverImage = $form['coverImage']->getData()) {
 
                 $imgUrl = $phtFigServ->add($coverImage, 1280, 720);
                 $figure->setCoverImageUrl($imgUrl);
-
-                $slug = str_replace(' ', '-', $form->get('nom')->getData());
-                $slug = strtolower($slug);
-                $figure->setSlug($slug);
                 
-                try {
+            }
+            
+            $slug = str_replace(' ', '-', $form->get('nom')->getData());
+            $slug = strtolower($slug);
+            $session->set('slug', $slug);
+            $figure->setSlug($slug);
 
-                    $manager->persist($figure);
-                    $manager->flush();
+            $manager->persist($figure);
+            $manager->flush();
 
-                    return $this->render('figure/creation.html.twig', [
-                        'controller_name' => "Création d'une figure",   
-                        'success' => "Figure enregistrée ",
-                        'form' => $form
-                    ]);
+            try {
 
-                } catch (UniqueConstraintViolationException $e) {
-                    
-                    return $this->render('figure/creation.html.twig', [
-                        'controller_name' => "Création d'une figure",
-                        'error' => "Attention : il y a un duplicata sur un des champs ! ",
-                        'form' => $form
-                    ]);
-                }
+                return $this->render('figure/edition.html.twig', [
+                    'controller_name' => 'Edition d\'une figure',
+                    'form' => $form->createView(),
+                    'success' => 'Figure enregistré',
+                    'figure' => $oldFigure,
+    
+                ]);
+
+            } catch(UniqueConstraintViolationException $e) {
+
+                return $this->render('figure/edition.html.twig', [
+                    'controller_name' => 'Edition d\'une figure',
+                    'form' => $form->createView(),
+                    'error' => 'Attention : il y a un duplicata sur un des champs ! ',
+                    'figure' => $oldFigure,
+    
+                ]);
+
             }
 
-            return $this->render('figure/creation.html.twig', [
-                'controller_name' => "Création d'une figure",
-                'form' => $form
-            ]);
-
-        } else {
-
-            return $this->render('home/index.html.twig', [
-                'controller_name' => 'Home',
-                'isAdmin' => false
-            ]);
-            
         }
+
+        return $this->render('figure/edition.html.twig', [
+            'controller_name' => 'Edition d\'une figure',
+            'form' => $form->createView(),
+            'figure' => $oldFigure,
+
+        ]);
+    }
+    
+    #[Route('/creation-figure', name: 'app_creation_figure', methods: ['GET', 'POST'])]
+    public function creationFigure(Request $request, EntityManagerInterface $manager, PhotoFigureService $phtFigServ)  : Response 
+    {
+        
+        $form = $this->createForm(CreationFigureType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $figure = $form->getData();
+            $figure->setCreatedDate(new \DateTime());
+            $figure->setEditedDate(new \DateTime());
+            $images = $form['image']->getData();
+            $coverImage = $form['coverImage']->getData();
+            $videos = $form->get('videoFigures');
+
+            foreach($images as $image){
+
+                $imgUrl = $phtFigServ->add($image, 300, 300);
+                $pht = new PhotoFigure();
+                $pht->setImageUrl($imgUrl);
+                $figure->addPhotoFigure($pht);
+                $manager->persist($pht);
+
+            }
+
+            foreach($videos as $video){
+
+                $vd = new VideoFigure();
+                $vd->setUrlVideo($video['urlVideo']->getData());
+                $figure->addVideoFigure($vd);
+                $manager->persist($vd);
+
+            }
+
+            $imgUrl = $phtFigServ->add($coverImage, 1280, 720);
+            $figure->setCoverImageUrl($imgUrl);
+
+            $slug = str_replace(' ', '-', $form->get('nom')->getData());
+            $slug = strtolower($slug);
+            $figure->setSlug($slug);
+            
+            try {
+
+                $manager->persist($figure);
+                $manager->flush();
+
+                return $this->render('figure/creation.html.twig', [
+                    'controller_name' => "Création d'une figure",   
+                    'success' => "Figure enregistrée ",
+                    'form' => $form
+                ]);
+
+            } catch (UniqueConstraintViolationException $e) {
+                
+                return $this->render('figure/creation.html.twig', [
+                    'controller_name' => "Création d'une figure",
+                    'error' => "Attention : il y a un duplicata sur un des champs ! ",
+                    'form' => $form
+                ]);
+            }
+        }
+
+        return $this->render('figure/creation.html.twig', [
+            'controller_name' => "Création d'une figure",
+            'form' => $form
+        ]);
+
     }
 }

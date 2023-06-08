@@ -33,7 +33,7 @@
                 </svg>
             </a>
         </div>
-        {% if isAdmin == true %}
+        {% if app.user is defined %}
             <a href="{{ path('app_creation_figure') }}">
                 <button class="btn btn-success"> Ajouter </button>
             </a>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         {% endif %}
-    <div id='tricks-card-list' class="my-5 row row-cols-lg-2 row-cols-md-1 g-4">
+    <div id='tricks-card-list' class="my-5 row row-cols-lg-4 row-cols-md-1 g-4">
     </div>    
     <div class="clear">
         <div  class="col d-flex m-5 align-itms-center  justify-content-center ">

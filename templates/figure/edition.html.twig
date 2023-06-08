@@ -1,11 +1,40 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}{{ controller_name }}{% endblock %}
-
+{% block bodyheader %}
+    <div class="header-body-element w-100 d-flex align-items-center justify-content-center" style="background-image: url('{{asset('media/img/figures/' ~ figure.coverImageUrl )}}');
+    background-color: rgb(0, 0, 0);
+    background-blend-mode: screen;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}">
+        <h2 class="shadow fst-italic align-middle text-light text-center p-5 m-3"> Edition : {{figure.nom}}  </h2>
+        
+    </div>
+{% endblock %}
 {% block body %}
-<h2 class="mb-5 mt-5"> {{ controller_name }}</h2>
- {{ form_start(form, {'attr': {'id': 'figure-type'}}) }}
-
+{{ form_start(form, {'attr': {'id': 'figure-type'}}) }}
+    <div class="row mt-5 mb-5 d-flex justify-content-center optional-content">
+            <div class="row">
+                {% for photo in figure.photoFigures %}
+                    <div class="col m-1 p-1" media-container>
+                        <img class="mb-1" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+                        <div>
+                            <button class="m-1 btn btn-danger photo-delete-button" photodelbtn="{{photo.id}}" > Supprimer </button>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for video in figure.videoFigures %}
+                    <div class="col  m-1 p-1" media-container>
+                        <iframe class="mb-1" width="250" height="155" src="{{video.UrlVideo}}">
+                        </iframe>
+                         <div >
+                            <button class="m-1 btn btn-danger video-delete-button" videodelbtn="{{video.id}}" > Supprimer </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     <p>
         {{ form_row(form.coverImage) }}
     </p>
@@ -13,29 +42,8 @@
         {{ form_row(form.nom) }}
     </p>
     <p>
-        <div class="row">
-            {% for photo in figure.photoFigures %}
-                <div class="card m-3" id="card_photo_{{ photo.id }}" style="width: 18rem">  
-                    <img class="card-img-top" id='photo_figure_{{ photo.id }}' src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
-                    <div class="card-footer">
-                        <button class="btn btn-danger photo-delete-button" photodelbtn="{{photo.id}}" > Supprimer </button>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
 
-        <div class="row">
-            {% for video in figure.videoFigures %}
-                <div class="card m-3" id="card_video_{{ video.id }}" style="width: 18rem">  
-                    <iframe width="250" height="140" id='video_figure_{{ video.id}}' src="{{ video.urlVideo }}"></iframe>
-                    <div class="card-footer">
-                        <button class="btn btn-danger video-delete-button" videodelbtn="{{video.id}}" > Supprimer </button>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        {{ form_row(form.image) }}
+    {{ form_row(form.image) }}
 
     </p>
     <p>
@@ -45,6 +53,9 @@
     </p>
     <p>
         {{ form_row(form.article) }}
+    </p>
+    <p>
+        {{ form_row(form.groupe) }}
     </p>
     <p>
         {{ form_row(form.submit) }}

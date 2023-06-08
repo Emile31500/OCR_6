@@ -9,7 +9,7 @@
                     <a href="{{ path('app_figure', {slug: figure.slug } ) }}" >
                         <h3 class="col-8 h4 text-dark"> {{figure.nom}} </h3>
                     </a>
-                    {% if isAdmin == true %}
+                    {% if app.user is defined  %}
                         <div class="col-2 edit-card-div">
                             <a href="{{ path('app_edition_figure', {slug: figure.slug } ) }}">
                                 <svg class="icone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

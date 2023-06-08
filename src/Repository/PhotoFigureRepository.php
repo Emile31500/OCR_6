@@ -43,7 +43,7 @@ class PhotoFigureRepository extends ServiceEntityRepository
 //    /**
 //     * @return PhotoFigure[] Returns an array of PhotoFigure objects
 //     */
-    public function findByFigure($figure): array
+    public function findByFigure(int $figure): array
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.figure = :fig')

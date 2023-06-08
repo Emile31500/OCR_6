@@ -20,28 +20,17 @@ class PhotoFigureService {
         $fichier = uniqid().'jpg';
         $pictureInf = getimagesize($picture);
 
-        if ($pictureInf === false) {
+        if ($pictureInf["mime"] === 'image/png' || $pictureInf["mime"] === 'image/jpg' || $pictureInf["mime"] === 'image/webp' && $pictureInf === true) {
 
-            //throw new Exception('Image invalide');
-
-        }
-
-        if ($pictureInf["mime"] !== 'image/png' && $pictureInf["mime"] !== 'image/jpg' && $pictureInf["mime"] !== 'image/webp') {
-
-            //throw new Exception('Image invalide');
+            $path = $this->params->get('figure_image_directory');
+            $picture->move($path.'/', $fichier);
+            return $fichier;
 
         }
-
-        // $resizedPicture = imagecreatetruecolor($width, $heigth);
-        $path = $this->params->get('figure_image_directory');
-
-        $picture->move($path.'/', $fichier);
-
-        return $fichier;
-
+    
     }
 
-    public function delete(string $fichier)
+    public function delete(string $fichier) : bool
     {
         $success = false;
         if ($fichier !== 'default.webp')
