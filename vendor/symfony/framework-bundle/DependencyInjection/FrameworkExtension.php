@@ -970,6 +970,7 @@ class FrameworkExtension extends Extension
             $definitionDefinition->addArgument(new Reference(sprintf('%s.metadata_store', $workflowId)));
 
             // Create MarkingStore
+            $markingStoreDefinition = null;
             if (isset($workflow['marking_store']['type'])) {
                 $markingStoreDefinition = new ChildDefinition('workflow.marking_store.method');
                 $markingStoreDefinition->setArguments([
@@ -983,7 +984,7 @@ class FrameworkExtension extends Extension
             // Create Workflow
             $workflowDefinition = new ChildDefinition(sprintf('%s.abstract', $type));
             $workflowDefinition->replaceArgument(0, new Reference(sprintf('%s.definition', $workflowId)));
-            $workflowDefinition->replaceArgument(1, $markingStoreDefinition ?? null);
+            $workflowDefinition->replaceArgument(1, $markingStoreDefinition);
             $workflowDefinition->replaceArgument(3, $name);
             $workflowDefinition->replaceArgument(4, $workflow['events_to_dispatch']);
 
@@ -1180,11 +1181,8 @@ class FrameworkExtension extends Extension
 
         // session handler (the internal callback registered with PHP session management)
         if (null === $config['handler_id']) {
-            // Set the handler class to be null
-            $container->getDefinition('session.storage.factory.native')->replaceArgument(1, null);
-            $container->getDefinition('session.storage.factory.php_bridge')->replaceArgument(0, null);
-
-            $container->setAlias('session.handler', 'session.handler.native_file');
+            $config['save_path'] = null;
+            $container->setAlias('session.handler', 'session.handler.native');
         } else {
             $container->resolveEnvPlaceholders($config['handler_id'], null, $usedEnvs);
 
@@ -1776,9 +1774,6 @@ class FrameworkExtension extends Extension
     private function registerSerializerConfiguration(array $config, ContainerBuilder $container, PhpFileLoader $loader)
     {
         $loader->load('serializer.php');
-        if ($container->getParameter('kernel.debug')) {
-            $container->removeDefinition('serializer.mapping.cache_class_metadata_factory');
-        }
 
         $chainLoader = $container->getDefinition('serializer.mapping.chain_loader');
 
@@ -1801,6 +1796,10 @@ class FrameworkExtension extends Extension
 
         $serializerLoaders = [];
         if (isset($config['enable_annotations']) && $config['enable_annotations']) {
+            if ($container->getParameter('kernel.debug')) {
+                $container->removeDefinition('serializer.mapping.cache_class_metadata_factory');
+            }
+
             $annotationLoader = new Definition(
                 AnnotationLoader::class,
                 [new Reference('annotation_reader', ContainerInterface::NULL_ON_INVALID_REFERENCE)]

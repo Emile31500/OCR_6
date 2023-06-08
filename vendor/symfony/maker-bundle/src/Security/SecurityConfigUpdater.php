@@ -30,18 +30,32 @@ final class SecurityConfigUpdater
     ) {
     }
 
+    public function updateForFormLogin(string $yamlSource, string $firewallToUpdate, string $loginPath, string $checkPath): string
+    {
+        $newData = $this->createYamlSourceManipulator($yamlSource);
+
+        $newData['security']['firewalls'][$firewallToUpdate]['form_login']['login_path'] = $loginPath;
+        $newData['security']['firewalls'][$firewallToUpdate]['form_login']['check_path'] = $checkPath;
+        $newData['security']['firewalls'][$firewallToUpdate]['form_login']['enable_csrf'] = true;
+
+        return $this->getYamlContentsFromData($newData);
+    }
+
+    public function updateForJsonLogin(string $yamlSource, string $firewallToUpdate, string $checkPath): string
+    {
+        $data = $this->createYamlSourceManipulator($yamlSource);
+
+        $data['security']['firewalls'][$firewallToUpdate]['json_login']['check_path'] = $checkPath;
+
+        return $this->getYamlContentsFromData($data);
+    }
+
     /**
      * Updates security.yaml contents based on a new User class.
      */
     public function updateForUserClass(string $yamlSource, UserClassConfiguration $userConfig, string $userClass): string
     {
-        $this->manipulator = new YamlSourceManipulator($yamlSource);
-
-        if (null !== $this->ysmLogger) {
-            $this->manipulator->setLogger($this->ysmLogger);
-        }
-
-        $this->normalizeSecurityYamlFile();
+        $this->createYamlSourceManipulator($yamlSource);
 
         $this->updateProviders($userConfig, $userClass);
 
@@ -57,13 +71,7 @@ final class SecurityConfigUpdater
 
     public function updateForAuthenticator(string $yamlSource, string $firewallName, $chosenEntryPoint, string $authenticatorClass, bool $logoutSetup): string
     {
-        $this->manipulator = new YamlSourceManipulator($yamlSource);
-
-        if (null !== $this->ysmLogger) {
-            $this->manipulator->setLogger($this->ysmLogger);
-        }
-
-        $this->normalizeSecurityYamlFile();
+        $this->createYamlSourceManipulator($yamlSource);
 
         $newData = $this->manipulator->getData();
 
@@ -102,19 +110,60 @@ final class SecurityConfigUpdater
             $firewall['entry_point'] = $authenticatorClass;
         }
 
-        if (!isset($firewall['logout']) && $logoutSetup) {
-            $firewall['logout'] = ['path' => 'app_logout'];
-            $firewall['logout'][] = $this->manipulator->createCommentLine(
-                ' where to redirect after logout'
-            );
-            $firewall['logout'][] = $this->manipulator->createCommentLine(
-                ' target: app_any_route'
-            );
-        }
-
         $newData['security']['firewalls'][$firewallName] = $firewall;
 
+        if (!isset($firewall['logout']) && $logoutSetup) {
+            $this->configureLogout($newData, $firewallName);
+
+            return $this->manipulator->getContents();
+        }
+
         $this->manipulator->setData($newData);
+
+        return $this->manipulator->getContents();
+    }
+
+    public function updateForLogout(string $yamlSource, string $firewallName): string
+    {
+        $this->createYamlSourceManipulator($yamlSource);
+
+        $this->configureLogout($this->manipulator->getData(), $firewallName);
+
+        return $this->manipulator->getContents();
+    }
+
+    /**
+     * @legacy This can be removed once we deprecate/remove `make:auth`
+     */
+    private function configureLogout(array $securityData, string $firewallName): void
+    {
+        $securityData['security']['firewalls'][$firewallName]['logout'] = ['path' => 'app_logout'];
+        $securityData['security']['firewalls'][$firewallName]['logout'][] = $this->manipulator->createCommentLine(
+            ' where to redirect after logout'
+        );
+        $securityData['security']['firewalls'][$firewallName]['logout'][] = $this->manipulator->createCommentLine(
+            ' target: app_any_route'
+        );
+
+        $this->manipulator->setData($securityData);
+    }
+
+    private function createYamlSourceManipulator(string $yamlSource): array
+    {
+        $this->manipulator = new YamlSourceManipulator($yamlSource);
+
+        if (null !== $this->ysmLogger) {
+            $this->manipulator->setLogger($this->ysmLogger);
+        }
+
+        $this->normalizeSecurityYamlFile();
+
+        return $this->manipulator->getData();
+    }
+
+    private function getYamlContentsFromData(array $yamlData): string
+    {
+        $this->manipulator->setData($yamlData);
 
         return $this->manipulator->getContents();
     }

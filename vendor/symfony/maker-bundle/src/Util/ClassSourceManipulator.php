@@ -170,7 +170,7 @@ final class ClassSourceManipulator
             // look for "$this->propertyName = "
 
             $constructorString = $this->printer->prettyPrint([$this->getConstructorNode()]);
-            if (false !== strpos($constructorString, sprintf('$this->%s = ', $propertyName))) {
+            if (str_contains($constructorString, sprintf('$this->%s = ', $propertyName))) {
                 $addEmbedded = false;
             }
         }
@@ -834,7 +834,7 @@ final class ClassSourceManipulator
      * @param array   $options         The named arguments for the attribute ($key = argument name, $value = argument value)
      * @param ?string $attributePrefix If a prefix is provided, the node is built using the prefix. E.g. #[ORM\Column()]
      */
-    public function buildAttributeNode(string $attributeClass, array $options, ?string $attributePrefix = null): Node\Attribute
+    public function buildAttributeNode(string $attributeClass, array $options, string $attributePrefix = null): Node\Attribute
     {
         $options = $this->sortOptionsByClassConstructorParameters($options, $attributeClass);
 
@@ -1073,7 +1073,7 @@ final class ClassSourceManipulator
         $methodBuilder
             ->addStmt($this->createBlankLineNode(self::CONTEXT_CLASS_METHOD))
             ->addStmt(new Node\Stmt\Return_(new Node\Expr\Variable('this')));
-        $methodBuilder->setReturnType('self');
+        $methodBuilder->setReturnType('static');
     }
 
     private function isInSameNamespace(string $class): bool

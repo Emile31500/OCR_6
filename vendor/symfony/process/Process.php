@@ -421,7 +421,7 @@ class Process implements \IteratorAggregate
 
         do {
             $this->checkTimeout();
-            $running = '\\' === \DIRECTORY_SEPARATOR ? $this->isRunning() : $this->processPipes->areOpen();
+            $running = $this->isRunning() && ('\\' === \DIRECTORY_SEPARATOR || $this->processPipes->areOpen());
             $this->readPipes($running, '\\' !== \DIRECTORY_SEPARATOR || !$running);
         } while ($running);
 
@@ -603,6 +603,8 @@ class Process implements \IteratorAggregate
      * Returns an iterator to the output of the process, with the output type as keys (Process::OUT/ERR).
      *
      * @param int $flags A bit field of Process::ITER_* flags
+     *
+     * @return \Generator<string, string>
      *
      * @throws LogicException in case the output has been disabled
      * @throws LogicException In case the process is not started
@@ -872,7 +874,7 @@ class Process implements \IteratorAggregate
      * Stops the process.
      *
      * @param int|float $timeout The timeout in seconds
-     * @param int       $signal  A POSIX signal to send in case the process has not stop at timeout, default is SIGKILL (9)
+     * @param int|null  $signal  A POSIX signal to send in case the process has not stop at timeout, default is SIGKILL (9)
      *
      * @return int|null The exit-code of the process or null if it's not running
      */

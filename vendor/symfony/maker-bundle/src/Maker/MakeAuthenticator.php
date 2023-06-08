@@ -28,6 +28,7 @@ use Symfony\Bundle\MakerBundle\Util\UseStatementGenerator;
 use Symfony\Bundle\MakerBundle\Util\YamlManipulationFailedException;
 use Symfony\Bundle\MakerBundle\Util\YamlSourceManipulator;
 use Symfony\Bundle\MakerBundle\Validator;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Console\Command\Command;
@@ -42,7 +43,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Security as LegacySecurity;
 use Symfony\Component\Security\Guard\AuthenticatorInterface as GuardAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
@@ -93,7 +94,7 @@ final class MakeAuthenticator extends AbstractMaker
     public function interact(InputInterface $input, ConsoleStyle $io, Command $command): void
     {
         if (!$this->fileManager->fileExists($path = 'config/packages/security.yaml')) {
-            throw new RuntimeCommandException('The file "config/packages/security.yaml" does not exist. This command requires that file to exist so that it can be updated.');
+            throw new RuntimeCommandException('The file "config/packages/security.yaml" does not exist. PHP & XML configuration formats are currently not supported.');
         }
         $manipulator = new YamlSourceManipulator($this->fileManager->getFileContents($path));
         $securityData = $manipulator->getData();
@@ -273,13 +274,19 @@ final class MakeAuthenticator extends AbstractMaker
         $useStatements->addUseStatement([
             RedirectResponse::class,
             UrlGeneratorInterface::class,
-            Security::class,
             AbstractLoginFormAuthenticator::class,
             CsrfTokenBadge::class,
             UserBadge::class,
             PasswordCredentials::class,
             TargetPathTrait::class,
         ]);
+
+        // @legacy - Can be removed when Symfony 5.4 support is dropped
+        if (class_exists(Security::class)) {
+            $useStatements->addUseStatement(Security::class);
+        } else {
+            $useStatements->addUseStatement(LegacySecurity::class);
+        }
 
         $userClassNameDetails = $this->generator->createClassNameDetails(
             '\\'.$userClass,
