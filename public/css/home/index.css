@@ -5,6 +5,11 @@
 
 }
 
+.cool {
+    fill: teal;
+    stroke: teal;
+}
+
 .top-img-card {
 
     height: 225px;

@@ -1,7 +1,11 @@
 let videoFields = '';
 let form = document.getElementById("figure-type");
 let url = '';
+let newUrl;
 let i = 0;
+let index = 0;
+let data
+const parser = new DOMParser();
 
 form.addEventListener('submit', function(event){
     
@@ -9,40 +13,39 @@ form.addEventListener('submit', function(event){
 
     videoFields = document.querySelectorAll(".video-figure-url");
     
-    var data = new FormData(this);
+    data = new FormData(this);
 
-    let index = 0;
+    index = 0;
     videoFields.forEach(videoField => {
         
-        url = videoField.value;
+        url = parser.parseFromString(videoField.value, 'text/html');
+        if (url = url.querySelector("iframe") || url.querySelectorAll("iframe").lenght > 1 ) {
 
-        if (url.includes("https://www.youtube.com/watch?v=")){
+            url.setAttribute('height', 155);
+            url.setAttribute('width', 250);
+            newUrl = elementToString(url);
             
-            url = url.replace('https://www.youtube.com/watch?v=', '');
-            if (url.includes("&ab_channel"))  url = url.substring(0, url.indexOf("&ab_channel"));
-            if (url.includes("&t")) url.substring(0, url.indexOf("&t"));
-            url =' https://www.youtube.com/embed/' + url;
-            
+            if (newUrl.length < 512)
+            {
 
-        } else if (url.includes("https://www.dailymotion.com/video/")) {
+                data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', newUrl);
+                index++;
 
-            i = url.indexOf('/video/');
-            url = url.replace('/video/', '/embed/video/');
+            } else {
+
+                alert('Erreur : l\' élément iframe doit avoir une longuer de maximum 512 caractères. ' + newUrl.length + ' donnés.')
+                return false;
+
+            }
         
-        } else if (url.includes('vimeo.com/')) {
-
-            url = url.replace('vimeo.com/', 'vimeo.com/embed/'); 
-            url = url.replace('vimeo.com/', 'player.vimeo.com/')
-
         } else {
 
-            alert("Attetion: La vidéo doit contenir un lien vers une vidéo youtube")
+            alert('Erreur : la vidéo doit contenir un seul élement HTML <iframe>');
             return false;
 
-        }
 
-        data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', url);
-        index++;
+        }
+        
         
     });
 
@@ -55,24 +58,37 @@ form.addEventListener('submit', function(event){
     .then(response => response.text())
     .then(data => {
 
-        const parser = new DOMParser();
+       
         const responseElement = parser.parseFromString(data, 'text/html');
         console.log(responseElement);
 
-        if(responseElement.querySelector('.alert-success').innerHTML !== undefined){
+        if(responseElement.querySelector('.alert-success') !== undefined){
 
             alert(responseElement.querySelector('.alert-success').innerHTML);
+            return true;
 
-        } else if (responseElement.querySelector('.alert-danger').innerHTML !== undefined) {
+        } else if (responseElement.querySelector('.alert-danger') !== undefined) {
 
-            alert(responseElement.querySelector('.alert-success').innerHTML);
+            alert(responseElement.querySelector('.alert-danger').innerHTML);
+            return false;
+
 
         }
     })
     .catch(error => {
 
         alert("Erreur : " + error);
+        console.log(responseElement);
 
     });
-
+    
 });
+
+function elementToString(element) {
+
+    const wrapper = document.createElement('div');
+    wrapper.appendChild(element.cloneNode(true));
+    return wrapper.innerHTML;
+
+}
+  

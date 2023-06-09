@@ -18,7 +18,7 @@
             <div class="row">
                 {% for photo in figure.photoFigures %}
                     <div class="col m-1 p-1" media-container>
-                        <img class="mb-1" style="max-height: 155px; max-width: 250px;" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
+                        <img class="mb-1 figure-image" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
                         <div>
                             <button class="m-1 btn btn-danger photo-delete-button" photodelbtn="{{photo.id}}" > Supprimer </button>
                         </div>
@@ -26,8 +26,7 @@
                 {% endfor %}
                 {% for video in figure.videoFigures %}
                     <div class="col  m-1 p-1" media-container>
-                        <iframe class="mb-1" width="250" height="155" src="{{video.UrlVideo}}">
-                        </iframe>
+                        {{video.UrlVideo | raw}}
                          <div >
                             <button class="m-1 btn btn-danger video-delete-button" videodelbtn="{{video.id}}" > Supprimer </button>
                         </div>

@@ -33,7 +33,7 @@
                 </svg>
             </a>
         </div>
-        {% if app.user is defined %}
+        {% if app.user.id is defined %}
             <a href="{{ path('app_creation_figure') }}">
                 <button class="btn btn-success"> Ajouter </button>
             </a>
@@ -76,10 +76,4 @@
 {% endblock %}
 {% block perso_stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/home/index.css') }}" />
-    <style>
-  .cool {
-        fill: teal;
-        stroke: teal;
-    }
-</style>
 {% endblock %}

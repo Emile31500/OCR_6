@@ -12,9 +12,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home', methods:['GET'])]
     public function index(AuthorizationCheckerInterface $authorizationChecker): Response
     {
-
-
-
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Accueil',
         ]);

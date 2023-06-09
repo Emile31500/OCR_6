@@ -1,3 +1,16 @@
+iframe {
+
+    width: 250px;
+    height: 155px;
+}
+
+.figure-image{
+    
+    max-height: 155px;
+    max-width: 250px;
+
+}
+
 .footer-body-element {
 
     margin-top: 70px;

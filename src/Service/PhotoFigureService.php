@@ -14,20 +14,30 @@ class PhotoFigureService {
         $this->params = $params;
     }
 
-    public function add(UploadedFile $picture, ?int $width=500, int $heigth=500): string
+    public function add(UploadedFile $picture, ?int $width=500, int $heigth=500): mixed
     {
 
         $fichier = uniqid().'jpg';
         $pictureInf = getimagesize($picture);
 
-        if ($pictureInf["mime"] === 'image/png' || $pictureInf["mime"] === 'image/jpg' || $pictureInf["mime"] === 'image/webp' && $pictureInf === true) {
+        if ($pictureInf === false) {
 
-            $path = $this->params->get('figure_image_directory');
-            $picture->move($path.'/', $fichier);
-            return $fichier;
+            return 'erreur_1';
 
         }
-    
+
+        if ($pictureInf["mime"] !== 'image/png' && $pictureInf["mime"] !== 'image/jpg'  && $pictureInf["mime"] !== 'image/jpeg' && $pictureInf["mime"] !== 'image/webp') {
+
+            return $pictureInf["mime"];
+
+        }
+
+        $path = $this->params->get('figure_image_directory');
+
+        $picture->move($path.'/', $fichier);
+
+        return $fichier;
+
     }
 
     public function delete(string $fichier) : bool

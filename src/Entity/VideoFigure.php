@@ -15,7 +15,7 @@ class VideoFigure
     #[Groups(['figure'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 512)]
     #[Groups(['figure'])]
     private ?string $urlVideo = null;
 
