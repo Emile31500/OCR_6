@@ -10,17 +10,16 @@ butonsDeleteVideo.forEach(btn => {
 
         e.preventDefault();
         videoId = btn.getAttribute('videodelbtn');
-        videoCardSelector = "card_video_" + videoId;
-        
+        videoCardSelector = "video_card_" + videoId;
+
         fetch(root + '/figure/video/supprimer/' + videoId, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json"
             }
         })
-        .then(response => response.json())
-        .then(data => {
-        
+        .then(function() {
+            
             document.getElementById(videoCardSelector).remove();
 
         })

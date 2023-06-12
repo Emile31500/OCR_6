@@ -25,8 +25,8 @@
                     </div>
                 {% endfor %}
                 {% for video in figure.videoFigures %}
-                    <div class="col  m-1 p-1" media-container>
-                        {{video.UrlVideo | raw}}
+                    <div class="col  m-1 p-1" media-container id="video_card_{{video.id}}">
+                        <iframe width="250" height="155" src="{{video.urlVideo}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                          <div >
                             <button class="m-1 btn btn-danger video-delete-button" videodelbtn="{{video.id}}" > Supprimer </button>
                         </div>

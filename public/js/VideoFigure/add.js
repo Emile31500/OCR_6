@@ -19,17 +19,48 @@ form.addEventListener('submit', function(event){
     videoFields.forEach(videoField => {
         
         url = parser.parseFromString(videoField.value, 'text/html');
-        if (url = url.querySelector("iframe") || url.querySelectorAll("iframe").lenght > 1 ) {
+        if (url = url.querySelector("iframe")) {
 
-            url.setAttribute('height', 155);
-            url.setAttribute('width', 250);
-            newUrl = elementToString(url);
+            newUrl = url.getAttribute('src')
             
             if (newUrl.length < 512)
             {
 
                 data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', newUrl);
                 index++;
+
+                fetch(window.location, {
+
+                    method: 'POST',
+                    body: data
+            
+                })
+                .then(response => response.text())
+                .then(data => {
+            
+                   
+                    const responseElement = parser.parseFromString(data, 'text/html');
+                    console.log(responseElement);
+            
+                    if(responseElement.querySelector('.alert-success') !== undefined){
+            
+                        alert(responseElement.querySelector('.alert-success').innerHTML);
+                        return true;
+            
+                    } else if (responseElement.querySelector('.alert-danger') !== undefined) {
+            
+                        alert(responseElement.querySelector('.alert-danger').innerHTML);
+                        return false;
+            
+            
+                    }
+                })
+                .catch(error => {
+            
+                    alert("Erreur : " + error);
+                    console.log(responseElement);
+            
+                });
 
             } else {
 
@@ -47,39 +78,6 @@ form.addEventListener('submit', function(event){
         }
         
         
-    });
-
-    fetch(window.location, {
-
-        method: 'POST',
-        body: data
-
-    })
-    .then(response => response.text())
-    .then(data => {
-
-       
-        const responseElement = parser.parseFromString(data, 'text/html');
-        console.log(responseElement);
-
-        if(responseElement.querySelector('.alert-success') !== undefined){
-
-            alert(responseElement.querySelector('.alert-success').innerHTML);
-            return true;
-
-        } else if (responseElement.querySelector('.alert-danger') !== undefined) {
-
-            alert(responseElement.querySelector('.alert-danger').innerHTML);
-            return false;
-
-
-        }
-    })
-    .catch(error => {
-
-        alert("Erreur : " + error);
-        console.log(responseElement);
-
     });
     
 });

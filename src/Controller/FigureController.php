@@ -236,10 +236,11 @@ class FigureController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
+                
                 $slug = str_replace(' ', '-', $form->get('nom')->getData());
                 $slug = strtolower($slug);
 
-                if ($figureRepo->finBySlug($slug)) {
+                if ($figureRepo->findBySlug($slug)) {
 
                     return $this->render('figure/creation.html.twig', [
                         'controller_name' => "Création d'une figure",
@@ -249,6 +250,7 @@ class FigureController extends AbstractController
 
                 } else {
 
+                    $figure = $form->getData();
                     $figure->setSlug($slug);
                     $figure = $form->getData();
                     $figure->setCreatedDate(new \DateTime());
