@@ -14,17 +14,18 @@ class EditPsswFormType extends AbstractType
     {
         $builder
             ->add('password', PasswordType::class, [
-                    "label" => "Mot de passe : ",
-                    "attr" => [
+                    'label' => 'Mot de passe : ',
+                    'attr' => [
                         'class' => 'form-control'
                 ]])
             ->add('passwordConf', PasswordType::class, [
-                    "label" => "Confirmer : ",
-                    "attr" => [
+                    'label' => 'Confirmer : ',
+                    'attr' => [
                         'class' => 'form-control'
                 ]])
             ->add('submit', SubmitType::class, [
-                    "attr" => [
+                    'label' => 'envoyer',
+                    'attr' => [
                         'class' => 'form-control btn btn-primary'
                 ]])
         ;

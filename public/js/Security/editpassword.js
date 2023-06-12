@@ -50,24 +50,10 @@ password_edit_form.addEventListener("submit", function(event){
 
     } else {
 
-        let web_server = location.hostname + ':' + location.port;
-        let data = new FormData(password_edit_form);
-        
-        let response = fetch('http://' + web_server + '/modification-mot-de-passe"', {
-            method: 'POST',
-            body: data
-        })
-            .then(response => response.json())
-            .then(data => data)
-            .catch(error => console.error(error));
-
-        status_message.classList.remove("d-none");
-        status_message.classList.add("d-inline");
-        status_message.classList.remove("alert-danger");
-        status_message.classList.add("alert-success");
-        status_message.innerHTML = "Votre mot de passe a été enregistré";
-        return true;
-
+        if (status_message){
+            status_message.remove();
+        }
+        password_edit_form.submit();
 
     }
 

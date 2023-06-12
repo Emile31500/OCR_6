@@ -20,7 +20,7 @@ use DateTime;
 
 class ForgetPasswordController extends AbstractController
 {
-    #[Route('/recuperation-mot-de-passe', name: 'app_forget_password', methods:['GET'])]
+    #[Route('/recuperation-mot-de-passe', name: 'app_forget_password', methods:['GET', 'POST'])]
     public function index(Request $request, UtilisateurRepository $UtilisateurRepository, MailerInterface $mailer): Response
     {
         $form = $this->createForm(SendPasswordRecuperationCodeType::class);
@@ -64,8 +64,8 @@ class ForgetPasswordController extends AbstractController
         ]);
     }
 
-    #[Route('/modifier-le-mot-de-passe/{code_recup}', name: 'app_edit_password', methods:['POST'])]
-    public function editPassword(string $code_recup, UtilisateurRepository $utilisateurRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) : response
+    #[Route('/modifier-le-mot-de-passe/{code_recup}', name: 'app_edit_password', methods:['GET', 'POST'])]
+    public function editPassword(string $code_recup, UtilisateurRepository $utilisateurRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) : mixed
     {
 
         $utilisateur = $utilisateurRepository->findOneBySomeField('codeRecup', $code_recup);
@@ -81,19 +81,19 @@ class ForgetPasswordController extends AbstractController
                 $form->handleRequest($request);
     
                 if ($form->isSubmitted() && $form->isValid()){
-    
-                    $utilisateur->setPassword(
-                        $userPasswordHasher->hashPassword(
-                            $utilisateur,
-                            $form->get('password')->getData()
-                        )
-                    );
                     
+                    $password = $userPasswordHasher->hashPassword($utilisateur, $form->get('password')->getData());
+
+                    $utilisateur->setPassword($password);
                     $utilisateur->setCodeRecup(null);
                     $utilisateur->setRecupDate(null);
                     $utilisateurRepository->save($utilisateur, true);
-                    
-                    return new JsonResponse(["status" => true]);
+
+                    return $this->render('forget_password/editpw.html.twig', [
+                        'controller_name' => 'Modification réussie',
+                        'edit_pssw_form' => $form->createView(),
+                        'success' => 'le mot de passe a bien été modifié'
+                    ]);
     
                 }
                 

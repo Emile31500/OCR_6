@@ -35,15 +35,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 64)]
     private ?string $nomUtilisateur = null;
-
-    #[ORM\Column(length: 64)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 64)]
-    private ?string $prenom = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateDeNaissance = null;
     
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Message::class, orphanRemoval: true)]
     private Collection $Message;
@@ -146,42 +137,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNomUtilisateur(string $nomUtilisateur): self
     {
         $this->nomUtilisateur = $nomUtilisateur;
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getDateDeNaissance(): ?\DateTimeInterface
-    {
-        return $this->dateDeNaissance;
-    }
-
-    public function setDateDeNaissance(\DateTimeInterface $dateDeNaissance): self
-    {
-        $this->dateDeNaissance = $dateDeNaissance;
 
         return $this;
     }

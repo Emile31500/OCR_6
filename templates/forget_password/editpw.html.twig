@@ -3,10 +3,16 @@
 {% block title %} {{ controller_name }} {% endblock %}
 
 {% block body %}
-    <h2 class="header-body-element"> {{ controller_name }}</h2>
-    {% if edit_pssw_form is defined %}
-        {{ form_start(edit_pssw_form) }}
-        
+    <h2 class="header-body-element my-5"> {{ controller_name }}</h2>
+    {% if success is defined %}
+        <div class="status_message_container my-3">
+            <div id="status_message" class="alert alert-success d-inline" role="alert">
+                {{success}}
+            </div>
+        </div>
+    {% elseif edit_pssw_form is defined %}
+
+        {{ form_start(edit_pssw_form) }}    
             <p>
                 {{ form_row(edit_pssw_form.password) }}
             </p>
@@ -16,15 +22,21 @@
             <p>
                 {{ form_row(edit_pssw_form.submit) }}
             </p>
-
         {{ form_end(edit_pssw_form) }}
-    {% else %}
+
+        {% if error is defined%}
+            <div class="status_message_container my-3">
+                <div id="status_message" class="alert alert-danger d-inline" role="alert">
+                    {{error}}
+                </div>
+            </div>
+        {% endif %}
+
+    {% elseif erreur is defined %}
         <p>Erreur : {{erreur}} </p>
     {% endif %}
-    <div class="status_message_container">
-        <div id="status_message" class="alert alert-danger d-none" role="alert">
-        </div>
-    </div>
+        
+
 
 {% endblock %}
 {% block perso_javascripts %}

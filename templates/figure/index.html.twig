@@ -26,7 +26,8 @@
             {% endfor %}
             {% for video in figure.videoFigures %}
                 <div class="col m-1 p-1" media-container>
-                    {{video.UrlVideo | raw}}
+                    {# <iframe width="250" height="155" src="{{video.UrlVideo}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> #}
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/PxhfDec8Ays" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             {% endfor %}
           
