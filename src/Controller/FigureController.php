@@ -78,6 +78,8 @@ class FigureController extends AbstractController
             $photos = $photoFigureRepo->findByFigure($figure->getId());
             $videos = $videoFigureRepo->findByFigure($figure->getId());
             $messages = $messageRepository->findByFigure($figure->getId());
+            $messages = $messages["data"];
+
             
             if($coverImageFile = $figure->getCoverImageUrl()){
                 $phtFigServ->delete($coverImageFile);

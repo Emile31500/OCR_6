@@ -20,8 +20,10 @@
             <br>
             <input type="password" class="form-control" name="confirm-password" id="confirm-password"/>
         </p>
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn btn-primary">Register</button>
+        <p>
+            {{ form_row(registrationForm.agreeTerms) }}
+        </p>
+        
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

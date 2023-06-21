@@ -1,7 +1,10 @@
-let seeMore = document.querySelector('#see-more-message');
-let max = 10;
+let last = document.querySelector('#lastMessages');
+let next = document.querySelector('#nextMessages');
+let max = 1;
+let page = 1;
+let pageMax = 2;
 
-function loadMessage(maxMessages){
+function loadMessage(maxMessages, page){
 
     let message_zone = document.getElementById('message-zone');
     let web_server = location.hostname + ':' + location.port;
@@ -13,13 +16,16 @@ function loadMessage(maxMessages){
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body:  JSON.stringify({
-            "max_result": maxMessages
+            "max_result": maxMessages,
+            "page" : page
           }),
         redirect: 'follow'
     })
     .then(response => response.json())
     .then(data => {
-        data.forEach(message => {
+
+        
+        data['data'].forEach(message => {
 
             let date = message['date']['date'].slice(0, 19)
             html_message += "<div class='d-flex flex-row message border-top border-bottom m-0 p-3 bg-light bg-gradient'>"
@@ -34,20 +40,34 @@ function loadMessage(maxMessages){
             message_zone.innerHTML = html_message
             message_zone.scrollTop = message_zone.scrollHeight;
         }
+        pageMax = data['countPages'];
     })
     .catch(error => {
         console.error(error);
     });
 }
 
-loadMessage(max);
+loadMessage(max, page);
 
 let message_zone = document.getElementById('message-zone');
 message_zone.scrollTop = message_zone.scrollHeight;
 
-seeMore.addEventListener('click', function(){
+next.addEventListener('click', function(){
 
-    max += 10;
-    loadMessage(max);
+    if ( page < pageMax ){
+    
+        page++;
+        loadMessage(max, page);
+    
+    }
+})
 
-});
+last.addEventListener('click', function(){
+
+    if (page > 1) {
+
+        page -= 1;
+        loadMessage(max, page);
+
+    }
+})

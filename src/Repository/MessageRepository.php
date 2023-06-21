@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Message;
 use App\Entity\Figure;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Message;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Message>
@@ -43,14 +44,24 @@ class MessageRepository extends ServiceEntityRepository
 //    /**
 //     * @return Message[] Returns an array of Message objects
 //     */
-    public function findByFigure(int $value, int $max = 10): array
+    public function findByFigure(int $value, int $page = 1, int $max = 10): array
     {
-        return $this->createQueryBuilder('m')
+
+        $result = [];
+
+        $query = $this->createQueryBuilder('m')
             ->andWhere('m.figure = :val')
             ->setParameter('val', $value)
             ->orderBy('m.date', 'ASC')
             ->setMaxResults($max)
-            ->getQuery()
-            ->getResult();
+            ->setFirstResult(($max * $page) - $max);
+        
+        $paginator = new Paginator($query);
+        $data = $paginator  ->getQuery()->getResult();
+
+        $result["data"] = $data;
+        $result["countPages"] = ceil($paginator->count() / $max);
+
+        return $result;
     }
 }

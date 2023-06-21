@@ -17,9 +17,13 @@ class MessageController extends AbstractController{
     public function message(MessageRepository $messageRepo, FigureRepository $figureRepository, Request $request, string $slug) : JsonResponse {
         
         $max = $request->toArray()['max_result'];
+        $page = $request->toArray()['page'];
+
 
         $figure = $figureRepository->findBySlug($slug);
-        $messages_obj = $messageRepo->findByFigure($figure->getId(), $max);
+        $messages_obj = $messageRepo->findByFigure($figure->getId(), $page, $max);
+        $countPages = $messages_obj["countPages"];
+        $messages_obj = $messages_obj["data"];
         $nbMessage = count($messages_obj);
         $message = [];
 
@@ -33,8 +37,9 @@ class MessageController extends AbstractController{
             unset($temp);
 
         }
+        
 
-        return new JsonResponse($message);
+        return new JsonResponse(["data" => $message, "countPages" => $countPages]);
     }
 
 }
