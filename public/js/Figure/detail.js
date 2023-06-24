@@ -1,20 +1,23 @@
 let btnMedia = document.querySelector('#see-media');
-let media = document.querySelector('#media');
+let medias = document.querySelectorAll('.media');
 
 btnMedia.addEventListener('click', function(event){
 
     event.preventDefault();
 
-    console.log(media.style.display);
+    medias.forEach(media => {
+        
+        if (media.style.display !== "none") {
 
-    if (media.style.display !== "inline") {
+            media.style.display = "none"
+    
+        } else {
+    
+            media.style.display = "inline"
+    
+        }
 
-        media.style.display = "inline"
-
-    } else {
-
-        media.style.display = "none"
-
-    }
+    });
+   
 
 });

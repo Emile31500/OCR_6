@@ -59,13 +59,13 @@
     <p>
         {{ form_row(form.submit) }}
     </p>
-    {% if error is defined %}
-        <p class="alert alert-danger">
-            {{ error }}
-        </p>
-    {% elseif success is defined %}
+    {% if success is defined %}
         <p class="alert alert-success">
             {{ success }}
+        </p>
+    {% elseif error is defined%}
+        <p class="alert alert-danger">
+            {{ error }}
         </p>
     {% endif %}
  {{ form_end(form) }}
@@ -74,8 +74,8 @@
 {% block perso_javascripts %}
     <script type="module" src="{{ asset('js/VideoFigure/module.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/videoFieldController.js') }}"></script>
-    <script src="{{ asset('js/VideoFigure/cancel.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/add.js') }}"></script>
+    <script src="{{ asset('js/VideoFigure/cancel.js') }}"></script>
     <script src="{{ asset('js/VideoFigure/delete.js') }}"></script>
     <script src="{{ asset('js/PhotoFigure/delete.js') }}"></script>
 

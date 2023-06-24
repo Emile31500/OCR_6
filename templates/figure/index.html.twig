@@ -20,12 +20,12 @@
     <div class="row mt-5 mb-5 d-flex justify-content-center optional-content">
         <div class="row">
             {% for photo in figure.photoFigures %}
-                <div class="col m-1 p-1" media-container>
+                <div class="col m-1 p-1 media" media-container>
                     <img class="figure-image" src="{{ asset('media/img/figures/' ~ photo.ImageUrl) }}">
                 </div>
             {% endfor %}
             {% for video in figure.videoFigures %}
-                <div class="col m-1 p-1" media-container>
+                <div class="col m-1 p-1 media" media-container>
                     <iframe width="250" height="155" src="{{video.urlVideo}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             {% endfor %}

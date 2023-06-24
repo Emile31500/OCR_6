@@ -23,7 +23,12 @@
 
 #slug {
 
-    display: none
+    display: none;
+}
+
+.media {
+
+    display: inline;
 }
 
 #see-media{
@@ -36,7 +41,7 @@
         height: 35vh;
     }
 
-    #media{
+    .media{
         display: none;
     }
 

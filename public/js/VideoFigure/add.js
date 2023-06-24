@@ -29,39 +29,6 @@ form.addEventListener('submit', function(event){
                 data.set('creation_figure[videoFigures]['+ index +'][urlVideo]"', newUrl);
                 index++;
 
-                fetch(window.location, {
-
-                    method: 'POST',
-                    body: data
-            
-                })
-                .then(response => response.text())
-                .then(data => {
-            
-                   
-                    const responseElement = parser.parseFromString(data, 'text/html');
-                    console.log(responseElement);
-            
-                    if(responseElement.querySelector('.alert-success') !== undefined){
-            
-                        alert(responseElement.querySelector('.alert-success').innerHTML);
-                        return true;
-            
-                    } else if (responseElement.querySelector('.alert-danger') !== undefined) {
-            
-                        alert(responseElement.querySelector('.alert-danger').innerHTML);
-                        return false;
-            
-            
-                    }
-                })
-                .catch(error => {
-            
-                    alert("Erreur : " + error);
-                    console.log(responseElement);
-            
-                });
-
             } else {
 
                 alert('Erreur : l\' élément iframe doit avoir une longuer de maximum 512 caractères. ' + newUrl.length + ' donnés.')
@@ -73,11 +40,30 @@ form.addEventListener('submit', function(event){
 
             alert('Erreur : la vidéo doit contenir un seul élement HTML <iframe>');
             return false;
-
-
-        }
+        }   
         
-        
+    });
+
+    fetch(window.location, {
+
+        method: 'POST',
+        body: data
+
+    })
+    .then(response => response.text())
+    .then(data => {
+
+       
+        const responseElement = parser.parseFromString(data, 'text/html');
+        alert(responseElement.querySelector('.alert').innerHTML);
+        return false;
+
+    })
+    .catch(error => {
+
+        alert("Erreur : " + error);
+        console.log(responseElement);
+
     });
     
 });

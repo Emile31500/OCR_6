@@ -185,10 +185,12 @@ class FigureController extends AbstractController
                 $session->set('slug', $slug);
                 $figure->setSlug($slug);
 
-                $manager->persist($figure);
-                $manager->flush();
+                
 
                 try {
+
+                    $manager->persist($figure);
+                    $manager->flush();
 
                     return $this->render('figure/edition.html.twig', [
                         'controller_name' => 'Edition d\'une figure',
@@ -203,7 +205,7 @@ class FigureController extends AbstractController
                     return $this->render('figure/edition.html.twig', [
                         'controller_name' => 'Edition d\'une figure',
                         'form' => $form->createView(),
-                        'error' => 'Attention : il y a un duplicata sur un des champs ! ',
+                        'error' => 'Attention : ce nom de figure existe déjà ! ',
                         'figure' => $oldFigure,
         
                     ]);
@@ -298,7 +300,7 @@ class FigureController extends AbstractController
                         
                         return $this->render('figure/creation.html.twig', [
                             'controller_name' => "Création d'une figure",
-                            'error' => "Attention : il y a un duplicata sur un des champs ! ",
+                            'error' => "Attention : ce nom de figure existe déjà ! ",
                             'form' => $form
                         ]);
                     }
